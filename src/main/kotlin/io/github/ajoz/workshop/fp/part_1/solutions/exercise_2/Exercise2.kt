@@ -1,6 +1,6 @@
 @file:Suppress("PackageName")
 
-package io.github.ajoz.workshop.fp.solutions.exercise_2
+package io.github.ajoz.workshop.fp.part_1.solutions.exercise_2
 
 internal interface KFunction1<A, B> {
     operator fun invoke(argument: A): B

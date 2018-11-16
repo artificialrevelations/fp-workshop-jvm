@@ -1,6 +1,6 @@
 @file:Suppress("PackageName")
 
-package io.github.ajoz.workshop.fp.exercises.exercise_2
+package io.github.ajoz.workshop.fp.part_1.exercises.exercise_2
 
 /*
   Create a class that can represents a one argument function from a generic type

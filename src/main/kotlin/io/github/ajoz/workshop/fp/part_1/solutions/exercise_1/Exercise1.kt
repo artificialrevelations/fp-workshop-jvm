@@ -1,6 +1,6 @@
 @file:Suppress("PackageName", "PARAMETER_NAME_CHANGED_ON_OVERRIDE")
 
-package io.github.ajoz.workshop.fp.solutions.exercise_1
+package io.github.ajoz.workshop.fp.part_1.solutions.exercise_1
 
 // We can express a one argument function in the form of an abstract class:
 abstract class KFunction1 {

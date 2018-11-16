@@ -1,4 +1,4 @@
-package io.github.ajoz.workshop.fp.solutions.exercise_2;
+package io.github.ajoz.workshop.fp.part_1.solutions.exercise_2;
 
 // We can mark the interface as Functional Interface, this is only an indication
 // that the interface has a Single Abstract Method

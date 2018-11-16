@@ -1,6 +1,6 @@
 @file:Suppress("PackageName")
 
-package io.github.ajoz.workshop.fp.exercises.exercise_1
+package io.github.ajoz.workshop.fp.part_1.exercises.exercise_1
 
 /*
   Create a class that can represent a one argument function from Integer to Integer.
