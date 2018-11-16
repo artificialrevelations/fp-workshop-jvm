@@ -15,17 +15,35 @@ interface Function1 {
 
 public class Exercise1 {
     public static void main(String[] args) {
-        final Function1 function = new Function1() {
+        final Function1 xPlusOne = new Function1() {
             @Override
             Integer apply(final Integer x) {
                 return x + 1;
             }
         };
 
-        printFunction(function, 1);
-        printFunction(function, 2);
-        printFunction(function, 3);
-        printFunction(function, 4);
+        final Function1 xPlusTwoSquared = new Function1() {
+            @Override
+            Integer apply(final Integer x) {
+                return (x + 2) * (x + 2);
+            }
+        };
+
+        final Function1 minusXPlusTen = new Function1() {
+            @Override
+            Integer apply(final Integer x) {
+                return -x + 10;
+            }
+        };
+
+        printFunction(xPlusOne, 1);
+        printFunction(xPlusOne, 2);
+
+        printFunction(xPlusTwoSquared, 3);
+        printFunction(xPlusTwoSquared, 4);
+
+        printFunction(minusXPlusTen, 5);
+        printFunction(minusXPlusTen, 6);
     }
 
     private static void printFunction(final Function1 function,
