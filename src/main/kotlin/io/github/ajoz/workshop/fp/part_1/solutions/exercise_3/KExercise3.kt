@@ -1,3 +1,5 @@
+@file:Suppress("PackageName")
+
 package io.github.ajoz.workshop.fp.part_1.solutions.exercise_3
 
 fun kComposeIntFuns(first: (Int) -> Int, second: (Int) -> Int): (Int) -> Int =

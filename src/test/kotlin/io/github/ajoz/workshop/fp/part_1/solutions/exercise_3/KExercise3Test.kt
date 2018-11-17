@@ -1,8 +1,7 @@
 @file:Suppress("PackageName")
 
-package io.github.ajoz.workshop.fp.part_1.solutions
+package io.github.ajoz.workshop.fp.part_1.solutions.exercise_3
 
-import io.github.ajoz.workshop.fp.part_1.solutions.exercise_3.*
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.experimental.runners.Enclosed

@@ -1,3 +1,5 @@
+@file:Suppress("PackageName")
+
 package io.github.ajoz.workshop.fp.part_1.exercises.exercise_3
 
 /*
