@@ -22,7 +22,7 @@ package io.github.ajoz.workshop.fp.part_1.exercises.exercise_3;
   Create a function/method called composeAll for composing multiple functions
   passed as an argument. Try to solve this part in several ways:
   - use the compose(Function1, Function1)
-  - use function application and a loop
+  - use function application
 
   Question: Does it matter in what order we will compose the functions?
   Question: How should the composeAll behave for one argument?
@@ -49,7 +49,7 @@ class Exercise3 {
 
     @SafeVarargs
     public static <A> Function1<A, A> composeAll(final Function1<A, A>... functions) {
-        throw new UnsupportedOperationException("Exercise3 composeAll is missing");
+        throw new UnsupportedOperationException("Exercise3 composeAll is missing!");
     }
 }
 
