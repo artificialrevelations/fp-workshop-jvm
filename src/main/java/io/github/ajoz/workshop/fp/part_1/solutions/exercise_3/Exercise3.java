@@ -1,19 +1,19 @@
 package io.github.ajoz.workshop.fp.part_1.solutions.exercise_3;
 
 class Exercise3 {
-    public static Function1<Integer, Integer> composeIntFuns(final Function1<Integer, Integer> first,
-                                                             final Function1<Integer, Integer> second) {
+    static Function1<Integer, Integer> composeIntFuns(final Function1<Integer, Integer> first,
+                                                      final Function1<Integer, Integer> second) {
         return (Integer value) -> second.apply(first.apply(value));
     }
 
     // hint: Allow the types to guide you with the composition
-    public static <A, B, C> Function1<A, C> compose(final Function1<A, B> f,
-                                                    final Function1<B, C> g) {
+    static <A, B, C> Function1<A, C> compose(final Function1<A, B> f,
+                                             final Function1<B, C> g) {
         return (A a) -> g.apply(f.apply(a));
     }
 
     @SafeVarargs
-    public static <A> Function1<A, A> composeAll(final Function1<A, A>... functions) {
+    static <A> Function1<A, A> composeAll(final Function1<A, A>... functions) {
         // as an application loop:
 //        return (A a) -> {
 //            A result = a;
