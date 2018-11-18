@@ -37,8 +37,6 @@ All parts of the workshop are planned to take around 3 hours (2 - 2.5h with 2x 1
 - A brief look at side effects, what are intentional and nonintentional side effects?
 - What is a Total and Partial function?
 - What is currying and partial application?
-- quick look at Kotlin (only in regards to the material)
-- quick look at Haskell (just to understand the possibilities and comparing this with Java)
 
 ## (Part 2) Higher Order Functions
 - Everything is a Set? Can whole math be built from the concept of a Set in an empty universe?
@@ -46,11 +44,11 @@ All parts of the workshop are planned to take around 3 hours (2 - 2.5h with 2x 1
 - Function as a value? Why we have problems with adjusting to this idea?
 - A quick glance at Lambda calculus
 - What are higher order functions? How can we use them effectively?
-- what benefits we get from abstracting simple looping?
-- what issues does Java create when working with higher order functions?
-- is Kotlin solving anything in this department?
-- why higher order functions are importantant? (quick look into Haskell)
-- does order of function arguments have a meaning? (point free notation), why OO is messing this up?
+- What benefits we get from abstracting simple looping?
+- What issues does Java create when working with higher order functions?
+- Is Kotlin solving anything in this department?
+- Why higher order functions are importantant? (quick look into Haskell)
+- Does order of function arguments have a meaning? (point free notation), why OO is messing this up?
 
 ## (Part 3) Algebraic Data Types and expressing optionality
 - What are Sum Types? How can they be expressed in Java/Kotlin?
@@ -81,13 +79,13 @@ All parts of the workshop are planned to take around 3 hours (2 - 2.5h with 2x 1
 - Creating a lazy "stream-like" data structure, is it doable in Java?
 - A quick dip into the design of Java 8 Stream and Kotlin's Sequence
 
-## (Part 5) Functional architecture or putting everything to use
-- how do OO design patterns translate to Functional Programming?
+## (Part 5) Functional architecture or putting everything to use (+what issues we may face)
+- How do OO design patterns translate to Functional Programming?
 - Stringly-types vs Strongly-typed (one letter but great difference)
-- making illegal state unrepresentable!
-- designing for errors, keeping them as a part of your domain
-- how to mix pure and impure code?
-- hexagonal architecture (ports and adapters) and why its natural in FP (at least in Haskell)?
-- two types of pushing responsibility with types: backward (caller handles inputs) and foreward (caller handles outputs)
+- Making illegal state unrepresentable!
+- Designing for errors, keeping them as a part of your domain
+- How to mix pure and impure code?
+- Hexagonal architecture (ports and adapters) and why its natural in FP?
+- Two types of pushing responsibility with types: backward (caller handles inputs) and foreward (caller handles outputs)
   
 
