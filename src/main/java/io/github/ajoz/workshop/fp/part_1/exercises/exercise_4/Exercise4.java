@@ -27,6 +27,14 @@ import kotlin.Pair;
   Create a function/method for converting Function1 to Function2
   - from a Function1 where arguments are expressed as a tuple
   - from a Function1 where return type is another Function1
+
+  part 4:
+
+  Create a function/method called flip* that can flip argument order of a two
+  argument function.
+  - from a Function2<A, B, C> to Function2<B, A, C>
+  - from a Function1<Pair<A, B>, C> to Function1<Pair<B, A>, C>
+  - from a Function1<A, Function1<B, C>> to Function1<B, Function1<A, C>>
  */
 
 @FunctionalInterface
@@ -42,19 +50,31 @@ interface Function2<A, B, C> {
 // as Java does not have a concept of a tuple please use Pair class from kotlin stdlib!
 
 class Exercise4 {
-    static <A, B, C> Function1<Pair<A, B>, C> convertToFunction1WithPair(final Function2<A, B, C> function2) {
-        throw new UnsupportedOperationException("Exercise4 convertToFunction1WithPair is missing!");
+    static <A, B, C> Function1<Pair<A, B>, C> tuple(final Function2<A, B, C> function2) {
+        throw new UnsupportedOperationException("Exercise4 tuple is missing!");
     }
 
-    static <A, B, C> Function1<A, Function1<B, C>> convertToFunction1WithFunction(final Function2<A, B, C> function2) {
-        throw new UnsupportedOperationException("Exercise4 convertToFunction1WithFunction is missing!");
+    static <A, B, C> Function1<A, Function1<B, C>> curry(final Function2<A, B, C> function2) {
+        throw new UnsupportedOperationException("Exercise4 curry is missing!");
     }
 
-    static <A, B, C> Function2<A, B, C> convertToFunction2FromPair(final Function1<Pair<A, B>, C> function1) {
-        throw new UnsupportedOperationException("Exercise4 convertToFunction2FromPair is missing!");
+    static <A, B, C> Function2<A, B, C> untuple(final Function1<Pair<A, B>, C> function1) {
+        throw new UnsupportedOperationException("Exercise4 untuple is missing!");
     }
 
-    static <A, B, C> Function2<A, B, C> convertToFunction2FromFunction(final Function1<A, Function1<B, C>> function1) {
-        throw new UnsupportedOperationException("Exercise4 convertToFunction2FromFunction is missing!");
+    static <A, B, C> Function2<A, B, C> uncurry(final Function1<A, Function1<B, C>> function1) {
+        throw new UnsupportedOperationException("Exercise4 uncurry is missing!");
+    }
+
+    static <A, B, C> Function2<B, A, C> flip(final Function2<A, B, C> function2) {
+        throw new UnsupportedOperationException("Exercise4 flip is missing!");
+    }
+
+    static <A, B, C> Function1<Pair<B, A>, C> flipTupled(final Function1<Pair<A, B>, C> function1) {
+        throw new UnsupportedOperationException("Exercise4 flipTupled is missing!");
+    }
+
+    static <A, B, C> Function1<B, Function1<A, C>> flipCurried(final Function1<A, Function1<B, C>> function1) {
+        throw new UnsupportedOperationException("Exercise4 flipCurried is missing!");
     }
 }

@@ -30,20 +30,42 @@ package io.github.ajoz.workshop.fp.part_1.exercises.exercise_4
   argument function:
   - from a one argument function where arguments are expressed as a tuple
   - from a one argument function where return type is another one argument function
+
+  part 4:
+
+  Create a function/method called flip* that can flip argument order of a two
+  argument function.
+  - from a (A, B) -> C to (B, A) -> C
+  - from a (Pair<A, B>) -> C to (Pair<B, A>) -> C
+  - from a (A) -> (B) -> C to (B) -> (A) -> C
  */
 
-fun <A, B, C> kConvertToFunction1WithPair(f: (A, B) -> C): (Pair<A, B>) -> C {
-    TODO("KExercise4 kConvertToFunction1WithPair is missing!")
+fun <A, B, C> kTuple(f: (A, B) -> C): (Pair<A, B>) -> C {
+    TODO("KExercise4 kTuple is missing!")
 }
 
-fun <A, B, C> kConvertToFunction1WithFunction(f: (A, B) -> C): (A) -> (B) -> C {
-    TODO("KExercise4 kConvertToFunction1WithFunction is missing!")
+fun <A, B, C> kCurry(f: (A, B) -> C): (A) -> (B) -> C {
+    TODO("KExercise4 kCurry is missing!")
 }
 
-fun <A, B, C> kConvertToFunction2FromPair(f: (Pair<A, B>) -> C): (A, B) -> C {
-    TODO("KExercise4 kConvertToFunction2FromPair is missing!")
+fun <A, B, C> kUnTuple(f: (Pair<A, B>) -> C): (A, B) -> C {
+    TODO("KExercise4 kUnTuple is missing!")
 }
 
-fun <A, B, C> convertToFunction2FromFunction(f: (A) -> (B) -> C): (A, B) -> C {
-    TODO("KExercise4 kConvertToFunction2FromPair is missing!")
+fun <A, B, C> kUnCurry(f: (A) -> (B) -> C): (A, B) -> C {
+    TODO("KExercise4 kUnCurry is missing!")
 }
+
+fun <A, B, C> kFlip(f: (A, B) -> C): (B, A) -> C {
+    TODO("KExercise4 kFlip is missing!")
+}
+
+fun <A, B, C> kFlipTupled(f: (Pair<A, B>) -> C): (Pair<B, A>) -> C {
+    TODO("KExercise4 kFlipTupled is missing!")
+}
+
+fun <A, B, C> kFlipCurried(f: (A) -> (B) -> C): (B) -> (A) -> C {
+    TODO("KExercise4 kFlipCurried is missing!")
+}
+
+
