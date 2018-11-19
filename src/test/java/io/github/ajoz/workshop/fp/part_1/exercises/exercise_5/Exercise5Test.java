@@ -1,8 +1,9 @@
 package io.github.ajoz.workshop.fp.part_1.exercises.exercise_5;
 
+import static io.github.ajoz.workshop.fp.part_1.exercises.exercise_5.Exercise5.applyFirst;
 import static io.github.ajoz.workshop.fp.part_1.exercises.exercise_5.Exercise5.composeConsumer;
 import static io.github.ajoz.workshop.fp.part_1.exercises.exercise_5.Exercise5.composeSupplier;
-import org.junit.Assert;
+import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 public class Exercise5Test {
@@ -33,6 +34,22 @@ public class Exercise5Test {
         final Supplier<Integer> tested = composeSupplier(function, supplier);
 
         // then:
-        Assert.assertEquals(new Integer(42), tested.get());
+        assertEquals(new Integer(42), tested.get());
+    }
+
+    @Test
+    public void should_apply_first_argument() {
+        // given:
+        final Supplier<String> supplier =
+                () -> "foo";
+
+        final Function1<String, Function1<Integer, String>> function =
+                string -> integer -> String.format("%s : %d", string, integer);
+
+        // when:
+        final Function1<Integer, String> tested = applyFirst(function, supplier);
+
+        // then:
+        assertEquals(function.apply("foo").apply(42), tested.apply(42));
     }
 }

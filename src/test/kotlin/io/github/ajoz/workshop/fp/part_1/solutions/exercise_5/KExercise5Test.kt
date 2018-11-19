@@ -2,7 +2,7 @@
 
 package io.github.ajoz.workshop.fp.part_1.solutions.exercise_5
 
-import org.junit.Assert
+import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class KExercise5Test {
@@ -33,6 +33,24 @@ class KExercise5Test {
         val tested = kComposeSupplier(function, supplier)
 
         // then:
-        Assert.assertEquals(42, tested())
+        assertEquals(42, tested())
+    }
+
+    @Test
+    fun `should apply first argument`() {
+        // given:
+        val supplier = { "foo" }
+
+        val function: (String) -> (Int) -> String = { string ->
+            { integer ->
+                String.format("%s : %d", string, integer)
+            }
+        }
+
+        // when:
+        val tested = kApplyFirst(function, supplier)
+
+        // then:
+        assertEquals(function("foo")(42), tested(42))
     }
 }

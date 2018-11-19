@@ -27,6 +27,11 @@ package io.github.ajoz.workshop.fp.part_1.exercises.exercise_5;
 
   Create a function for composing a Supplier with a Function1
 
+  part 4:
+
+  Create a function for partially applying the first argument of a curried
+  function with the use of a Supplier.
+
  */
 
 @FunctionalInterface
@@ -45,11 +50,18 @@ interface Supplier<A> {
 }
 
 class Exercise5 {
-    static <A, B> Consumer1<A> composeConsumer(final Function1<A, B> function, final Consumer1<B> consumer) {
+    static <A, B> Consumer1<A> composeConsumer(final Function1<A, B> function,
+                                               final Consumer1<B> consumer) {
         throw new UnsupportedOperationException("Exercise5 composeConsumer is missing!");
     }
 
-    static <A, B> Supplier<B> composeSupplier(final Function1<A, B> function, final Supplier<A> supplier) {
+    static <A, B> Supplier<B> composeSupplier(final Function1<A, B> function,
+                                              final Supplier<A> supplier) {
         throw new UnsupportedOperationException("Exercise5 composeSupplier is missing!");
+    }
+
+    static <A, B, C> Function1<B, C> applyFirst(final Function1<A, Function1<B, C>> function,
+                                                final Supplier<A> supplier) {
+        throw new UnsupportedOperationException("Exercise5 applyFirst is missing!");
     }
 }

@@ -23,4 +23,9 @@ class Exercise5 {
     static <A, B> Supplier<B> composeSupplier(final Function1<A, B> function, final Supplier<A> supplier) {
         return () -> function.apply(supplier.get());
     }
+
+    static <A, B, C> Function1<B, C> applyFirst(final Function1<A, Function1<B, C>> function,
+                                                final Supplier<A> supplier) {
+        return (B b) -> function.apply(supplier.get()).apply(b);
+    }
 }

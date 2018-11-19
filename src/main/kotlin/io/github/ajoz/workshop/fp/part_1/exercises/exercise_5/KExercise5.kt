@@ -35,6 +35,11 @@ package io.github.ajoz.workshop.fp.part_1.exercises.exercise_5
   Create a function for composing a (Unit) -> A function with a (A) -> B function.
 
   Question: The same as for part2, maybe we already have everything what we need?
+
+  part 4:
+
+  Create a function for partially applying the first argument of a curried
+  function with the use of a Supplier.
  */
 
 fun <A, B> kComposeConsumer(f: (A) -> B, c: (B) -> Unit): (A) -> Unit {
@@ -43,4 +48,8 @@ fun <A, B> kComposeConsumer(f: (A) -> B, c: (B) -> Unit): (A) -> Unit {
 
 fun <A, B> kComposeSupplier(f: (A) -> B, s: () -> A): () -> B {
     TODO("Exercise5 kComposeSupplier is missing!")
+}
+
+fun <A, B, C> kApplyFirst(f: (A) -> (B) -> C, s: () -> A): (B) -> C {
+    TODO("Exercise5 kApplyFirst is missing!")
 }
