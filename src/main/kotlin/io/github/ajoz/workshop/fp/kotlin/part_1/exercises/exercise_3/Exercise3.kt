@@ -37,16 +37,16 @@ package io.github.ajoz.workshop.fp.kotlin.part_1.exercises.exercise_3
   - compose that first applies the function give as the argument and then applies the function
 */
 
-fun kComposeIntFuns(first: (Int) -> Int, second: (Int) -> Int): (Int) -> Int {
-    TODO("Exercise3 kComposeIntFuns is missing!")
+fun composeIntFuns(first: (Int) -> Int, second: (Int) -> Int): (Int) -> Int {
+    TODO("Exercise3 composeIntFuns is missing!")
 }
 
 fun <A, B, C> kCompose(f: (A) -> B, g: (B) -> C): (A) -> C {
-    TODO("Exercise3 kCompose is missing!")
+    TODO("Exercise3 kompose is missing!")
 }
 
 fun <A> kComposeAll(vararg functions: (A) -> A): (A) -> A {
-    TODO("Exercise3 kComposeAll is missing!")
+    TODO("Exercise3 composeAll is missing!")
 }
 
 infix fun <A, B, C> ((A) -> B).andThen(after: (B) -> C): (A) -> C {

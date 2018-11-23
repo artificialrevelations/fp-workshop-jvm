@@ -1,8 +1,7 @@
 @file:Suppress("PackageName")
 
-package io.github.ajoz.workshop.fp.java.part_1.solutions.exercise_3
+package io.github.ajoz.workshop.fp.kotlin.part_1.exercises.exercise_3
 
-import io.github.ajoz.workshop.fp.kotlin.part_1.solutions.exercise_3.*
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.experimental.runners.Enclosed
@@ -18,11 +17,11 @@ class KExercise3Test {
             val g: (Int) -> Int = { it + 2 }
 
             // when:
-            val h = kComposeIntFuns(f, g)
+            val h = composeIntFuns(f, g)
 
             // then:
             assertEquals(3, h(0))
-            assertEquals(4, h(1))
+            assertEquals(4, h(0))
         }
 
         @Test
@@ -32,7 +31,7 @@ class KExercise3Test {
             val g: (Int) -> Int = { it }
 
             // when:
-            val h = kComposeIntFuns(f, g)
+            val h = composeIntFuns(f, g)
 
             // then:
             assertEquals(0, h(0))
@@ -47,7 +46,7 @@ class KExercise3Test {
             val g: (Int) -> Int = { it - 1 }
 
             // when:
-            val h = kComposeIntFuns(f, g)
+            val h = composeIntFuns(f, g)
 
             // then:
             assertEquals(0, h(0))

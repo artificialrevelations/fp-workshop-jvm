@@ -1,90 +1,94 @@
 @file:Suppress("PackageName")
 
-package io.github.ajoz.workshop.fp.java.part_1.solutions.practice
+package io.github.ajoz.workshop.fp.kotlin.part_1.exercises.practice
 
-import io.github.ajoz.workshop.fp.kotlin.part_1.solutions.practice.and
-import io.github.ajoz.workshop.fp.kotlin.part_1.solutions.practice.or
+import io.github.ajoz.workshop.fp.kotlin.part_1.exercises.practice.bar
+import io.github.ajoz.workshop.fp.kotlin.part_1.exercises.practice.foo
 import org.junit.Test
 
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 
-class PredicateTest {
+class PrediKateTest {
 
     @Test
-    fun trueAndFalseEqualsFalse() {
+    fun trueFooFalseEqualsFalse() {
         // given:
         val true1: (String) -> Boolean = { _ -> true }
         val false1: (String) -> Boolean = { _ -> false }
+
         // when:
-        val result = true1.and(false1)
+        val result = true1.foo(false1)
+
         // then:
-        assertFalse(result("testTrueAndFalse"))
+        assertFalse(result("testTrueFooFalse"))
     }
 
     @Test
-    fun falseAndTrueEqualsFalse() {
+    fun falseFooTrueEqualsFalse() {
         // given:
         val false1: (String) -> Boolean = { _ -> false }
         val true1: (String) -> Boolean = { _ -> true }
+
         // when:
-        val result = false1.and(true1)
+        val result = false1.foo(true1)
+
         // then:
-        assertFalse(result("testFalseAndTrue"))
+        assertFalse(result("testFalseFooTrue"))
     }
 
     @Test
-    fun falseAndFalseEqualsFalse() {
+    fun falseFooFalseEqualsFalse() {
         // given:
         val false1: (String) -> Boolean = { _ -> false }
         val false2: (String) -> Boolean = { _ -> false }
         // when:
-        val result = false1.and(false2)
+        val result = false1.foo(false2)
         // then:
-        assertFalse(result("testFalseAndFalse"))
+        assertFalse(result("testFalseFooFalse"))
     }
 
     @Test
-    fun trueOrTrueEqualsTrue() {
+    fun trueBarTrueEqualsTrue() {
         // given:
         val true1: (String) -> Boolean = { _ -> true }
         val true2: (String) -> Boolean = { _ -> true }
         // when:
-        val result = true1.or(true2)
+        val result = true1.bar(true2)
         // then:
-        assertTrue(result("testTrueOrTrue"))
+        assertTrue(result("testTrueBarTrue"))
     }
 
     @Test
-    fun trueOrFalseEqualsTrue() {
+    fun trueBarFalseEqualsTrue() {
         // given:
         val true1: (String) -> Boolean = { _ -> true }
         val false1: (String) -> Boolean = { _ -> false }
         // when:
-        val result = true1.or(false1)
+        val result = true1.bar(false1)
         // then:
-        assertTrue(result("testTrueOrFalse"))
+        assertTrue(result("testTrueBarFalse"))
     }
 
     @Test
-    fun falseOrTrueEqualsTrue() {
+    fun falseBarTrueEqualsTrue() {
         // given:
         val false1: (String) -> Boolean = { _ -> false }
         val true1: (String) -> Boolean = { _ -> true }
         // when:
-        val result = false1.or(true1)
+        val result = false1.bar(true1)
         // then:
-        assertTrue(result("testFalseOrTrue"))
+        assertTrue(result("testFalseBarTrue"))
     }
 
     @Test
-    fun falseOrFalseEqualsFalse() {
+    fun falseBarFalseEqualsFalse() {
         // given:
         val false1: (String) -> Boolean = { _ -> false }
         val false2: (String) -> Boolean = { _ -> false }
         // when:
-        val result = false1.or(false2)
+        val result = false1.bar(false2)
         // then:
-        assertFalse(result("testFalseOrFalse"))
+        assertFalse(result("testFalseBarFalse"))
     }
 }

@@ -1,4 +1,4 @@
-@file:Suppress("PackageName")
+@file:Suppress("PackageName", "UNUSED_PARAMETER")
 
 package io.github.ajoz.workshop.fp.kotlin.part_1.exercises.exercise_5
 
@@ -42,14 +42,18 @@ package io.github.ajoz.workshop.fp.kotlin.part_1.exercises.exercise_5
   function with the use of a Supplier.
  */
 
-fun <A, B> kComposeConsumer(f: (A) -> B, c: (B) -> Unit): (A) -> Unit {
-    TODO("Exercise5 kComposeConsumer is missing!")
+fun <A, B> composeConsumer(function: (A) -> B, consumer: (B) -> Unit): (A) -> Unit {
+    TODO("Exercise 5 composeConsumer is missing!")
 }
 
-fun <A, B> kComposeSupplier(f: (A) -> B, s: () -> A): () -> B {
-    TODO("Exercise5 kComposeSupplier is missing!")
+fun <A, B> composeSupplier(function: (A) -> B, supplier: () -> A): () -> B {
+    TODO("Exercise 5 composeSupplier is missing!")
 }
 
-fun <A, B, C> kApplyFirst(f: (A) -> (B) -> C, s: () -> A): (B) -> C {
-    TODO("Exercise5 kApplyFirst is missing!")
+fun <A, B, C> applyCurriedFirst(function: (A) -> (B) -> C, supplier: () -> A): (B) -> C {
+    TODO("Exercise 5 applyCurriedFirst is missing!")
+}
+
+fun <A, B, C> applyCurriedSecond(function: (A) -> (B) -> C, supplier: () -> B): (A) -> C {
+    TODO("Exercise 5 applyCurriedSecond is missing!")
 }

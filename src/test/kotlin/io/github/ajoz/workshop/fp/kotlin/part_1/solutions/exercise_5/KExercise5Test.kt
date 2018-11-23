@@ -1,10 +1,7 @@
 @file:Suppress("PackageName")
 
-package io.github.ajoz.workshop.fp.java.part_1.exercises.exercise_5
+package io.github.ajoz.workshop.fp.kotlin.part_1.solutions.exercise_5
 
-import io.github.ajoz.workshop.fp.kotlin.part_1.exercises.exercise_5.kApplyFirst
-import io.github.ajoz.workshop.fp.kotlin.part_1.exercises.exercise_5.kComposeConsumer
-import io.github.ajoz.workshop.fp.kotlin.part_1.exercises.exercise_5.kComposeSupplier
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -19,7 +16,7 @@ class KExercise5Test {
         val function: (String) -> Int = { Integer.valueOf(it) }
 
         // when:
-        val tested = kComposeConsumer(function, consumer)
+        val tested = composeConsumer(function, consumer)
 
         // then:
         tested("42")
@@ -33,7 +30,7 @@ class KExercise5Test {
         val function: (String) -> Int = { Integer.valueOf(it) }
 
         // when:
-        val tested = kComposeSupplier(function, supplier)
+        val tested = composeSupplier(function, supplier)
 
         // then:
         assertEquals(42, tested())
@@ -51,7 +48,7 @@ class KExercise5Test {
         }
 
         // when:
-        val tested = kApplyFirst(function, supplier)
+        val tested = applyCurriedFirst(function, supplier)
 
         // then:
         assertEquals(function("foo")(42), tested(42))

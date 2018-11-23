@@ -59,7 +59,7 @@ class Exercise4 {
     }
 
     static <A, B, C> Function2<A, B, C> untuple(final Function1<Pair<A, B>, C> function1) {
-        throw new UnsupportedOperationException("Exercise4 untuple is missing!");
+        throw new UnsupportedOperationException("Exercise4 unTuple is missing!");
     }
 
     static <A, B, C> Function2<A, B, C> uncurry(final Function1<A, Function1<B, C>> function1) {

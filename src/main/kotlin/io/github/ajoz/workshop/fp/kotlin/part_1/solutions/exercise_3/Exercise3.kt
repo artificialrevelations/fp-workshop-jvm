@@ -2,17 +2,17 @@
 
 package io.github.ajoz.workshop.fp.kotlin.part_1.solutions.exercise_3
 
-fun kComposeIntFuns(first: (Int) -> Int, second: (Int) -> Int): (Int) -> Int =
+fun composeIntFuns(first: (Int) -> Int, second: (Int) -> Int): (Int) -> Int =
         { value ->
             second(first(value))
         }
 
-fun <A, B, C> kCompose(f: (A) -> B, g: (B) -> C): (A) -> C =
+fun <A, B, C> kompose(f: (A) -> B, g: (B) -> C): (A) -> C =
         { a: A ->
             g(f(a))
         }
 
-fun <A> kComposeAll(vararg functions: (A) -> A): (A) -> A
+fun <A> composeAll(vararg functions: (A) -> A): (A) -> A
 // as function application:
 //        = { a: A ->
 //            var result = a
@@ -24,7 +24,7 @@ fun <A> kComposeAll(vararg functions: (A) -> A): (A) -> A
 {
     var result: (A) -> A = { it }
     for (function in functions) {
-        result = kCompose(result, function)
+        result = kompose(result, function)
     }
     return result
 }

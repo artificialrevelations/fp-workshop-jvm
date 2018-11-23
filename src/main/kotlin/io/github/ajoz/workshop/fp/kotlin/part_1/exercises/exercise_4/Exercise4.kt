@@ -40,32 +40,32 @@ package io.github.ajoz.workshop.fp.kotlin.part_1.exercises.exercise_4
   - from a (A) -> (B) -> C to (B) -> (A) -> C
  */
 
-fun <A, B, C> kTuple(f: (A, B) -> C): (Pair<A, B>) -> C {
-    TODO("KExercise4 kTuple is missing!")
+fun <A, B, C> tuple(f: (A, B) -> C): (Pair<A, B>) -> C {
+    TODO("KExercise 4 tuple is missing!")
 }
 
-fun <A, B, C> kCurry(f: (A, B) -> C): (A) -> (B) -> C {
-    TODO("KExercise4 kCurry is missing!")
+fun <A, B, C> curry(f: (A, B) -> C): (A) -> (B) -> C {
+    TODO("KExercise 4 curry is missing!")
 }
 
-fun <A, B, C> kUnTuple(f: (Pair<A, B>) -> C): (A, B) -> C {
-    TODO("KExercise4 kUnTuple is missing!")
+fun <A, B, C> unTuple(f: (Pair<A, B>) -> C): (A, B) -> C {
+    TODO("KExercise 4 unTuple is missing!")
 }
 
-fun <A, B, C> kUnCurry(f: (A) -> (B) -> C): (A, B) -> C {
-    TODO("KExercise4 kUnCurry is missing!")
+fun <A, B, C> unCurry(f: (A) -> (B) -> C): (A, B) -> C {
+    TODO("KExercise 4 unCurry is missing!")
 }
 
-fun <A, B, C> kFlip(f: (A, B) -> C): (B, A) -> C {
-    TODO("KExercise4 kFlip is missing!")
+fun <A, B, C> flip(f: (A, B) -> C): (B, A) -> C {
+    TODO("KExercise 4 flip is missing!")
 }
 
-fun <A, B, C> kFlipTupled(f: (Pair<A, B>) -> C): (Pair<B, A>) -> C {
-    TODO("KExercise4 kFlipTupled is missing!")
+fun <A, B, C> flipTupled(f: (Pair<A, B>) -> C): (Pair<B, A>) -> C {
+    TODO("KExercise 4 flipTupled is missing!")
 }
 
-fun <A, B, C> kFlipCurried(f: (A) -> (B) -> C): (B) -> (A) -> C {
-    TODO("KExercise4 kFlipCurried is missing!")
+fun <A, B, C> flipCurried(f: (A) -> (B) -> C): (B) -> (A) -> C {
+    TODO("KExercise 4 flipCurried is missing!")
 }
 
 

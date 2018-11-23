@@ -1,8 +1,7 @@
 @file:Suppress("PackageName")
 
-package io.github.ajoz.workshop.fp.java.part_1.exercises.exercise_3
+package io.github.ajoz.workshop.fp.kotlin.part_1.solutions.exercise_3
 
-import io.github.ajoz.workshop.fp.kotlin.part_1.exercises.exercise_3.*
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.experimental.runners.Enclosed
@@ -18,11 +17,11 @@ class KExercise3Test {
             val g: (Int) -> Int = { it + 2 }
 
             // when:
-            val h = kComposeIntFuns(f, g)
+            val h = composeIntFuns(f, g)
 
             // then:
             assertEquals(3, h(0))
-            assertEquals(4, h(0))
+            assertEquals(4, h(1))
         }
 
         @Test
@@ -32,7 +31,7 @@ class KExercise3Test {
             val g: (Int) -> Int = { it }
 
             // when:
-            val h = kComposeIntFuns(f, g)
+            val h = composeIntFuns(f, g)
 
             // then:
             assertEquals(0, h(0))
@@ -47,7 +46,7 @@ class KExercise3Test {
             val g: (Int) -> Int = { it - 1 }
 
             // when:
-            val h = kComposeIntFuns(f, g)
+            val h = composeIntFuns(f, g)
 
             // then:
             assertEquals(0, h(0))
@@ -63,7 +62,7 @@ class KExercise3Test {
             val g: (Int) -> Boolean = { it == 42 }
 
             // when:
-            val h = kCompose(f, g)
+            val h = kompose(f, g)
 
             // then:
             assertEquals(true, h("42"))
@@ -81,7 +80,7 @@ class KExercise3Test {
             val i: (Int) -> Int = { x -> x + 4 }
 
             // when:
-            val j = kComposeAll(f, g, h, i)
+            val j = composeAll(f, g, h, i)
 
             // then:
             assertEquals(10, j(0))
