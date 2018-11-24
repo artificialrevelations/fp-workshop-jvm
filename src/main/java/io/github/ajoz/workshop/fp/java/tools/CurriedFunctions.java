@@ -6,11 +6,13 @@ public final class CurriedFunctions {
         return (B b) -> (A a) -> function1.apply(a).apply(b);
     }
 
+    @SuppressWarnings("unused")
     public static <A, B, C> Function1<B, C> applyFirst(final Function1<A, Function1<B, C>> function,
                                                        final Supplier<A> supplier) {
         return (B b) -> function.apply(supplier.get()).apply(b);
     }
 
+    @SuppressWarnings("unused")
     public static <A, B, C> Function1<A, C> applySecond(final Function1<A, Function1<B, C>> function,
                                                         final Supplier<B> supplier) {
         return (A a) -> function.apply(a).apply(supplier.get());

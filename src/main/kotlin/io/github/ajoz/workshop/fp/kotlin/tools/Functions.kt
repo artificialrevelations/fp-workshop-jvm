@@ -28,12 +28,26 @@ infix fun <A, B, C> ((A, B) -> C).applySecond(supplier: () -> B): (A) -> C =
         }
 
 // composes two functions
-infix fun <A, B, C> ((A) -> B).andThen(after: (B) -> C): (A) -> C = { a: A ->
-    after(this(a))
-}
+infix fun <A, B, C> ((A) -> B).andThen(after: (B) -> C): (A) -> C =
+        { a: A ->
+            after(this(a))
+        }
 
 
 // composes two functions
-infix fun <A, B, C> ((A) -> B).compose(before: (C) -> A): (C) -> B = { c: C ->
-    this(before(c))
-}
+infix fun <A, B, C> ((A) -> B).compose(before: (C) -> A): (C) -> B =
+        { c: C ->
+            this(before(c))
+        }
+
+// returns a function that takes a value and returns it
+fun <A> identity(): (A) -> A =
+        { a: A ->
+            a
+        }
+
+// returns a function that takes a value and returns always the same value
+fun <A, B> constant(value: B): (A) -> B =
+        {
+            value
+        }
