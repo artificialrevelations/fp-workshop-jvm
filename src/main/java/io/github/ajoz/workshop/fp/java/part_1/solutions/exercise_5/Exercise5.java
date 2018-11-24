@@ -28,4 +28,9 @@ class Exercise5 {
                                                 final Supplier<A> supplier) {
         return (B b) -> function.apply(supplier.get()).apply(b);
     }
+
+    static <A, B, C> Function1<A, C> applySecond(final Function1<A, Function1<B, C>> function,
+                                                 final Supplier<B> supplier) {
+        return (A a) -> function.apply(a).apply(supplier.get());
+    }
 }

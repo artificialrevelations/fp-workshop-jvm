@@ -24,6 +24,14 @@ public interface Function2<A, B, C> {
         return (A a) -> (B b) -> this.apply(a, b);
     }
 
+    default Function1<B, C> applyFirst(final Supplier<A> supplier) {
+        return (B b) -> this.apply(supplier.get(), b);
+    }
+
+    default Function1<A, C> applySecond(final Supplier<B> supplier) {
+        return (A a) -> this.apply(a, supplier.get());
+    }
+
     static <A, B, C> Function2<A, B, C> uncurry(final Function1<A, Function1<B, C>> function1) {
         return (A a, B b) -> function1.apply(a).apply(b);
     }

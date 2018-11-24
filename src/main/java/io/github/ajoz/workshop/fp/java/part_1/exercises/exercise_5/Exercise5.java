@@ -64,4 +64,9 @@ class Exercise5 {
                                                 final Supplier<A> supplier) {
         throw new UnsupportedOperationException("Exercise5 applyCurriedFirst is missing!");
     }
+
+    static <A, B, C> Function1<A, C> applySecond(final Function1<A, Function1<B, C>> function,
+                                                 final Supplier<B> supplier) {
+        throw new UnsupportedOperationException("Exercise5 applyCurriedFirst is missing!");
+    }
 }

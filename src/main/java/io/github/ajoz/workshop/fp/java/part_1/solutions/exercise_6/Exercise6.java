@@ -79,20 +79,36 @@ class Exercise6 {
             value -> new Hash((long) value.title.length());
 
     public static Function1<Customer, Hash> getCustomerToHash() {
-        // flip the arguments of the original
-        // change it to curried form
-        // partially apply the first argument
-        // change the Order to a title
-        // change the title to a secret hash
-
-        return applyFirst(getOrderForCustomer.flip().curry(), getProductionDatabase)
+        /*
+        // this version is using flipping, currying, application of first value and composition
+        return CurriedFunctions
+                .applyFirst(getOrderForCustomer.flip().curry(), getProductionDatabase)
                 .andThen(getOrderTitle)
                 .andThen(getTitleHash);
-    }
+         */
 
-    @SuppressWarnings("SameParameterValue")
-    private static <A, B, C> Function1<B, C> applyFirst(final Function1<A, Function1<B, C>> function,
-                                                        final Supplier<A> supplier) {
-        return (B b) -> function.apply(supplier.get()).apply(b);
+        /*
+        // this version is using currying, application of first value and composition
+        return CurriedFunctions
+                .applySecond(getOrderForCustomer.curry(), getProductionDatabase)
+                .andThen(getOrderTitle)
+                .andThen(getTitleHash);
+         */
+
+        /*
+        // this version is skipping currying and just works with two arg function
+        return getOrderForCustomer
+                .flip()
+                .applyFirst(getProductionDatabase)
+                .andThen(getOrderTitle)
+                .andThen(getTitleHash);
+        */
+
+        // this is probably the easiest to grasp and read in Java version
+        // for anyone that is not used to functional programming
+        return getOrderForCustomer                  // Customer -> Database -> Order
+                .applySecond(getProductionDatabase) // Customer -> Order
+                .andThen(getOrderTitle)             // Customer -> Title
+                .andThen(getTitleHash);             // Customer -> Hash
     }
 }
