@@ -1,7 +1,13 @@
 package io.github.ajoz.workshop.fp.java.part_1.solutions.exercise_6;
 
+
+import io.github.ajoz.workshop.fp.java.tools.Function1;
+import io.github.ajoz.workshop.fp.java.tools.Function2;
+import io.github.ajoz.workshop.fp.java.tools.Supplier;
+
 final class Customer {
-    private final String name;
+    final String name;
+    // other fields like: surname, address, etc.
 
     Customer(final String name) {
         this.name = name;
@@ -9,69 +15,82 @@ final class Customer {
 }
 
 final class Order {
-    final String title;
-    private final Long date;
+    final Title title;
+    final Timestamp date;
+    // other fields like: amount, currency, tax, etc.
 
-    Order(String title, Long date) {
+    Order(final Title title,
+          final Timestamp date) {
         this.title = title;
         this.date = date;
     }
 }
 
+final class Title {
+    final String title;
+
+    Title(final String title) {
+        this.title = title;
+    }
+}
+
+final class Timestamp {
+    final Long unixTimestamp;
+
+    Timestamp(final Long seconds) {
+        this.unixTimestamp = seconds;
+    }
+}
+
+final class Hash {
+    final Long value;
+
+    Hash(final Long value) {
+        this.value = value;
+    }
+}
+
 final class Database {
-    io.github.ajoz.workshop.fp.kotlin.part_1.solutions.exercise_6.Order findOrder(final io.github.ajoz.workshop.fp.kotlin.part_1.solutions.exercise_6.Customer customer) {
-        return new io.github.ajoz.workshop.fp.kotlin.part_1.solutions.exercise_6.Order("JUG Łódź -- visit our FB, twitter and meetup!", 42L);
+    // for now let's assume that the DB will always return an Order for a
+    // given Customer
+    Order findOrder(final Customer customer) {
+        return new Order(
+                new Title("JUG Łódź -- visit our FB, twitter and meetup!"),
+                new Timestamp(42L)
+        );
     }
-}
-
-@FunctionalInterface
-interface Function1<A, B> {
-    B apply(A a);
-
-    default <C> Function1<A, C> andThen(final Function1<B, C> after) {
-        return a -> after.apply(this.apply(a));
-    }
-}
-
-@FunctionalInterface
-interface Function2<A, B, C> {
-    C apply(A a, B b);
-}
-
-@FunctionalInterface
-interface Supplier<A> {
-    A get();
 }
 
 class Exercise6 {
-    private static final Function2<io.github.ajoz.workshop.fp.kotlin.part_1.solutions.exercise_6.Customer, io.github.ajoz.workshop.fp.kotlin.part_1.solutions.exercise_6.Database, io.github.ajoz.workshop.fp.kotlin.part_1.solutions.exercise_6.Order> getOrderForCustomer =
+    // Please do not change this function!
+    private static final Function2<Customer, Database, Order> getOrderForCustomer =
             (customer, database) -> database.findOrder(customer);
 
-    private static final Supplier<io.github.ajoz.workshop.fp.kotlin.part_1.solutions.exercise_6.Database> getProductionDatabase = io.github.ajoz.workshop.fp.kotlin.part_1.solutions.exercise_6.Database::new;
+    // Please do not change this function!
+    private static final Supplier<Database> getProductionDatabase =
+            Database::new;
 
-    private static final Function1<io.github.ajoz.workshop.fp.kotlin.part_1.solutions.exercise_6.Order, String> getOrderTitle = order -> order.title;
+    // Please do not change this function!
+    private static final Function1<Order, Title> getOrderTitle =
+            order -> order.title;
 
-    private static final Function1<String, Long> getHash = value -> 42L;
+    // Please do not change this function!
+    private static final Function1<Title, Hash> getTitleHash =
+            value -> new Hash((long) value.title.length());
 
-    public static Function1<io.github.ajoz.workshop.fp.kotlin.part_1.solutions.exercise_6.Customer, Long> getCustomerToHash() {
+    public static Function1<Customer, Hash> getCustomerToHash() {
         // flip the arguments of the original
         // change it to curried form
         // partially apply the first argument
         // change the Order to a title
         // change the title to a secret hash
-        return applyFirst(curry(flip(getOrderForCustomer)), getProductionDatabase)
+
+        return applyFirst(getOrderForCustomer.flip().curry(), getProductionDatabase)
                 .andThen(getOrderTitle)
-                .andThen(getHash);
+                .andThen(getTitleHash);
     }
 
-    private static <A, B, C> Function1<A, Function1<B, C>> curry(final Function2<A, B, C> function2) {
-        return (A a) -> (B b) -> function2.apply(a, b);
-    }
-
-    private static <A, B, C> Function2<B, A, C> flip(final Function2<A, B, C> function2) {
-        return (B b, A a) -> function2.apply(a, b);
-    }
-
+    @SuppressWarnings("SameParameterValue")
     private static <A, B, C> Function1<B, C> applyFirst(final Function1<A, Function1<B, C>> function,
                                                         final Supplier<A> supplier) {
         return (B b) -> function.apply(supplier.get()).apply(b);

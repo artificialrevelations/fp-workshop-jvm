@@ -1,5 +1,9 @@
 package io.github.ajoz.workshop.fp.java.part_1.exercises.exercise_6;
 
+import io.github.ajoz.workshop.fp.java.tools.Function1;
+import io.github.ajoz.workshop.fp.java.tools.Function2;
+import io.github.ajoz.workshop.fp.java.tools.Supplier;
+
 /*
   -- Putting the knowledge to use --
 
@@ -21,22 +25,53 @@ package io.github.ajoz.workshop.fp.java.part_1.exercises.exercise_6;
   task.
  */
 
-
+// this object represents data related to the company customers
 final class Customer {
     final String name;
+    // other fields like: surname, address, etc.
 
     Customer(final String name) {
         this.name = name;
     }
 }
 
+// this object represents data related to the order that customers make
 final class Order {
-    final String title;
-    final Long date;
+    final Title title;
+    final Timestamp date;
+    // other fields like: amount, currency, tax, etc.
 
-    Order(String title, Long date) {
+    Order(final Title title,
+          final Timestamp date) {
         this.title = title;
         this.date = date;
+    }
+}
+
+// this object is here to emphasise not using Strings for everything
+final class Title {
+    final String title;
+
+    Title(final String title) {
+        this.title = title;
+    }
+}
+
+// this object is for the similar reason as the Title :>
+final class Timestamp {
+    final Long unixTimestamp;
+
+    Timestamp(final Long seconds) {
+        this.unixTimestamp = seconds;
+    }
+}
+
+// this object is for the similar reason as the Timestamp :>
+final class Hash {
+    final Long value;
+
+    Hash(final Long value) {
+        this.value = value;
     }
 }
 
@@ -44,23 +79,11 @@ final class Database {
     // for now let's assume that the DB will always return an Order for a
     // given Customer
     Order findOrder(final Customer customer) {
-        return new Order("JUG Łódź -- visit our FB, twitter and meetup!", 42L);
+        return new Order(
+                new Title("JUG Łódź -- visit our FB, twitter and meetup!"),
+                new Timestamp(42L)
+        );
     }
-}
-
-@FunctionalInterface
-interface Function1<A, B> {
-    B apply(A a);
-}
-
-@FunctionalInterface
-interface Function2<A, B, C> {
-    C apply(A a, B b);
-}
-
-@FunctionalInterface
-interface Supplier<A> {
-    A get();
 }
 
 public class Exercise6 {
@@ -69,15 +92,18 @@ public class Exercise6 {
             (customer, database) -> database.findOrder(customer);
 
     // Please do not change this function!
-    private static final Supplier<Database> getProductionDatabase = Database::new;
+    private static final Supplier<Database> getProductionDatabase =
+            Database::new;
 
     // Please do not change this function!
-    private static final Function1<Order, String> getOrderTitle = order -> order.title;
+    private static final Function1<Order, Title> getOrderTitle =
+            order -> order.title;
 
     // Please do not change this function!
-    private static final Function1<String, Long> getHash = value -> 42L;
+    private static final Function1<Title, Hash> getTitleHash =
+            value -> new Hash((long) value.title.length());
 
-    public static Function1<Customer, Long> getCustomerToHash() {
-        throw new UnsupportedOperationException("Exercise6 getCustomerToHash is missing!");
+    public static Function1<Customer, Hash> getCustomerToHash() {
+        throw new UnsupportedOperationException("Exercise 6 getCustomerToHash is missing!");
     }
 }
