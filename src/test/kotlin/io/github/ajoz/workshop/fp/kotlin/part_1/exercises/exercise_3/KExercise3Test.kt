@@ -62,7 +62,7 @@ class KExercise3Test {
             val g: (Int) -> Boolean = { it == 42 }
 
             // when:
-            val h = kCompose(f, g)
+            val h = kompose(f, g)
 
             // then:
             assertEquals(true, h("42"))
@@ -80,7 +80,7 @@ class KExercise3Test {
             val i: (Int) -> Int = { x -> x + 4 }
 
             // when:
-            val j = kComposeAll(f, g, h, i)
+            val j = composeAll(f, g, h, i)
 
             // then:
             assertEquals(10, j(0))

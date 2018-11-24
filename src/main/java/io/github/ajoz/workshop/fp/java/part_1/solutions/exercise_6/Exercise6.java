@@ -99,7 +99,7 @@ class Exercise6 {
 
     static Function1<Customer, Hash> getCustomerToHash() {
         /*
-        // this version is using flipping, currying, application of first value and composition
+        // this version is using flipping, currying, application of the first argument and composition
         return CurriedFunctions
                 .applyFirst(getOrderForCustomer.flip().curry(), getProductionDatabase)
                 .andThen(getOrderTitle)
@@ -125,7 +125,7 @@ class Exercise6 {
 
         // this is probably the easiest to grasp and read in Java version
         // for anyone that is not used to functional programming
-        return getOrderForCustomer                  // Customer -> Database -> Order
+        return getOrderForCustomer                  // (Customer, Database) -> Order
                 .applySecond(getProductionDatabase) // Customer -> Order
                 .andThen(getOrderTitle)             // Customer -> Title
                 .andThen(getTitleHash);             // Customer -> Hash

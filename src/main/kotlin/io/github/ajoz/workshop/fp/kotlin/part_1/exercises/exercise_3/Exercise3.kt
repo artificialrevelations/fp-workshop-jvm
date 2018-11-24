@@ -1,4 +1,4 @@
-@file:Suppress("PackageName")
+@file:Suppress("PackageName", "UNUSED_PARAMETER")
 
 package io.github.ajoz.workshop.fp.kotlin.part_1.exercises.exercise_3
 
@@ -38,21 +38,21 @@ package io.github.ajoz.workshop.fp.kotlin.part_1.exercises.exercise_3
 */
 
 fun composeIntFuns(first: (Int) -> Int, second: (Int) -> Int): (Int) -> Int {
-    TODO("Exercise3 composeIntFuns is missing!")
+    TODO("Exercise 3 composeIntFuns is missing!")
 }
 
-fun <A, B, C> kCompose(f: (A) -> B, g: (B) -> C): (A) -> C {
-    TODO("Exercise3 kompose is missing!")
+fun <A, B, C> kompose(f: (A) -> B, g: (B) -> C): (A) -> C {
+    TODO("Exercise 3 kompose is missing!")
 }
 
-fun <A> kComposeAll(vararg functions: (A) -> A): (A) -> A {
-    TODO("Exercise3 composeAll is missing!")
+fun <A> composeAll(vararg functions: (A) -> A): (A) -> A {
+    TODO("Exercise 3 composeAll is missing!")
 }
 
 infix fun <A, B, C> ((A) -> B).andThen(after: (B) -> C): (A) -> C {
-    TODO("Exercise3 KFunction1.andThen is missing!")
+    TODO("Exercise 3 KFunction1.andThen is missing!")
 }
 
 infix fun <A, B, C> ((A) -> B).compose(before: (C) -> A): (C) -> B {
-    TODO("Exercise3 KFunction1.compose is missing!")
+    TODO("Exercise 3 KFunction1.compose is missing!")
 }

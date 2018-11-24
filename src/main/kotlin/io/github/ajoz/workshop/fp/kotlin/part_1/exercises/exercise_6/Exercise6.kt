@@ -23,19 +23,30 @@ package io.github.ajoz.workshop.fp.kotlin.part_1.exercises.exercise_6
   task.
  */
 
-class Customer(val name: String)
+// other fields like: surname, address, etc.
+data class Customer(val name: String)
 
-class Order(val title: String, val date: Long?)
+// other fields like: amount, currency, tax, etc.
+data class Order(val title: Title, val date: Timestamp)
 
-class Database {
+data class Title(val title: String)
+
+data class Timestamp(val unixTimestamp: Long)
+
+data class Hash(val value: Long)
+
+internal class Database {
     // for now let's assume that the DB will always return an Order for a
     // given Customer
     fun findOrder(customer: Customer): Order {
-        return Order("JUG Łódź -- visit our FB, twitter and meetup!", 42L)
+        return Order(
+                Title(String.format("FP Workshop - %s", customer.name)),
+                Timestamp(42L)
+        )
     }
 }
 
-object KExercise6 {
+object Exercise6 {
     // Please do not change this function!
     private val getOrderForCustomer: (Customer, Database) -> Order =
             { customer, database ->
@@ -43,19 +54,20 @@ object KExercise6 {
             }
 
     // Please do not change this function!
-    private val getProductionDatabase = { Database() }
+    private val getProductionDatabase =
+            { Database() }
 
     // Please do not change this function!
-    private val getOrderTitle: (Order) -> String = { order ->
-        order.title
-    }
+    private val getOrderTitle: (Order) -> Title =
+            { it.title }
 
     // Please do not change this function!
-    private val getHash: (String) -> Long = {
-        42L
-    }
+    private val getTitleHash: (Title) -> Hash =
+            {
+                Hash(it.title.length.toLong())
+            }
 
-    fun customerToHash(): (Customer) -> Long {
-        TODO("Exercise6 customerToHash is missing!")
+    fun customerToHash(): (Customer) -> Hash {
+        TODO("Exercise 6 customerToHash is missing!")
     }
 }

@@ -1,4 +1,4 @@
-@file:Suppress("PackageName")
+@file:Suppress("PackageName", "UNUSED_PARAMETER")
 
 package io.github.ajoz.workshop.fp.kotlin.part_1.exercises.exercise_4
 
@@ -40,32 +40,32 @@ package io.github.ajoz.workshop.fp.kotlin.part_1.exercises.exercise_4
   - from a (A) -> (B) -> C to (B) -> (A) -> C
  */
 
-fun <A, B, C> tuple(f: (A, B) -> C): (Pair<A, B>) -> C {
-    TODO("KExercise 4 tuple is missing!")
+fun <A, B, C> tuple(function: (A, B) -> C): (Pair<A, B>) -> C {
+    TODO("Exercise 4 tuple is missing!")
 }
 
-fun <A, B, C> curry(f: (A, B) -> C): (A) -> (B) -> C {
-    TODO("KExercise 4 curry is missing!")
+fun <A, B, C> curry(function: (A, B) -> C): (A) -> (B) -> C {
+    TODO("Exercise 4 curry is missing!")
 }
 
-fun <A, B, C> unTuple(f: (Pair<A, B>) -> C): (A, B) -> C {
-    TODO("KExercise 4 unTuple is missing!")
+fun <A, B, C> unTuple(function: (Pair<A, B>) -> C): (A, B) -> C {
+    TODO("Exercise 4 unTuple is missing!")
 }
 
-fun <A, B, C> unCurry(f: (A) -> (B) -> C): (A, B) -> C {
-    TODO("KExercise 4 unCurry is missing!")
+fun <A, B, C> unCurry(function: (A) -> (B) -> C): (A, B) -> C {
+    TODO("Exercise 4 unCurry is missing!")
 }
 
-fun <A, B, C> flip(f: (A, B) -> C): (B, A) -> C {
-    TODO("KExercise 4 flip is missing!")
+fun <A, B, C> flip(function: (A, B) -> C): (B, A) -> C {
+    TODO("Exercise 4 flip is missing!")
 }
 
-fun <A, B, C> flipTupled(f: (Pair<A, B>) -> C): (Pair<B, A>) -> C {
-    TODO("KExercise 4 flipTupled is missing!")
+fun <A, B, C> flipTupled(function: (Pair<A, B>) -> C): (Pair<B, A>) -> C {
+    TODO("Exercise 4 flipTupled is missing!")
 }
 
-fun <A, B, C> flipCurried(f: (A) -> (B) -> C): (B) -> (A) -> C {
-    TODO("KExercise 4 flipCurried is missing!")
+fun <A, B, C> flipCurried(function: (A) -> (B) -> C): (B) -> (A) -> C {
+    TODO("Exercise 4 flipCurried is missing!")
 }
 
 
