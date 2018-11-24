@@ -33,12 +33,12 @@ package io.github.ajoz.workshop.fp.java.part_1.exercises.practice;
 interface Predicate<A> {
     boolean test(final A value);
 
-    // foo
+    @SuppressWarnings("unused")
     default Predicate<A> foo(final Predicate<A> other) {
         throw new UnsupportedOperationException("HomeWork foo is missing!");
     }
 
-    // bar
+    @SuppressWarnings("unused")
     default Predicate<A> bar(final Predicate<A> other) {
         throw new UnsupportedOperationException("HomeWork bar is missing!");
     }

@@ -4,6 +4,8 @@ import io.github.ajoz.workshop.fp.java.tools.Function1;
 import io.github.ajoz.workshop.fp.java.tools.Function2;
 import io.github.ajoz.workshop.fp.java.tools.Supplier;
 
+import java.util.Objects;
+
 /*
   -- Putting the knowledge to use --
 
@@ -70,6 +72,23 @@ final class Timestamp {
 final class Hash {
     final Long value;
 
+    @Override
+    public boolean equals(final Object other) {
+        if (this == other)
+            return true;
+
+        if (other == null || getClass() != other.getClass())
+            return false;
+
+        final Hash hash = (Hash) other;
+        return Objects.equals(value, hash.value);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
     Hash(final Long value) {
         this.value = value;
     }
@@ -80,13 +99,14 @@ final class Database {
     // given Customer
     Order findOrder(final Customer customer) {
         return new Order(
-                new Title("JUG Łódź -- visit our FB, twitter and meetup!"),
+                new Title(String.format("FP Workshop - %s", customer.name)),
                 new Timestamp(42L)
         );
     }
 }
 
-public class Exercise6 {
+@SuppressWarnings("unused")
+class Exercise6 {
     // Please do not change this function!
     private static final Function2<Customer, Database, Order> getOrderForCustomer =
             (customer, database) -> database.findOrder(customer);

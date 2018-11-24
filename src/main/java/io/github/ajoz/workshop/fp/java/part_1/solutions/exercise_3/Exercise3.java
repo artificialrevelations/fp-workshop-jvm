@@ -6,7 +6,6 @@ class Exercise3 {
         return (Integer value) -> second.apply(first.apply(value));
     }
 
-    // hint: Allow the types to guide you with the composition
     static <A, B, C> Function1<A, C> compose(final Function1<A, B> f,
                                              final Function1<B, C> g) {
         return (A a) -> g.apply(f.apply(a));

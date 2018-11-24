@@ -5,6 +5,8 @@ import io.github.ajoz.workshop.fp.java.tools.Function1;
 import io.github.ajoz.workshop.fp.java.tools.Function2;
 import io.github.ajoz.workshop.fp.java.tools.Supplier;
 
+import java.util.Objects;
+
 final class Customer {
     final String name;
     // other fields like: surname, address, etc.
@@ -45,6 +47,23 @@ final class Timestamp {
 final class Hash {
     final Long value;
 
+    @Override
+    public boolean equals(final Object other) {
+        if (this == other)
+            return true;
+
+        if (other == null || getClass() != other.getClass())
+            return false;
+
+        final Hash hash = (Hash) other;
+        return Objects.equals(value, hash.value);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
+    }
+
     Hash(final Long value) {
         this.value = value;
     }
@@ -55,7 +74,7 @@ final class Database {
     // given Customer
     Order findOrder(final Customer customer) {
         return new Order(
-                new Title("JUG Łódź -- visit our FB, twitter and meetup!"),
+                new Title(String.format("FP Workshop - %s", customer.name)),
                 new Timestamp(42L)
         );
     }
@@ -78,7 +97,7 @@ class Exercise6 {
     private static final Function1<Title, Hash> getTitleHash =
             value -> new Hash((long) value.title.length());
 
-    public static Function1<Customer, Hash> getCustomerToHash() {
+    static Function1<Customer, Hash> getCustomerToHash() {
         /*
         // this version is using flipping, currying, application of first value and composition
         return CurriedFunctions

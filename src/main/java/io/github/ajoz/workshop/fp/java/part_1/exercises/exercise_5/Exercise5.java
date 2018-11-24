@@ -49,6 +49,7 @@ interface Supplier<A> {
     A get();
 }
 
+@SuppressWarnings("unused")
 class Exercise5 {
     static <A, B> Consumer1<A> composeConsumer(final Function1<A, B> function,
                                                final Consumer1<B> consumer) {

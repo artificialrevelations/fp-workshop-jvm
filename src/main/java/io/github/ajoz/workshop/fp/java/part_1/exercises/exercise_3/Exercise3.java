@@ -35,6 +35,7 @@ package io.github.ajoz.workshop.fp.java.part_1.exercises.exercise_3;
   - compose that first applies the function give as the argument and then applies the function
 */
 
+@SuppressWarnings("unused")
 class Exercise3 {
     static Function1<Integer, Integer> composeIntFuns(final Function1<Integer, Integer> first,
                                                       final Function1<Integer, Integer> second) {
@@ -57,10 +58,12 @@ class Exercise3 {
 interface Function1<A, B> {
     B apply(A a);
 
+    @SuppressWarnings("unused")
     default <C> Function1<A, C> andThen(final Function1<B, C> after) {
         throw new UnsupportedOperationException("Exercise3 Function1.andThen is missing!");
     }
 
+    @SuppressWarnings("unused")
     default <C> Function1<C, B> compose(final Function1<C, A> before) {
         throw new UnsupportedOperationException("Exercise3 Function1.compose is missing!");
     }

@@ -1,9 +1,8 @@
 package io.github.ajoz.workshop.fp.java.part_1.solutions.exercise_5;
 
-import static io.github.ajoz.workshop.fp.java.part_1.solutions.exercise_5.Exercise5.applyFirst;
-import static io.github.ajoz.workshop.fp.java.part_1.solutions.exercise_5.Exercise5.composeConsumer;
-import static io.github.ajoz.workshop.fp.java.part_1.solutions.exercise_5.Exercise5.composeSupplier;
+import static io.github.ajoz.workshop.fp.java.part_1.solutions.exercise_5.Exercise5.*;
 import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
 public class Exercise5Test {
@@ -51,5 +50,22 @@ public class Exercise5Test {
 
         // then:
         assertEquals(function.apply("foo").apply(42), tested.apply(42));
+    }
+
+    @Test
+    public void should_apply_second_argument() {
+        // given:
+        final Supplier<Integer> supplier =
+                () -> 42;
+
+        final Function1<String, Function1<Integer, String>> function =
+                string -> integer -> String.format("%s : %d", string, integer);
+
+        // when:
+        final Function1<String, String> tested =
+                applySecond(function, supplier);
+
+        // then
+        assertEquals(function.apply("foo").apply(42), tested.apply("foo"));
     }
 }

@@ -49,6 +49,7 @@ interface Function2<A, B, C> {
 
 // as Java does not have a concept of a tuple please use Pair class from kotlin stdlib!
 
+@SuppressWarnings("unused")
 class Exercise4 {
     static <A, B, C> Function1<Pair<A, B>, C> tuple(final Function2<A, B, C> function2) {
         throw new UnsupportedOperationException("Exercise4 tuple is missing!");
