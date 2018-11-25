@@ -1,5 +1,9 @@
 package io.github.ajoz.workshop.fp.java.part_2.exercises.exercise_3;
 
+import io.github.ajoz.workshop.fp.java.tools.Function2;
+
+import java.util.List;
+
 /*
   -- Different kind of fold --
 
@@ -16,11 +20,6 @@ package io.github.ajoz.workshop.fp.java.part_2.exercises.exercise_3;
 
   The implementation which we created is foldLeft.
  */
-
-import io.github.ajoz.workshop.fp.java.tools.Function2;
-
-import java.util.List;
-
 class Exercise3 {
     /*
       Part 1:
