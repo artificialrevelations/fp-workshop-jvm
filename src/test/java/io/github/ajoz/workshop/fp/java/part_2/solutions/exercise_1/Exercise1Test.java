@@ -7,11 +7,11 @@ import org.junit.runner.RunWith;
 import java.util.Collections;
 import java.util.List;
 
-import static io.github.ajoz.workshop.fp.java.part_2.solutions.exercise_1.Exercise1.product;
-import static io.github.ajoz.workshop.fp.java.part_2.solutions.exercise_1.Exercise1.sum;
+import static io.github.ajoz.workshop.fp.java.part_2.solutions.exercise_1.Exercise1.*;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 @RunWith(Enclosed.class)
@@ -155,6 +155,34 @@ public class Exercise1Test {
             final Integer actual = product(mixedList);
             // then:
             assertThat(actual, is(expected));
+        }
+    }
+
+    public static class InTermsOfFoo {
+        @Test
+        public void sumAndSumInTermsOfFooShouldBeEqual() {
+            // given:
+            final List<Integer> list = asList(-1, 2, 1, 2);
+
+            // when:
+            final Integer expected = sum(list);
+            final Integer actual = fooSum(list);
+
+            // then:
+            assertEquals(expected, actual);
+        }
+
+        @Test
+        public void productAndProductInTermsOfFooShouldBeEqual() {
+            // given:
+            final List<Integer> list = asList(-1, 2, 1, 2);
+
+            // when:
+            final Integer expected = product(list);
+            final Integer actual = fooProduct(list);
+
+            // then:
+            assertEquals(expected, actual);
         }
     }
 }

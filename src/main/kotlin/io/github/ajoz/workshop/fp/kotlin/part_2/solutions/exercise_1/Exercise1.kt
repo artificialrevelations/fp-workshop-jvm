@@ -33,13 +33,13 @@ fun foo(list: List<Int>, initial: Int, operator: (Int, Int) -> Int): Int {
     return accumulator
 }
 
-fun sum2(list: List<Int>): Int {
+fun fooSum(list: List<Int>): Int {
     return foo(list, 0) { a, b ->
         a + b
     }
 }
 
-fun product2(list: List<Int>): Int {
+fun fooProduct(list: List<Int>): Int {
     return foo(list, 1) { a, b ->
         a * b
     }

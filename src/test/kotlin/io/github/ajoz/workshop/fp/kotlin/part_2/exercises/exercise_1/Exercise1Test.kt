@@ -153,4 +153,35 @@ class Exercise1Test {
             assertThat(actual, `is`(expected))
         }
     }
+
+    /*
+    // uncomment this after implementing `fooSum` and `fooProduct`
+    class InTermsOfFoo {
+        @Test
+        fun sumAndSumInTermsOfFooShouldBeEqual() {
+            // given:
+            val list = asList(-1, 2, 1, 2)
+
+            // when:
+            val expected = sum(list)
+            val actual = fooSum(list)
+
+            // then:
+            assertEquals(expected, actual)
+        }
+
+        @Test
+        fun productAndProductInTermsOfFooShouldBeEqual() {
+            // given:
+            val list = asList(-1, 2, 1, 2)
+
+            // when:
+            val expected = product(list)
+            val actual = fooProduct(list)
+
+            // then:
+            assertEquals(expected, actual)
+        }
+    }
+     */
 }

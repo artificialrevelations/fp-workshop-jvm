@@ -5,6 +5,7 @@ package io.github.ajoz.workshop.fp.kotlin.part_2.solutions.exercise_1
 import java.util.Arrays.asList
 import java.util.Collections.emptyList
 import org.hamcrest.CoreMatchers.`is`
+import org.junit.Assert.assertEquals
 import org.junit.Assert.assertThat
 import org.junit.Test
 import org.junit.experimental.runners.Enclosed
@@ -151,6 +152,34 @@ class Exercise1Test {
             val actual = product(mixedList)
             // then:
             assertThat(actual, `is`(expected))
+        }
+    }
+
+    class InTermsOfFoo {
+        @Test
+        fun sumAndSumInTermsOfFooShouldBeEqual() {
+            // given:
+            val list = asList(-1, 2, 1, 2)
+
+            // when:
+            val expected = sum(list)
+            val actual = fooSum(list)
+
+            // then:
+            assertEquals(expected, actual)
+        }
+
+        @Test
+        fun productAndProductInTermsOfFooShouldBeEqual() {
+            // given:
+            val list = asList(-1, 2, 1, 2)
+
+            // when:
+            val expected = product(list)
+            val actual = fooProduct(list)
+
+            // then:
+            assertEquals(expected, actual)
         }
     }
 }

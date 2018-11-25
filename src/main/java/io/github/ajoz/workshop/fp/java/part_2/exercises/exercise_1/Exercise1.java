@@ -5,7 +5,10 @@ import java.util.List;
 /*
   -- Simple functions --
 
+  A simple example of `sum` and `product` and an attempt at generalizing them.
+
  */
+@SuppressWarnings("unused")
 class Exercise1 {
     /*
       Part 1:
@@ -15,8 +18,11 @@ class Exercise1 {
       - please consider a case of an empty list
       - passed list will never be null
       - passed list will never have null elements
+      - passed list will be finite
+      - do not worry about the result of product exceeding the amount the Integer
+        type can hold
      */
-    public static Integer sum(final List<Integer> list) {
+    static Integer sum(final List<Integer> list) {
         throw new UnsupportedOperationException("Exercise 1 sum is missing!");
     }
 
@@ -28,8 +34,11 @@ class Exercise1 {
       - please consider a case of an empty list
       - passed list will never be null
       - passed list will never have null elements
+      - passed list will be finite
+      - do not worry about the result of product exceeding the amount the Integer
+        type can hold
      */
-    public static Integer product(final List<Integer> list) {
+    static Integer product(final List<Integer> list) {
         throw new UnsupportedOperationException("Exercise 1 product is missing!");
     }
 
@@ -53,11 +62,12 @@ class Exercise1 {
           throw new UnsupportedOperationException("Exercise 1 foo is missing!");
       }
 
-      public static Integer sum2(final List<Integer> list) {
+      // there are unit tests for those two functions in Exercise1Test
+      public static Integer fooSum(final List<Integer> list) {
           return foo(list, ...);
       }
 
-      public static Integer product2(final List<Integer> list) {
+      public static Integer fooProduct(final List<Integer> list) {
           return foo(list, ...);
       }
      */

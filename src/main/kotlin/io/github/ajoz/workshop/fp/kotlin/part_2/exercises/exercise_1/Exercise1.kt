@@ -53,11 +53,12 @@ fun product(list: List<Int>): Int {
       TODO("Exercise 1 foo is missing!")
   }
 
-  fun sum2(list: List<Int>): Int {
+  // there are unit tests for those two functions in Exercise1Test
+  fun fooSum(list: List<Int>): Int {
       return foo(list, ...)
   }
 
-  fun product2(list: List<Int>): Int {
+  fun fooProduct(list: List<Int>): Int {
       return foo(list, ...)
   }
  */
