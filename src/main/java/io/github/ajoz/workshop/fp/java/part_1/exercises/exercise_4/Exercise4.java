@@ -37,6 +37,9 @@ import kotlin.Pair;
   - from a Function1<A, Function1<B, C>> to Function1<B, Function1<A, C>>
  */
 
+// as Java does not have a concept of a tuple please use Pair class from kotlin stdlib!
+
+@SuppressWarnings("unused")
 @FunctionalInterface
 interface Function1<A, B> {
     B apply(A a);
@@ -52,30 +55,30 @@ interface Function2<A, B, C> {
 @SuppressWarnings("unused")
 class Exercise4 {
     static <A, B, C> Function1<Pair<A, B>, C> tuple(final Function2<A, B, C> function2) {
-        throw new UnsupportedOperationException("Exercise4 tuple is missing!");
+        return (Pair<A, B> abPair) -> function2.apply(abPair.getFirst(), abPair.getSecond());
     }
 
     static <A, B, C> Function1<A, Function1<B, C>> curry(final Function2<A, B, C> function2) {
-        throw new UnsupportedOperationException("Exercise4 curry is missing!");
+        return (A argA) -> (B argb) -> function2.apply(argA, argb);
     }
 
     static <A, B, C> Function2<A, B, C> untuple(final Function1<Pair<A, B>, C> function1) {
-        throw new UnsupportedOperationException("Exercise4 unTuple is missing!");
+        return (a, b) -> function1.apply(new Pair<>(a, b));
     }
 
     static <A, B, C> Function2<A, B, C> uncurry(final Function1<A, Function1<B, C>> function1) {
-        throw new UnsupportedOperationException("Exercise4 uncurry is missing!");
+        return (A argA, B argB) -> function1.apply(argA).apply(argB);
     }
 
     static <A, B, C> Function2<B, A, C> flip(final Function2<A, B, C> function2) {
-        throw new UnsupportedOperationException("Exercise4 flip is missing!");
+        return (B argB, A argA) -> function2.apply(argA, argB);
     }
 
     static <A, B, C> Function1<Pair<B, A>, C> flipTupled(final Function1<Pair<A, B>, C> function1) {
-        throw new UnsupportedOperationException("Exercise4 flipTupled is missing!");
+        return (Pair<B, A> baPair) -> function1.apply(new Pair<>(baPair.getSecond(), baPair.getFirst()));
     }
 
     static <A, B, C> Function1<B, Function1<A, C>> flipCurried(final Function1<A, Function1<B, C>> function1) {
-        throw new UnsupportedOperationException("Exercise4 flipCurried is missing!");
+        return (B argB) -> (A arga) -> function1.apply(arga).apply(argB);
     }
 }
