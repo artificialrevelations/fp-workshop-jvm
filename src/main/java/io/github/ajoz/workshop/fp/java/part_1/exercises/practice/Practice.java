@@ -35,11 +35,11 @@ interface Predicate<A> {
 
     @SuppressWarnings("unused")
     default Predicate<A> foo(final Predicate<A> other) {
-        throw new UnsupportedOperationException("HomeWork foo is missing!");
+        return (A argA) -> this.test(argA) && other.test(argA);
     }
 
     @SuppressWarnings("unused")
     default Predicate<A> bar(final Predicate<A> other) {
-        throw new UnsupportedOperationException("HomeWork bar is missing!");
+        return (A argA) -> this.test(argA) || other.test(argA);
     }
 }
