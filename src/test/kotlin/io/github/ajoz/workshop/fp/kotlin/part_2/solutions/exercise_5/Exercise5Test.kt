@@ -2,10 +2,6 @@
 
 package io.github.ajoz.workshop.fp.kotlin.part_2.solutions.exercise_5
 
-import io.github.ajoz.workshop.fp.kotlin.part_2.solutions.exercise_5.Exercise5.addOne
-import io.github.ajoz.workshop.fp.kotlin.part_2.solutions.exercise_5.Exercise5.lengths
-import io.github.ajoz.workshop.fp.kotlin.part_2.solutions.exercise_5.Exercise5.map
-import io.github.ajoz.workshop.fp.kotlin.part_2.solutions.exercise_5.Exercise5.mapInts
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import java.util.*
