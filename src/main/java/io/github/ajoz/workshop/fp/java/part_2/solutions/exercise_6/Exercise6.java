@@ -5,7 +5,7 @@ import io.github.ajoz.workshop.fp.java.tools.Function1;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Exercise6 {
+class Exercise6 {
     // Part 1:
     static <A, B> Function1<B, Function1<List<A>, B>> foldLeftCurried(final Function1<B, Function1<A, B>> operator) {
         return (B initial) -> (List<A> list) -> {

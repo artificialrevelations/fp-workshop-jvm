@@ -4,7 +4,7 @@ import io.github.ajoz.workshop.fp.java.tools.Function1;
 
 import java.util.List;
 
-public class Exercise6 {
+class Exercise6 {
     /*
        Part 1:
 
