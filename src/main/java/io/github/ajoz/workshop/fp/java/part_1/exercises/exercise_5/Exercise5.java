@@ -53,17 +53,17 @@ interface Supplier<A> {
 class Exercise5 {
     static <A, B> Consumer1<A> composeConsumer(final Function1<A, B> function,
                                                final Consumer1<B> consumer) {
-        throw new UnsupportedOperationException("Exercise5 composeConsumer is missing!");
+        return (A argA) -> consumer.accept(function.apply(argA));
     }
 
     static <A, B> Supplier<B> composeSupplier(final Function1<A, B> function,
                                               final Supplier<A> supplier) {
-        throw new UnsupportedOperationException("Exercise5 composeSupplier is missing!");
+        return () -> function.apply(supplier.get());
     }
 
     static <A, B, C> Function1<B, C> applyFirst(final Function1<A, Function1<B, C>> function,
                                                 final Supplier<A> supplier) {
-        throw new UnsupportedOperationException("Exercise5 applyCurriedFirst is missing!");
+        return (B argB) -> function.apply(supplier.get()).apply(argB);
     }
 
     static <A, B, C> Function1<A, C> applySecond(final Function1<A, Function1<B, C>> function,
