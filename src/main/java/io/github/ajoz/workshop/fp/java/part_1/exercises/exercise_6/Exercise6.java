@@ -28,11 +28,6 @@ import java.util.Objects;
   task.
  */
 
-@FunctionalInterface
-interface Consumer1<A> {
-    void accept(A a);
-}
-
 // this object represents data related to the company customers
 final class Customer {
     final String name;
@@ -143,58 +138,12 @@ class Exercise6 {
             */
 
             return getOrderForCustomer
-                    .applySecond(getProductionDatabase)
+                    .flip()
+                    .applyFirst(getProductionDatabase)
                     .andThen(getOrderTitle)
                     .andThen(getTitleHash)
                     .apply(customer);
+
         };
-    }
-
-    static <A, B> Consumer1<A> composeConsumer(final Function1<A, B> function,
-                                               final Consumer1<B> consumer) {
-        return (A argA) -> consumer.accept(function.apply(argA));
-    }
-
-    static <A, B> Supplier<B> composeSupplier(final Function1<A, B> function,
-                                              final Supplier<A> supplier) {
-        return () -> function.apply(supplier.get());
-    }
-
-    static <A, B, C> Function1<B, C> applyFirst(final Function1<A, Function1<B, C>> function,
-                                                final Supplier<A> supplier) {
-        return (B argB) -> function.apply(supplier.get()).apply(argB);
-    }
-
-    static <A, B, C> Function1<A, C> applySecond(final Function1<A, Function1<B, C>> function,
-                                                 final Supplier<B> supplier) {
-        throw new UnsupportedOperationException("Exercise5 applyCurriedFirst is missing!");
-    }
-
-    static <A, B, C> Function1<Pair<A, B>, C> tuple(final Function2<A, B, C> function2) {
-        return (Pair<A, B> abPair) -> function2.apply(abPair.getFirst(), abPair.getSecond());
-    }
-
-    static <A, B, C> Function1<A, Function1<B, C>> curry(final Function2<A, B, C> function2) {
-        return (A argA) -> (B argb) -> function2.apply(argA, argb);
-    }
-
-    static <A, B, C> Function2<A, B, C> untuple(final Function1<Pair<A, B>, C> function1) {
-        return (a, b) -> function1.apply(new Pair<>(a, b));
-    }
-
-    static <A, B, C> Function2<A, B, C> uncurry(final Function1<A, Function1<B, C>> function1) {
-        return (A argA, B argB) -> function1.apply(argA).apply(argB);
-    }
-
-    static <A, B, C> Function2<B, A, C> flip(final Function2<A, B, C> function2) {
-        return (B argB, A argA) -> function2.apply(argA, argB);
-    }
-
-    static <A, B, C> Function1<Pair<B, A>, C> flipTupled(final Function1<Pair<A, B>, C> function1) {
-        return (Pair<B, A> baPair) -> function1.apply(new Pair<>(baPair.getSecond(), baPair.getFirst()));
-    }
-
-    static <A, B, C> Function1<B, Function1<A, C>> flipCurried(final Function1<A, Function1<B, C>> function1) {
-        return (B argB) -> (A arga) -> function1.apply(arga).apply(argB);
     }
 }
