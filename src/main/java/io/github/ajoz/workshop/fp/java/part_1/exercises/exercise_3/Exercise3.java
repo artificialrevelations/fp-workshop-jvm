@@ -37,21 +37,45 @@ package io.github.ajoz.workshop.fp.java.part_1.exercises.exercise_3;
 
 @SuppressWarnings("unused")
 class Exercise3 {
+    // region part1
     static Function1<Integer, Integer> composeIntFuns(final Function1<Integer, Integer> first,
                                                       final Function1<Integer, Integer> second) {
-        throw new UnsupportedOperationException("Exercise3 composeIntFuns is missing!");
+        return (Integer argument) -> second.apply(first.apply(argument));
     }
+    // endregion
 
+    //region part2
     // hint: Allow the types to guide you with the composition
     static <A, B, C> Function1<A, C> compose(final Function1<A, B> f,
                                              final Function1<B, C> g) {
-        throw new UnsupportedOperationException("Exercise3 compose is missing!");
+        return (A a) -> g.apply(f.apply(a));
     }
+    //endregion
 
+    //region part3
     @SafeVarargs
     static <A> Function1<A, A> composeAll(final Function1<A, A>... functions) {
-        throw new UnsupportedOperationException("Exercise3 composeAll is missing!");
+        /*
+        return (A arg) -> {
+            A temp = arg;
+            for (Function1<A, A> function : functions) {
+                temp = function.apply(temp);
+            }
+
+            return temp;
+        };
+        */
+
+        // second approach: identity function
+        Function1<A, A> temp = x -> x;
+        for (Function1<A, A> function : functions) {
+            temp = compose(temp, function);
+        }
+
+        return temp;
+
     }
+    //endregion
 }
 
 @FunctionalInterface
@@ -60,12 +84,12 @@ interface Function1<A, B> {
 
     @SuppressWarnings("unused")
     default <C> Function1<A, C> andThen(final Function1<B, C> after) {
-        throw new UnsupportedOperationException("Exercise3 Function1.andThen is missing!");
+        return (A arg) -> after.apply(this.apply(arg));
     }
 
     @SuppressWarnings("unused")
     default <C> Function1<C, B> compose(final Function1<C, A> before) {
-        throw new UnsupportedOperationException("Exercise3 Function1.compose is missing!");
+        return (C cArg) -> this.apply(before.apply(cArg));
     }
 }
 
