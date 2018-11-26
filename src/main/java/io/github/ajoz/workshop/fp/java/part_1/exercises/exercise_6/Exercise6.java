@@ -124,6 +124,17 @@ class Exercise6 {
             value -> new Hash((long) value.title.length());
 
     public static Function1<Customer, Hash> getCustomerToHash() {
-        throw new UnsupportedOperationException("Exercise 6 getCustomerToHash is missing!");
+        return new Function1<Customer, Hash>() {
+            @Override
+            public Hash apply(Customer customer) {
+                Order order = getOrderForCustomer.apply(customer, getProductionDatabase.get());
+
+                Title title = getOrderTitle.apply(order);
+
+                Hash hash = getTitleHash.apply(title);
+
+                return hash;
+            }
+        };
     }
 }
