@@ -5,6 +5,7 @@ import io.github.ajoz.workshop.fp.java.tools.Predicate;
 
 import java.util.List;
 
+@SuppressWarnings("unused")
 public class Practice {
     /*
       Part 1:
