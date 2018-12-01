@@ -1,12 +1,8 @@
 package io.github.ajoz.workshop.fp.java.part_3.solutions.solution_1;
 
+import io.github.ajoz.workshop.fp.java.tools.Effect;
 import io.github.ajoz.workshop.fp.java.tools.Supplier;
 
-/*
-  -- Creating Boolean from scratch --
-
-
- */
 enum EnumBoolean {
     TRUE() {
         @Override
@@ -15,18 +11,23 @@ enum EnumBoolean {
         }
 
         @Override
-        public EnumBoolean or(EnumBoolean other) {
+        public EnumBoolean or(final EnumBoolean other) {
             return this;
         }
 
         @Override
-        public EnumBoolean ifTrue(Runnable effect) {
-            effect.run();
+        public EnumBoolean not() {
+            return FALSE;
+        }
+
+        @Override
+        public EnumBoolean ifTrue(final Effect effect) {
+            effect.perform();
             return this;
         }
 
         @Override
-        public EnumBoolean ifFalse(Runnable effect) {
+        public EnumBoolean ifFalse(final Effect effect) {
             return this;
         }
 
@@ -43,18 +44,23 @@ enum EnumBoolean {
         }
 
         @Override
-        public EnumBoolean or(EnumBoolean other) {
+        public EnumBoolean or(final EnumBoolean other) {
             return other;
         }
 
         @Override
-        public EnumBoolean ifTrue(Runnable effect) {
+        public EnumBoolean not() {
+            return TRUE;
+        }
+
+        @Override
+        public EnumBoolean ifTrue(final Effect effect) {
             return this;
         }
 
         @Override
-        public EnumBoolean ifFalse(Runnable effect) {
-            effect.run();
+        public EnumBoolean ifFalse(final Effect effect) {
+            effect.perform();
             return this;
         }
 
@@ -69,23 +75,37 @@ enum EnumBoolean {
 
     public abstract EnumBoolean or(final EnumBoolean other);
 
-    public abstract EnumBoolean ifTrue(final Runnable effect);
+    public abstract EnumBoolean not();
 
-    public abstract EnumBoolean ifFalse(final Runnable effect);
+    public abstract EnumBoolean ifTrue(final Effect effect);
+
+    public abstract EnumBoolean ifFalse(final Effect effect);
 
     public abstract <A> A match(final Supplier<A> ifTrue,
                                 final Supplier<A> ifFalse);
 }
 
-public class Exercise1 {
-    public static void main(String[] args) {
-        System.out.println("" + EnumBoolean.TRUE.and(EnumBoolean.TRUE));
+@SuppressWarnings("ConstantConditions")
+final class Exercise1 {
+    public static void main(final String[] args) {
+        // simple boolean algebra:
+        // and:
+        System.out.println(EnumBoolean.TRUE.and(EnumBoolean.TRUE));
         System.out.println(EnumBoolean.TRUE.and(EnumBoolean.FALSE));
         System.out.println(EnumBoolean.FALSE.and(EnumBoolean.FALSE));
+        System.out.println(EnumBoolean.FALSE.and(EnumBoolean.TRUE));
+
+        // or:
         System.out.println(EnumBoolean.TRUE.or(EnumBoolean.FALSE));
         System.out.println(EnumBoolean.FALSE.or(EnumBoolean.TRUE));
         System.out.println(EnumBoolean.FALSE.or(EnumBoolean.FALSE));
+        System.out.println(EnumBoolean.TRUE.or(EnumBoolean.TRUE));
 
+        // not:
+        System.out.println(EnumBoolean.TRUE.not());
+        System.out.println(EnumBoolean.FALSE.not());
+
+        // conditions as methods:
         EnumBoolean.TRUE
                 .ifTrue(() -> System.out.println("EnumTrue is EnumTrue!"))
                 .ifFalse(() -> System.out.println("EnumTrue is EnumFalse?"));
@@ -94,13 +114,13 @@ public class Exercise1 {
                 .ifTrue(() -> System.out.println("EnumFalse is EnumTrue?"))
                 .ifFalse(() -> System.out.println("EnumFalse is EnumFalse!"));
 
+        // conditions as expressions:
         final String trueMessage =
                 EnumBoolean.TRUE
                         .match(
                                 () -> "Matching EnumTrue to EnumTrue!",
                                 () -> "Matching EnumTrue to EnumFalse?"
                         );
-
         System.out.println(trueMessage);
 
         final String falseMessage =
@@ -109,7 +129,17 @@ public class Exercise1 {
                                 () -> "Matching EnumFalse to EnumTrue?",
                                 () -> "Matching EnumFalse to EnumFalse!"
                         );
-
         System.out.println(falseMessage);
+
+        // using the switch:
+        final EnumBoolean bool = EnumBoolean.TRUE;
+        switch (bool) {
+            case FALSE:
+                System.out.println("Switch FALSE");
+                break;
+            case TRUE:
+                System.out.println("Switch TRUE");
+                break;
+        }
     }
 }

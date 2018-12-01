@@ -24,6 +24,10 @@ package io.github.ajoz.workshop.fp.java.part_3.solutions.solution_4;
   - getting Order information from the Server
   - getting information from a Device
   - getting value from a Map under the given key
+  - getting first value from a List (head)
+  - getting the List except the head (tail)
+  - getting List item on the given index
+  - getting element from a Set
   - getting value stored in SharedPreferences (Android)
 
   This looks like a lot of things we are usually working with.
@@ -87,6 +91,21 @@ public class Exercise4 {
     /*
 
      */
+    static class Result {
+        public final Integer value;
+        public final boolean exists;
+
+        public Result(Integer value, boolean exists) {
+            this.value = value;
+            this.exists = exists;
+        }
+    }
+
+    static Result div4(final Integer a, final Integer b) {
+        return b != 0
+                ? new Result(a / b, true)
+                : new Result(null, false);
+    }
 
     public static void main(String[] args) {
         // Part 1:
@@ -94,17 +113,26 @@ public class Exercise4 {
 
         // Part 2:
         try {
-            System.out.println(div2(42, 0));
+            final Integer res2 = div2(42, 0);
+            System.out.println(res2);
         } catch (DivideByZero divideByZero) {
             divideByZero.printStackTrace();
         }
 
         // Part 3:
-        final Integer result = div3(42, 0);
-        if (null != result) {
-            System.out.println("Div3 result: " + result);
+        final Integer res3 = div3(42, 0);
+        if (null != res3) {
+            System.out.println("Div3 result: " + res3);
         } else {
             System.out.println("Error handling after div3 failed!");
+        }
+
+        // Part 4:
+        final Result res4 = div4(42, 0);
+        if (res4.exists) {
+            System.out.println("Div4 result: " + res4);
+        } else {
+            System.out.println("Error handling after div4 failed!");
         }
     }
 }
