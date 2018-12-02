@@ -230,8 +230,8 @@ class Exercise1 {
                 .ifFalse(() -> System.out.println("EnumTrue is EnumFalse?"));
 
         EnumBoolean.FALSE
-                .ifTrue(() -> System.out.println("EnumFalse is EnumTrue?"))
-                .ifFalse(() -> System.out.println("EnumFalse is EnumFalse!"));
+                .ifFalse(() -> System.out.println("EnumFalse is EnumFalse!"))
+                .ifTrue(() -> System.out.println("EnumFalse is EnumTrue?"));
 
         // conditions as expressions:
         final String trueMessage =

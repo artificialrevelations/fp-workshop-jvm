@@ -7,11 +7,13 @@ enum EnumBoolean {
     TRUE() {
         @Override
         public EnumBoolean and(final EnumBoolean other) {
+            // if this is TRUE then `and` relies on other
             return other;
         }
 
         @Override
         public EnumBoolean or(final EnumBoolean other) {
+            // if this is TRUE then `or` does not depend on other
             return this;
         }
 
@@ -28,7 +30,7 @@ enum EnumBoolean {
 
         @Override
         public EnumBoolean ifFalse(final Effect effect) {
-            return this;
+            return this; //pass through
         }
 
         @Override
@@ -40,11 +42,13 @@ enum EnumBoolean {
     FALSE() {
         @Override
         public EnumBoolean and(final EnumBoolean other) {
+            // if this is FALSE then `and` does not depend on other
             return this;
         }
 
         @Override
         public EnumBoolean or(final EnumBoolean other) {
+            // if this is FALSE then `or` relies on other
             return other;
         }
 
@@ -111,8 +115,8 @@ final class Exercise1 {
                 .ifFalse(() -> System.out.println("EnumTrue is EnumFalse?"));
 
         EnumBoolean.FALSE
-                .ifTrue(() -> System.out.println("EnumFalse is EnumTrue?"))
-                .ifFalse(() -> System.out.println("EnumFalse is EnumFalse!"));
+                .ifFalse(() -> System.out.println("EnumFalse is EnumFalse!"))
+                .ifTrue(() -> System.out.println("EnumFalse is EnumTrue?"));
 
         // conditions as expressions:
         final String trueMessage =
