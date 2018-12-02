@@ -1,66 +1,12 @@
 package io.github.ajoz.workshop.fp.java.part_3.solutions.exercise_4;
 
-/*
-  -- Partial and Total Functions
-
-  A partial function from X to Y is a function f: X' -> Y for some proper subset
-  X' of X. If X' = X, then f is called a total function.
-
-  This definition sounds very "math-y" but in plain words it means that partial
-  functions are those that do not have "results" for every argument in their
-  domain.
-
-  Do such functions exist?
-
-  The simplest example is division. We cannot divide by zero. So division is a
-  partial function on the domain of natural numbers but is a total function on
-  the domain of natural numbers without zero.
-
-  But this is "math-y", what about real world engineering examples?
-
-  Are these functions partial?
-  - getting Order information from the Database
-  - getting Order information from the Cache
-  - getting Order information from the Server
-  - getting information from a Device
-  - getting value from a Map under the given key
-  - getting first value from a List (head)
-  - getting the List except the head (tail)
-  - getting List item on the given index
-  - getting element from a Set
-  - getting value stored in SharedPreferences (Android)
-
-  This looks like a lot of things we are usually working with.
- */
+@SuppressWarnings({"WeakerAccess", "SameParameterValue"})
 public class Exercise4 {
-    /*
-      Part 1:
 
-      Please create a function called `div1` that performs division of two
-      given Integers.
-
-      Question:
-      - what will happen if we divide by zero?
-      - is having an implicit exception in the code a good thing?
-      - how can we solve this issue?
-     */
     static Integer div1(final Integer a, final Integer b) {
         return a / b;
     }
 
-    /*
-      Part 2:
-
-      Please create a function called `div2` that performs division of two
-      given Integers but in the case of the second argument being zero throws
-      a checked exception called DivideByZero.
-
-      Question:
-      - is using a checked exception better?
-      - what about the code readability?
-      - what about the code extendability?
-      - is it easy to use the `div2` function with other functions?
-     */
     static class DivideByZero extends Exception {
     }
 
@@ -71,26 +17,11 @@ public class Exercise4 {
         return a / b;
     }
 
-    /*
-      Part 3:
-
-      Please create a function called `div3` that performs division of two
-      given Integers but in the case of the second argument being zero it
-      returns a null.
-
-      Question:
-      - is it better then the checked exception version?
-      - what about the code readability?
-      - what about the code extendability?
-      - is it easier to use then `div2`?
-     */
     static Integer div3(final Integer a, Integer b) {
         return b != 0 ? a / b : null;
     }
 
-    /*
-
-     */
+    @SuppressWarnings("WeakerAccess")
     static class Result {
         public final Integer value;
         public final boolean exists;
@@ -107,7 +38,14 @@ public class Exercise4 {
                 : new Result(null, false);
     }
 
-    public static void main(String[] args) {
+    static Maybe<Integer> safeDiv(final Integer a, final Integer b) {
+        return b != 0
+                ? new Maybe.Just<>(a / b)
+                : new Maybe.Nothing<>();
+    }
+
+
+    public static void main(final String[] args) {
         // Part 1:
         System.out.println(div1(42, 0));
 
@@ -134,5 +72,31 @@ public class Exercise4 {
         } else {
             System.out.println("Error handling after div4 failed!");
         }
+
+        // Part 5:
+        final Maybe<Integer> safeRes = safeDiv(24, 0);
+        if (safeRes instanceof Maybe.Just) {
+            System.out.println("SafeDiv result: " + ((Maybe.Just) safeRes).value);
+        } else {
+            System.out.println("Error handling after safeDiv failed!");
+        }
+    }
+}
+
+// Part of Part 5 because Java is like that :-(
+@SuppressWarnings("unused")
+abstract class Maybe<A> {
+    public static class Just<A> extends Maybe<A> {
+        public final A value;
+
+        public Just(final A value) {
+            this.value = value;
+        }
+    }
+
+    public static class Nothing<A> extends Maybe<A> {
+    }
+
+    private Maybe() {
     }
 }
