@@ -1,4 +1,4 @@
-package io.github.ajoz.workshop.fp.java.part_3.solutions.solution_2;
+package io.github.ajoz.workshop.fp.java.part_3.solutions.exercise_2;
 
 import io.github.ajoz.workshop.fp.java.tools.Supplier;
 

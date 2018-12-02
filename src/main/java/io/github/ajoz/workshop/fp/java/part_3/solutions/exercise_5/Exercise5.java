@@ -1,4 +1,4 @@
-package io.github.ajoz.workshop.fp.java.part_3.solutions.solution_5;
+package io.github.ajoz.workshop.fp.java.part_3.solutions.exercise_5;
 
 
 enum Architecture {

@@ -1,4 +1,4 @@
-package io.github.ajoz.workshop.fp.java.part_3.solutions.solution_4;
+package io.github.ajoz.workshop.fp.java.part_3.solutions.exercise_4;
 
 /*
   -- Partial and Total Functions

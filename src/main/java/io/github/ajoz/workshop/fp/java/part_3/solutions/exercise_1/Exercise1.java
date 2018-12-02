@@ -1,4 +1,4 @@
-package io.github.ajoz.workshop.fp.java.part_3.solutions.solution_1;
+package io.github.ajoz.workshop.fp.java.part_3.solutions.exercise_1;
 
 import io.github.ajoz.workshop.fp.java.tools.Effect;
 import io.github.ajoz.workshop.fp.java.tools.Supplier;
