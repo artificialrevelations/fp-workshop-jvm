@@ -4,7 +4,7 @@ import io.github.ajoz.workshop.fp.java.tools.Effect;
 import io.github.ajoz.workshop.fp.java.tools.Supplier;
 
 /*
-  -- Creating a Boolean type from scratch --
+  -- Creating a Boolean type from scratch - vol. 1 --
 
   In the first part of the workshop we were looking at an example from the
   language Smalltalk. It showed that a programming language does not need to
@@ -161,34 +161,33 @@ enum EnumBoolean {
          */
         @Override
         public EnumBoolean and(final EnumBoolean other) {
-            return this;
+            throw new UnsupportedOperationException("Exercise 1 FALSE.and is missing!");
         }
 
         @Override
         public EnumBoolean or(final EnumBoolean other) {
-            return other;
+            throw new UnsupportedOperationException("Exercise 1 FALSE.or is missing!");
         }
 
         @Override
         public EnumBoolean not() {
-            return TRUE;
+            throw new UnsupportedOperationException("Exercise 1 FALSE.not is missing!");
         }
 
         @Override
         public EnumBoolean ifTrue(final Effect effect) {
-            return this;
+            throw new UnsupportedOperationException("Exercise 1 FALSE.ifTrue is missing!");
         }
 
         @Override
         public EnumBoolean ifFalse(final Effect effect) {
-            effect.perform();
-            return this;
+            throw new UnsupportedOperationException("Exercise 1 FALSE.ifFalse is missing!");
         }
 
         @Override
         public <A> A match(final Supplier<A> ifTrue,
                            final Supplier<A> ifFalse) {
-            return ifFalse.get();
+            throw new UnsupportedOperationException("Exercise 1 FALSE.match is missing!");
         }
     };
 
@@ -214,11 +213,13 @@ class Exercise1 {
         System.out.println(EnumBoolean.TRUE.and(EnumBoolean.TRUE));
         System.out.println(EnumBoolean.TRUE.and(EnumBoolean.FALSE));
         System.out.println(EnumBoolean.FALSE.and(EnumBoolean.FALSE));
+        System.out.println(EnumBoolean.FALSE.and(EnumBoolean.TRUE));
 
         // or:
         System.out.println(EnumBoolean.TRUE.or(EnumBoolean.FALSE));
         System.out.println(EnumBoolean.FALSE.or(EnumBoolean.TRUE));
         System.out.println(EnumBoolean.FALSE.or(EnumBoolean.FALSE));
+        System.out.println(EnumBoolean.TRUE.or(EnumBoolean.TRUE));
 
         // not:
         System.out.println(EnumBoolean.TRUE.not());
