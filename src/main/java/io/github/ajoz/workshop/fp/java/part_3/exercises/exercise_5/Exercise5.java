@@ -12,6 +12,7 @@ import java.util.NoSuchElementException;
   - `get` method returns value stored in Just and throws exception in Nothing
   - two static methods for creating the types
  */
+@SuppressWarnings("unused")
 abstract class Maybe<A> {
     private static final class Nothing<A> extends Maybe<A> {
         @Override
@@ -72,6 +73,7 @@ abstract class Maybe<A> {
 
   Look at the classes to get familiar with the SDK design:
  */
+@SuppressWarnings("unused")
 class DeviceAPI {
     // this might return a null :-(
     DeviceInfo getDeviceInfo() {
@@ -79,6 +81,7 @@ class DeviceAPI {
     }
 }
 
+@SuppressWarnings("unused")
 class DeviceInfo {
     // this might return a null :-(
     HardwareInfo getHardwareInfo() {
@@ -86,6 +89,7 @@ class DeviceInfo {
     }
 }
 
+@SuppressWarnings("unused")
 class HardwareInfo {
     // this might return a null :-(
     Architecture getArchitecture() {
@@ -203,8 +207,13 @@ public class Exercise5 {
     }
 
     public static void main(final String[] args) {
+        // Part 1:
         logging1(new DeviceAPI());
+
+        // Part 2:
         logging2(new DeviceAPI());
+
+        // Part 3:
         logging3(new DeviceAPI());
     }
 }
