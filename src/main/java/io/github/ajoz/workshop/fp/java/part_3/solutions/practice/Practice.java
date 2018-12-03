@@ -1,8 +1,10 @@
 package io.github.ajoz.workshop.fp.java.part_3.solutions.practice;
 
+import io.github.ajoz.workshop.fp.java.tools.CheckedSupplier;
 import io.github.ajoz.workshop.fp.java.tools.Function1;
 
 import java.util.NoSuchElementException;
+import java.util.Random;
 
 @SuppressWarnings({"unused", "WeakerAccess"})
 abstract class Try<A> {
@@ -101,10 +103,94 @@ abstract class Try<A> {
     public static <A> Try<A> failure(final Throwable error) {
         return new Failure<>(error);
     }
+
+    public static <A> Try<A> ofChecked(final CheckedSupplier<A> supplier) {
+        try {
+            return Try.success(supplier.get());
+        } catch (final Throwable error) {
+            return Try.failure(error);
+        }
+    }
+
+    public static <A> Try<A> ofNullable(final A value) {
+        if (null != value) {
+            return Try.success(value);
+        }
+        return Try.failure(new IllegalArgumentException("Null value passed to ofNullable!"));
+    }
 }
 
-public class Practice {
-    public static void main(final String[] args) {
+class DeviceAPI {
+    private final Random random = new Random();
+    private final DeviceInfo deviceInfo = new DeviceInfo();
 
+    Try<DeviceInfo> getDeviceInfo() {
+        if (random.nextBoolean()) {
+            return Try.success(deviceInfo);
+        }
+        return Try.failure(new NoSuchElementException("DeviceInfo does not exist!"));
+    }
+}
+
+@SuppressWarnings("unused")
+class DeviceInfo {
+    private final Random random = new Random();
+    private final HardwareInfo hardwareInfo = new HardwareInfo();
+
+    Try<HardwareInfo> getHardwareInfo() {
+        if (random.nextBoolean()) {
+            return Try.success(hardwareInfo);
+        }
+        return Try.failure(new IllegalStateException("HardwareInfo unavailable!"));
+    }
+}
+
+@SuppressWarnings("unused")
+class HardwareInfo {
+    private final Random random = new Random();
+    private final Architecture architecture = Architecture.VLIW;
+
+    Try<Architecture> getArchitecture() {
+        if (random.nextBoolean()) {
+            return Try.success(architecture);
+        }
+        return Try.failure(new RuntimeException("Architecture not specified!"));
+    }
+}
+
+@SuppressWarnings("unused")
+enum Architecture {
+    VLIW,
+    CISC,
+    RISC,
+    MISC,
+    ZISC,
+    EPIC
+}
+
+
+@SuppressWarnings("WeakerAccess")
+public class Practice {
+    public static void tryLogging(final DeviceAPI api) {
+        final String message =
+                Try.ofNullable(api)
+                        .flatMap(DeviceAPI::getDeviceInfo)
+                        .flatMap(DeviceInfo::getHardwareInfo)
+                        .flatMap(HardwareInfo::getArchitecture)
+                        .map(Architecture::name)
+                        .recover(Throwable::getMessage)
+                        .get();
+        System.out.println(message);
+    }
+
+    public static void main(final String[] args) {
+        // with null:
+        tryLogging(null);
+
+        // without null:
+        final DeviceAPI api = new DeviceAPI();
+        for (int i = 0; i < 100; i++) {
+            tryLogging(api);
+        }
     }
 }
