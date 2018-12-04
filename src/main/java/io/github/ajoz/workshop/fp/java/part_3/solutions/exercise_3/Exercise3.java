@@ -7,7 +7,10 @@ import java.util.NoSuchElementException;
 
 import static io.github.ajoz.workshop.fp.java.part_3.solutions.exercise_3.SealedList.cons;
 import static io.github.ajoz.workshop.fp.java.part_3.solutions.exercise_3.SealedList.nil;
+import static io.github.ajoz.workshop.fp.java.part_3.solutions.exercise_3.SealedTree.leaf;
+import static io.github.ajoz.workshop.fp.java.part_3.solutions.exercise_3.SealedTree.node;
 
+@SuppressWarnings("WeakerAccess")
 abstract class SealedList<A> {
     @SuppressWarnings("WeakerAccess")
     public static class Nil<A> extends SealedList<A> {
@@ -104,6 +107,46 @@ abstract class SealedList<A> {
     }
 }
 
+
+abstract class SealedTree<A> {
+    private static final class Leaf<A> extends SealedTree<A> {
+        private final A value;
+
+        private Leaf(final A value) {
+            this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return String.format("Leaf(%s)", value);
+        }
+    }
+
+    private static final class Node<A> extends SealedTree<A> {
+        private final SealedTree<A> left;
+        private final SealedTree<A> right;
+
+        private Node(final SealedTree<A> left, final SealedTree<A> right) {
+            this.left = left;
+            this.right = right;
+        }
+
+        @Override
+        public String toString() {
+            return String.format("Node(%s, %s)", left, right);
+        }
+    }
+
+    public static <A> SealedTree<A> leaf(final A value) {
+        return new Leaf<>(value);
+    }
+
+    public static <A> SealedTree<A> node(final SealedTree<A> left,
+                                         final SealedTree<A> right) {
+        return new Node<>(left, right);
+    }
+}
+
 public class Exercise3 {
     public static void main(final String[] args) {
         // A new list is created
@@ -120,5 +163,22 @@ public class Exercise3 {
                         .tail()
                         .foldLeft("" + mappedList.head(), (str, element) -> str + " " + element);
         System.out.println(foldedList);
+
+        // A new tree is created
+        final SealedTree<Integer> sealedTree =
+                node(
+                        node(
+                                node(
+                                        leaf(1),
+                                        leaf(2)
+                                ),
+                                node(
+                                        leaf(3),
+                                        leaf(4)
+                                )
+                        ),
+                        leaf(5)
+                );
+        System.out.println(sealedTree);
     }
 }
