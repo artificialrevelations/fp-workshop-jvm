@@ -360,6 +360,7 @@ abstract class SealedList<A> {
     }
 }
 
+
 public class Exercise3 {
     public static void main(final String[] args) {
         // A new list is created

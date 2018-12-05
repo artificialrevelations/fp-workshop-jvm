@@ -16,16 +16,31 @@ import io.github.ajoz.workshop.fp.java.tools.Supplier;
   First let's define what a Boolean is. Boolean is a type that has only two
   possible values denoting truth and false (from logic and Boolean algebra).
 
-  data Bool = True | False
+  data Boolean = True | False
 
-  This concise notation gets to the point. A Boolean is either True or False.
+  This concise notation gets to the point: A Boolean is a data type that is
+  either True or False. The True and False are - one could say - "atomic" and
+  cannot be deconstructed further into other types. They are also not wrapping
+  anything they just are!
 
-  How to describe it in Java?
+  There is also a sad truth lurking here, the two cases we just defined above
+  do not have meaning, the meaning is given by us through functions we define
+  on them like: `and`, `or`, `not`.
 
-  A natural thing is to use an enum. A simple Boolean enum might look like:
+  We could have a different data type called Foo with two cases Bar and Baz
+  that could work similarly.
 
-  // an "Enum" prefix in the name to make it more distinct from the standard
-  // Boolean type available in the Java standard library
+  Enough of this philosophy, how to define it in Java?
+
+  A natural thing is to use an enum. A quote from the official Java lang tutorial
+
+  "An enum type is a special data type that enables for a variable to be a set
+  of predefined constants."
+
+  This is exactly what we want to achieve: a type with two predefined constants.
+
+  A simple Boolean enum might look like:
+
   enum EnumBoolean {
        TRUE,
        FALSE
@@ -35,9 +50,16 @@ import io.github.ajoz.workshop.fp.java.tools.Supplier;
   - and
   - or
   - not
+  - xor
+  - nand
+
   And most importantly what about `if` statements/expressions?
 
-  First let's think about `and`, `or`, `not`. We could add those missing methods
+  Should we store the "real" Java boolean inside? :-)
+  Should we add a nice `toBoolean()` method so we can use `ifs`? :-)
+
+  Maybe we will manage to do something without resorting to such solutions. First
+  let's think about `and`, `or`, `not`. We could add those missing methods
   to the enum, but this would mean using a lot of switch statements e.g.:
 
   enum EnumBoolean {
@@ -49,19 +71,14 @@ import io.github.ajoz.workshop.fp.java.tools.Supplier;
                case TRUE: return other;
                case FALSE: return this;
            }
-           throw new IllegalStateException("Boolean has more then two cases: " + this);
+           throw new IllegalStateException("Boolean has more then two cases?: " + this);
        }
   }
 
-  Java compiler cannot detect that the switch is exhaustive and we have two
-  choices:
-  - we will explicitly show each case (like above) and drop the default case
-    in favor of an exception thrown at the end
-  - we will use a default e.g. treat FALSE case as default, this will spare us
-    the need of using an exception.
+  We have another option. Java Language Specification gives us a hint:
 
-  Instead of having a switch in each method we can have two implementations, one
-  for True and another for False.
+  "An enum declaration is implicitly final unless it contains at least one enum
+  constant that has a class body"
 
   Let's do this instead!
  */
@@ -95,9 +112,9 @@ enum EnumBoolean {
           would normally be done with
 
           if (condition) {
-              //ifTrue block of code
+              // if(true) block of code
           } else {
-              //ifFalse block of code
+              // if(false) block of code
           }
 
           To simulate the block of code that is run in both cases we need a way
@@ -153,11 +170,10 @@ enum EnumBoolean {
           Please add implementations of missing methods for the FALSE case.
 
           Questions:
-          - Can we model anything with enum?
+          - Can we model anything useful with enum?
           - What are the issues with enum?
           - Can each case take different arguments?
           - Can we instantiate the same case with different arguments?
-          - Most importantly what was the point?
          */
         @Override
         public EnumBoolean and(final EnumBoolean other) {
