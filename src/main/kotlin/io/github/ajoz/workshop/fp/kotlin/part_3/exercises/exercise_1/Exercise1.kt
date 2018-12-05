@@ -2,10 +2,6 @@
 
 package io.github.ajoz.workshop.fp.kotlin.part_3.exercises.exercise_1
 
-
-import io.github.ajoz.workshop.fp.java.tools.Effect
-import io.github.ajoz.workshop.fp.java.tools.Supplier
-
 /*
   -- Creating a Boolean type from scratch - vol. 1 --
 
@@ -168,9 +164,13 @@ enum class EnumBoolean {
                 TODO("Exercise 1 FALSE.match is missing!")
     };
 
-    abstract fun and(other: EnumBoolean): EnumBoolean
+    /*
+      Added benefit of Kotlin (comparing to Java) is the possibility of marking
+      the classes with infix keyword.
+     */
+    abstract infix fun and(other: EnumBoolean): EnumBoolean
 
-    abstract fun or(other: EnumBoolean): EnumBoolean
+    abstract infix fun or(other: EnumBoolean): EnumBoolean
 
     abstract operator fun not(): EnumBoolean
 
@@ -181,56 +181,53 @@ enum class EnumBoolean {
     abstract fun <A> match(ifTrue: () -> A, ifFalse: () -> A): A
 }
 
-internal object Exercise1 {
-    @JvmStatic
-    fun main(args: Array<String>) {
-        // simple boolean algebra:
-        // and:
-        println(EnumBoolean.TRUE.and(EnumBoolean.TRUE))
-        println(EnumBoolean.TRUE.and(EnumBoolean.FALSE))
-        println(EnumBoolean.FALSE.and(EnumBoolean.FALSE))
-        println(EnumBoolean.FALSE.and(EnumBoolean.TRUE))
+fun main(args: Array<String>) {
+    // simple boolean algebra:
+    // and:
+    println(EnumBoolean.TRUE and EnumBoolean.TRUE)
+    println(EnumBoolean.TRUE and EnumBoolean.FALSE)
+    println(EnumBoolean.FALSE and EnumBoolean.FALSE)
+    println(EnumBoolean.FALSE and EnumBoolean.TRUE)
 
-        // or:
-        println(EnumBoolean.TRUE.or(EnumBoolean.FALSE))
-        println(EnumBoolean.FALSE.or(EnumBoolean.TRUE))
-        println(EnumBoolean.FALSE.or(EnumBoolean.FALSE))
-        println(EnumBoolean.TRUE.or(EnumBoolean.TRUE))
+    // or:
+    println(EnumBoolean.TRUE or EnumBoolean.FALSE)
+    println(EnumBoolean.FALSE or EnumBoolean.TRUE)
+    println(EnumBoolean.FALSE or EnumBoolean.FALSE)
+    println(EnumBoolean.TRUE or EnumBoolean.TRUE)
 
-        // not:
-        println(EnumBoolean.TRUE.not())
-        println(EnumBoolean.FALSE.not())
+    // not:
+    println(EnumBoolean.TRUE.not())
+    println(EnumBoolean.FALSE.not())
 
-        // conditions as methods:
-        EnumBoolean.TRUE
-                .ifTrue { println("EnumTrue is EnumTrue!") }
-                .ifFalse { println("EnumTrue is EnumFalse?") }
+    // conditions as methods:
+    EnumBoolean.TRUE
+            .ifTrue { println("EnumTrue is EnumTrue!") }
+            .ifFalse { println("EnumTrue is EnumFalse?") }
 
-        EnumBoolean.FALSE
-                .ifFalse { println("EnumFalse is EnumFalse!") }
-                .ifTrue { println("EnumFalse is EnumTrue?") }
+    EnumBoolean.FALSE
+            .ifFalse { println("EnumFalse is EnumFalse!") }
+            .ifTrue { println("EnumFalse is EnumTrue?") }
 
-        // conditions as expressions:
-        val trueMessage = EnumBoolean.TRUE
-                .match(
-                        { "Matching EnumTrue to EnumTrue!" },
-                        { "Matching EnumTrue to EnumFalse?" }
-                )
-        println(trueMessage)
+    // conditions as expressions:
+    val trueMessage = EnumBoolean.TRUE
+            .match(
+                    { "Matching EnumTrue to EnumTrue!" },
+                    { "Matching EnumTrue to EnumFalse?" }
+            )
+    println(trueMessage)
 
-        val falseMessage = EnumBoolean.FALSE
-                .match(
-                        { "Matching EnumFalse to EnumTrue?" },
-                        { "Matching EnumFalse to EnumFalse!" }
-                )
-        println(falseMessage)
+    val falseMessage = EnumBoolean.FALSE
+            .match(
+                    { "Matching EnumFalse to EnumTrue?" },
+                    { "Matching EnumFalse to EnumFalse!" }
+            )
+    println(falseMessage)
 
-        // using the switch:
-        val bool = EnumBoolean.TRUE
-        when (bool) {
-            EnumBoolean.FALSE -> println("Switch FALSE")
-            EnumBoolean.TRUE -> println("Switch TRUE")
-        }
+    // using when:
+    val bool = EnumBoolean.TRUE
+    when (bool) {
+        EnumBoolean.FALSE -> println("When FALSE")
+        EnumBoolean.TRUE -> println("When TRUE")
     }
 }
 
