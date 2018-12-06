@@ -7,7 +7,7 @@ import io.github.ajoz.workshop.fp.java.tools.Supplier;
 
   In the first exercise we created a Boolean with the use of the enum class.
 
-  Enum was a very nice addition in Java 1.5 but is also very limiting:
+  Enum was a very nice addition in Java 1.5 but also very limiting:
   - there is only one instance of each enum case
   - although its possible to define multiple constructors for an enum, they can
     only be used in place of case definition
@@ -36,7 +36,7 @@ import io.github.ajoz.workshop.fp.java.tools.Supplier;
 
   More precisely it is a data structure used to hold a value, that could take
   on several distinct (fixed) types. The most simple implementation of such type
-  could be
+  could be:
 
   class IntOrBoolean {
       Integer integer;
@@ -52,44 +52,15 @@ import io.github.ajoz.workshop.fp.java.tools.Supplier;
       System.out.println("This union holds a Boolean!");
   }
 
-  So why is it called a sum type? Let's look at a more concise Boolean
-  definition:
-
-  data Bool = True | False
-
-  What do we see here? A Boolean is a True or False. We can think that Boolean
-  is a type that is a sum of True and False if we would like to count how many
-  different distinct values it can hold.
-
-  Boolean = True + False
-
-  As both True and False does not hold any other values we can substitute them
-  with 1's.
-
-  Boolean = 1 + 1
-
   Are there any other sum types you know of?
 
   Char = a | b | c | d | ... | A | B | C | ...
   Natural = 0 | 1 | 2 | 3 | ...
 
-  From the previous example:
-
-  IntOrBoolean = IntCase | BooleanCase
-
   Let's rewrite the Boolean implementation this time without using an enum.
  */
-@SuppressWarnings({"WeakerAccess", "StaticInitializerReferencesSubClass"})
+@SuppressWarnings({"StaticInitializerReferencesSubClass"})
 abstract class SealedBoolean {
-    private SealedBoolean() {
-        // abstract class with a private constructor allows us to create a
-        // sealed class hierarchy. This private constructor will be only
-        // accessible to private classes (static or not) of the abstract class.
-
-        // This gives us power as we can have an abstract type and we control
-        // how many subtypes of it exist.
-    }
-
     public static class True extends SealedBoolean {
         /*
           Part 1:
@@ -170,6 +141,15 @@ abstract class SealedBoolean {
         public String toString() {
             return "SealedFalse";
         }
+    }
+
+    private SealedBoolean() {
+        // abstract class with a private constructor allows us to create a
+        // sealed class hierarchy. This private constructor will be only
+        // accessible to private classes (static or not) of the abstract class.
+
+        // This gives us power as we can have an abstract type and we control
+        // how many subtypes of it exist.
     }
 
     public abstract SealedBoolean and(final SealedBoolean other);
