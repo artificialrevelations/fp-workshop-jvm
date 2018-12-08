@@ -2,9 +2,6 @@
 
 package io.github.ajoz.workshop.fp.kotlin.part_3.exercises.exercise_2
 
-import io.github.ajoz.workshop.fp.java.tools.Supplier
-
-
 /*
   -- Creating a Boolean from scratch - vol. 2 --
 
