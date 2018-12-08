@@ -1,10 +1,6 @@
 package io.github.ajoz.workshop.fp.java.part_3.exercises.exercise_3;
 
-import io.github.ajoz.workshop.fp.java.tools.Function1;
-import io.github.ajoz.workshop.fp.java.tools.Function2;
-
-import static io.github.ajoz.workshop.fp.java.part_3.exercises.exercise_3.SealedList.cons;
-import static io.github.ajoz.workshop.fp.java.part_3.exercises.exercise_3.SealedList.nil;
+import io.github.ajoz.workshop.fp.java.part_3.exercises.exercise_3.BetterPackageDeliveryStatus.RejectionCause;
 
 /*
   -- Beyond Sum Types --
@@ -58,10 +54,10 @@ import static io.github.ajoz.workshop.fp.java.part_3.exercises.exercise_3.Sealed
  */
 @SuppressWarnings("unused")
 class PackageDeliveryStatus {
-    public Long id;
-    public String trackingCode;
-    public Stage stage;
-    public RejectionCause rejectionCause;
+    Long id;
+    String trackingCode;
+    Stage stage;
+    RejectionCause rejectionCause;
 
     enum Stage {
         PREPARING,
@@ -101,281 +97,144 @@ class PackageDeliveryStatus {
   Let's rewrite it in Java
  */
 @SuppressWarnings("unused")
-abstract class PackageDeliveryStatus2 {
-    private static class Preparing extends PackageDeliveryStatus2 {
-        public Long id;
+abstract class BetterPackageDeliveryStatus {
+    static class Preparing extends BetterPackageDeliveryStatus {
+        Long id;
     }
 
-    private static class Prepared extends PackageDeliveryStatus2 {
-        public Long id;
+    static class Prepared extends BetterPackageDeliveryStatus {
+        Long id;
     }
 
-    private static class Rejected extends PackageDeliveryStatus2 {
-        public Long id;
-        public RejectionCause rejectionCause;
+    static class Rejected extends BetterPackageDeliveryStatus {
+        Long id;
+        RejectionCause rejectionCause;
     }
 
-    private static class Dispatched extends PackageDeliveryStatus2 {
-        public Long id;
-        public String trackingCode;
+    static class Dispatched extends BetterPackageDeliveryStatus {
+        Long id;
+        String trackingCode;
     }
-
-    // id is a common thing between all of those subtypes so it could be
-    // moved to the PackageDeliveryStatus2 class
 
     enum RejectionCause {
         RECIPIENT_UNKNOWN,
         PACKAGE_DAMAGED
     }
 
-    private PackageDeliveryStatus2() {
+    private BetterPackageDeliveryStatus() {
     }
 }
 
 /*
-  But how to work with types?
+  But how to work with such types?
 
-  We are taught that instanceOf is bad because of the performance. On the other
-  hand creating methods isPreparing(), isPrepared(), isDispatched() ... and
-  casting to correct type sounds like a hassle.
+  First thought is to use `instanceOf`. It is problematic for a few reasons:
+  - people coming from a C++ background will be thinking about dynamic_cast and
+    how it takes precious cycles to do it and then check if the returned pointer
+    is not null.
+    Is instanceOf really that costly nowadays?
+    Anyone checked?
+    Any JMH results that we can relay on?
+  - `instanceOf` will be probably used with the `if/else` statement. This is
+    super verbose as Java forces us to do a cast afterwards, but also is prone
+    to error. One can easily forget a case, compiler won't remind us we are not
+    handling some case.
+  - it is a defeat of a "normal" object oriented programming in Java. The
+    canonical way of handling it is to use subtype polymorphism.
+
+  Second thought is to create a family of `is***` methods. For our little
+  package delivery example it would be `isPreparing()`, `isPrepared()`,
+  `isDispatched()`, `isRejected()`.
+
+  The problem with this is that it doesn't bring us any gain comparing to the
+  similar usage of `instanceOf` operator. In the end we will have to still cast
+  the thing to a desired type.
 
   The answer lies in polymorphism, subtype polymorphism to be more precise.
-  Remember how we implemented the `ifTrue`, `ifFalse` and `match` methods?
+  Remember how we implemented the `ifTrue`, `ifFalse` and `match` methods over
+  our Boolean type?
 
-  Working with such sealed hierarchies in Java can be solved in similar manner.
-
-  Let's practice a bit creating and working with ADTs then.
-
-  We will create a single linked list in the form of an ADT. How a single linked
-  list is built? It's built from nodes, each node holds a value and a reference
-  to the next node. This means that the last node will have a reference to the
-  next set to null. But what if we would like to not use null for anything?
-
-  A quick dip into Haskell:
-
-  data List a = Nil | Cons a (List a)
-
-  List is either empty (Nil) or has an element and a reference to the next one
-  (Cons).
-
-  Empty list is just Nil.
-  Single element list is Cons(element Nil)
-  Two element list is Cons(element1 Cons(element2 Nil))
-  etc.
-
-  Simple List 1, 2, 3 will be
-
-  Cons(1, Cons(2, Cons(3, Nil)))
-
-  List is a very special example as it is simple yet shows both sum and product
-  in one concise package:
-
-  List = 1 + a * List
-
-  It is also an example of a very interesting type - a recursive type.
-
-  Let's create one in Java.
+  We can add "domain" specific polymorphic methods for our ADTs.
  */
-@SuppressWarnings("WeakerAccess")
-abstract class SealedList<A> {
-    public static class Nil<A> extends SealedList<A> {
-        private Nil() {
-        }
 
-        /*
-          Part 1:
+/*
+  Part 1:
 
-          Add missing `head` and `tail` methods for Nil case.
+  You are working for a revolutionary startup that is preparing a restaurant
+  aggregating website called eat.it. As the micro-services are the current latest
+  and greatest hip technology you decided to communicate the with Events.
 
-          Head of the list is the first element of the list.
-          In case of an empty List (Nil) a NoSuchElementException should be thrown.
+  Your solution architect created a list of possible events that you will have
+  to work with.
 
-          Tail of the list is all the elements except the head.
-          In case of an empty List (Nil) a NoSuchElementException should be thrown.
-         */
-        @Override
-        public A head() {
-            throw new UnsupportedOperationException("Exercise 3 SealedList.Nil.head is missing!");
-        }
+  1) The food order was created created.
+     - the event should contain an id
+     - the event should contain information about the food ordered
+     - the event should contain information about the address where it should be
+       sent
+  2) The food ordered was updated.
+     - the event should contain an id
+     - the event should contain information about the updated food
+  3) The address was updated.
+     - the event should contain an id
+     - the event should contain information about the updated address
+  4) The food order was canceled.
+     - the event should contain an id
 
-        @Override
-        public SealedList<A> tail() {
-            throw new UnsupportedOperationException("Exercise 3 SealedList.Nil.tail is missing!");
-        }
+  Please create an ADT (use the knowledge about product and sum types to do it)
+  that allows modeling a food order event for the eat.it portal.
 
-        /*
-          Part 2:
-
-          Add missing `map` and `foldLeft` methods for Nil case.
-
-          Questions:
-          - what should map on an empty List return?
-          - what should foldLeft on an empty List return?
-         */
-        @Override
-        public <B> SealedList<B> map(final Function1<A, B> mapper) {
-            throw new UnsupportedOperationException("Exercise 3 SealedList.Nil.tail is missing!");
-        }
-
-        @Override
-        public <B> B foldLeft(final B initial,
-                              final Function2<B, A, B> operator) {
-            throw new UnsupportedOperationException("Exercise 3 SealedList.Nil.foldLeft is missing!");
-        }
-
-        @Override
-        public String toString() {
-            return "Nil";
-        }
-    }
-
-    public static class Cons<A> extends SealedList<A> {
-        private final A head;
-        private final SealedList<A> tail;
-
-        public Cons(final A head, final SealedList<A> tail) {
-            this.head = head;
-            this.tail = tail;
-        }
-
-        /*
-          Part 3:
-
-          Add missing `head` and `tail` methods for Cons case.
-
-          Questions:
-          - should we be worried about anything here?
-         */
-        @Override
-        public A head() {
-            throw new UnsupportedOperationException("Exercise 3 SealedList.Cons.head is missing!");
-        }
-
-        @Override
-        public SealedList<A> tail() {
-            throw new UnsupportedOperationException("Exercise 3 SealedList.Cons.tail is missing!");
-        }
-
-        /*
-          Part 4:
-
-          Add missing `map` and `foldLeft` methods for Cons case.
-
-          This is a tricky part. The SealedList is a recursive type and thus it
-          needs recursion to perform `map` and `foldLeft`.
-
-          If you do not want, you don't have to express `map` in terms of
-          `foldLeft`.
-
-          Hints:
-          - take a look at the at the SealedList.cons method
-          - think how the list is created
-          - map boils down to creating new list with changed values
-         */
-        @Override
-        public <B> SealedList<B> map(final Function1<A, B> mapper) {
-            throw new UnsupportedOperationException("Exercise 3 SealedList.Cons.map is missing!");
-        }
-
-        /*
-          In case of such recursive type `foldLeft` is a different beast. What
-          was easy as a simple iteration needs to be expressed as a recursion.
-
-          Let's quickly examine the folding. Let's write the `foldLeft` as
-
-          foldLeft :: (b -> a -> b) -> b -> List a -> b
-
-          The function takes two argument function (operator - op in short),
-          initial value, list that is going to be folded and returns a value.
-
-          In case the list is empty (Nil case) we should return the initial
-          value, this is pretty simple.
-
-          foldLeft op initial Nil = initial
-
-          What about any other case? (Cons). Let's look at the foldLeft then:
-
-          foldLeft op initial (Cons head tail) = ????
-
-          We need to use operator on the initial value and the head value, so:
-
-          foldLeft op initial (Cons head tail) = initial op head
-
-          This is not yet the thing that we want to achieve as we need to fold
-          the tail.
-
-          In our imperative approach we had an accumulator and at the begining
-          it had the initial value:
-
-          B accumulator = initial;
-          for (final A element : list) {
-              accumulator = operator.apply(accumulator, element);
-          }
-
-          then we overwrote it with the result of the operator. One could say that
-          the new computed value became the initial value for the next iteration.
-          This next iteration was done on the rest of the list -- the tail.
-
-          Let's use this knowledge:
-
-          foldLeft op initial (Cons head tail) = foldLeft op (initial op head) tail
-
-          Let's try to do the same in Java (in OO-ish way)
-
-          Hint:
-          - on what thing the `foldLeft` will be invoked?
-          - the same operator is passed in each iteration
-         */
-        @Override
-        public <B> B foldLeft(final B initial,
-                              final Function2<B, A, B> operator) {
-            throw new UnsupportedOperationException("Exercise 3 SealedList.Cons.foldLeft is missing!");
-        }
-
-        @Override
-        public String toString() {
-            return String.format("Cons(%s, %s)", head, tail.toString());
-        }
-    }
-
-    public abstract A head();
-
-    public abstract SealedList<A> tail();
-
-    public abstract <B> SealedList<B> map(final Function1<A, B> mapper);
-
-    public abstract <B> B foldLeft(final B initial,
-                                   final Function2<B, A, B> operator);
-
-    public static <A> SealedList<A> cons(final A element,
-                                         final SealedList<A> list) {
-        return new Cons<>(element, list);
-    }
-
-    public static <A> SealedList<A> nil() {
-        return new Nil<>();
-    }
-
-    private SealedList() {
-    }
+  Hints:
+  - this problem can be solved in two different ways
+  - what is the thing that is common for all events?
+ */
+class FoodOrderEvent {
+    // implement the type!
 }
-
 
 public class Exercise3 {
     public static void main(final String[] args) {
-        // A new list is created
-        final SealedList<Integer> sealedList =
-                cons(1, cons(2, cons(3, nil())));
+        // Discussion
 
-        // List is mapped
-        final SealedList<Integer> mappedList =
-                sealedList.map(x -> x + 42);
+        // If we want to create a delivery status for a package that is
+        // dispatched to the designated address we need to do:
+        final PackageDeliveryStatus pds1 = new PackageDeliveryStatus();
+        // some id:
+        pds1.id = 1L;
+        // Depending on what we decide we need to either set this to null
+        // or create a special enum case called NO_CAUSE, we are on a null
+        // purging crusade so we go with NO_CAUSE instead
+        pds1.rejectionCause = PackageDeliveryStatus.RejectionCause.NO_CAUSE;
+        // this is obvious:
+        pds1.stage = PackageDeliveryStatus.Stage.DISPATCHED;
+        pds1.trackingCode = "a super fancy tracking code for web ui!";
 
-        // List is folded
-        final String foldedList =
-                mappedList
-                        .tail()
-                        .foldLeft("" + mappedList.head(), (str, element) -> str + " " + element);
-        System.out.println(foldedList);
+        // What about the a rejected package delivery?
+        final PackageDeliveryStatus pds2 = new PackageDeliveryStatus();
+        pds2.id = 42L;
+        pds2.rejectionCause = PackageDeliveryStatus.RejectionCause.RECIPIENT_UNKNOWN;
+        pds2.stage = PackageDeliveryStatus.Stage.REJECTED;
+        // We do not want a null so we use an empty string, but what about
+        // a case in which the type does not have such a nice neutral value?
+        // This is also a bit problematic because it causes our algorithms
+        // to have another layer of logic for checking if this trackingCode
+        // is not empty.
+        pds2.trackingCode = "";
+
+        // This way we have only access to the fields that have sense in a
+        // particular case
+        final BetterPackageDeliveryStatus.Dispatched bpds1 =
+                new BetterPackageDeliveryStatus.Dispatched();
+
+        bpds1.id = 1L;
+        // we do not have to worry about the "" value
+        bpds1.trackingCode = "another code for the super fancy tracking ui!";
+
+        final BetterPackageDeliveryStatus.Rejected bpds2 =
+                new BetterPackageDeliveryStatus.Rejected();
+
+        bpds2.id = 42L;
+        // we do not have a need for an artificial case like NO_CAUSE
+        bpds2.rejectionCause = RejectionCause.RECIPIENT_UNKNOWN;
     }
 }

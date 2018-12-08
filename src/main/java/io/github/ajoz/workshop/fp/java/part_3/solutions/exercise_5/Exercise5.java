@@ -1,180 +1,103 @@
 package io.github.ajoz.workshop.fp.java.part_3.solutions.exercise_5;
 
-import io.github.ajoz.workshop.fp.java.tools.Function1;
-
-import java.util.NoSuchElementException;
-
-abstract class Maybe<A> {
-    private static final class Nothing<A> extends Maybe<A> {
-        @Override
-        public A get() {
-            throw new NoSuchElementException("Cannot get value from Nothing!");
-        }
-
-        @Override
-        public boolean isPresent() {
-            return false;
-        }
-
-        @Override
-        public <B> Maybe<B> map(final Function1<A, B> mapper) {
-            return Maybe.nothing();
-        }
-
-        @Override
-        public <B> Maybe<B> flatMap(final Function1<A, Maybe<B>> mapper) {
-            return Maybe.nothing();
-        }
-
-        @Override
-        public A getOrElse(final A defaultValue) {
-            return defaultValue;
-        }
-    }
-
-    private static final class Just<A> extends Maybe<A> {
-        private final A value;
-
-        private Just(final A value) {
-            this.value = value;
-        }
-
-        @Override
-        public A get() {
-            return value;
-        }
-
-        @Override
-        public boolean isPresent() {
-            return true;
-        }
-
-        @Override
-        public <B> Maybe<B> map(final Function1<A, B> mapper) {
-            return Maybe.just(mapper.apply(value));
-        }
-
-        @Override
-        public <B> Maybe<B> flatMap(Function1<A, Maybe<B>> mapper) {
-            return mapper.apply(value);
-        }
-
-        @Override
-        public A getOrElse(A defaultValue) {
-            return value;
-        }
-    }
-
-    public abstract A get();
-
-    public abstract boolean isPresent();
-
-    public abstract <B> Maybe<B> map(final Function1<A, B> mapper);
-
-    public abstract <B> Maybe<B> flatMap(final Function1<A, Maybe<B>> mapper);
-
-    public abstract A getOrElse(final A defaultValue);
-
-    public static <A> Maybe<A> just(final A value) {
-        return new Just<>(value);
-    }
-
-    public static <A> Nothing<A> nothing() {
-        return new Nothing<>();
-    }
-}
-
-class DeviceAPI {
-    // this might return a null :-(
-    DeviceInfo getDeviceInfo() {
-        return new DeviceInfo();
-    }
-
-    // this will never be null
-    Maybe<DeviceInfo> safeGetDeviceInfo() {
-        return Maybe.just(new DeviceInfo());
-    }
-}
-
-class DeviceInfo {
-    // this might return a null :-(
-    HardwareInfo getHardwareInfo() {
-        return new HardwareInfo();
-    }
-
-    // this will never be null
-    Maybe<HardwareInfo> safeGetHardwareInfo() {
-        return Maybe.just(new HardwareInfo());
-    }
-}
-
-class HardwareInfo {
-    // this might return a null :-(
-    Architecture getArchitecture() {
-        return Architecture.VLIW;
-    }
-
-    // this will never be null
-    Maybe<Architecture> safeGetArchitecture() {
-        return Maybe.just(Architecture.VLIW);
-    }
-}
-
-@SuppressWarnings("unused")
-enum Architecture {
-    VLIW,
-    CISC,
-    RISC,
-    MISC,
-    ZISC,
-    EPIC
-}
-
-@SuppressWarnings("WeakerAccess")
+@SuppressWarnings({"WeakerAccess", "SameParameterValue"})
 public class Exercise5 {
-    static void logging1(final DeviceAPI api) {
-        String message = "Architecture info unavailable";
-        final DeviceInfo deviceInfo = api.getDeviceInfo();
-        if (deviceInfo != null) {
-            final HardwareInfo hardwareInfo = deviceInfo.getHardwareInfo();
-            if (hardwareInfo != null) {
-                final Architecture architecture = hardwareInfo.getArchitecture();
-                if (architecture != null) {
-                    message = "#1 Architecture: " + architecture.name();
-                }
-            }
-        }
-        System.out.println(message);
+
+    static Integer div1(final Integer a, final Integer b) {
+        return a / b;
     }
 
-    static void logging2(final DeviceAPI api) {
-        String message = "Architecture info unavailable";
-        final Maybe<DeviceInfo> deviceInfo = api.safeGetDeviceInfo();
-        if (deviceInfo.isPresent()) {
-            final Maybe<HardwareInfo> hardwareInfo = deviceInfo.get().safeGetHardwareInfo();
-            if (hardwareInfo.isPresent()) {
-                final Maybe<Architecture> architecture = hardwareInfo.get().safeGetArchitecture();
-                if (architecture.isPresent()) {
-                    message = "#2 Architecture: " + architecture.get().name();
-                }
-            }
-        }
-        System.out.println(message);
+    static class DivideByZero extends Exception {
     }
 
-    static void logging3(final DeviceAPI api) {
-        final String message = api
-                .safeGetDeviceInfo()
-                .flatMap(DeviceInfo::safeGetHardwareInfo)
-                .flatMap(HardwareInfo::safeGetArchitecture)
-                .map(architecture -> "#3 Architecture: " + architecture)
-                .getOrElse("Architecture info unavailable");
-        System.out.println(message);
+    static Integer div2(final Integer a, final Integer b) throws DivideByZero {
+        if (b == 0)
+            throw new DivideByZero();
+
+        return a / b;
     }
+
+    static Integer div3(final Integer a, Integer b) {
+        return b != 0 ? a / b : null;
+    }
+
+    @SuppressWarnings("WeakerAccess")
+    static class Result {
+        public final Integer value;
+        public final boolean exists;
+
+        public Result(final Integer value, final boolean exists) {
+            this.value = value;
+            this.exists = exists;
+        }
+    }
+
+    static Result div4(final Integer a, final Integer b) {
+        return b != 0
+                ? new Result(a / b, true)
+                : new Result(null, false);
+    }
+
+    static Maybe<Integer> safeDiv(final Integer a, final Integer b) {
+        return b != 0
+                ? new Maybe.Just<>(a / b)
+                : new Maybe.Nothing<>();
+    }
+
 
     public static void main(final String[] args) {
-        logging1(new DeviceAPI());
-        logging2(new DeviceAPI());
-        logging3(new DeviceAPI());
+        // Part 1:
+        // This will cause an ArithmeticException
+        // System.out.println(div1(42, 0));
+
+        // Part 2:
+        try {
+            final Integer res2 = div2(42, 0);
+            System.out.println(res2);
+        } catch (DivideByZero divideByZero) {
+            divideByZero.printStackTrace();
+        }
+
+        // Part 3:
+        final Integer res3 = div3(42, 0);
+        if (null != res3) {
+            System.out.println("Div3 result: " + res3);
+        } else {
+            System.out.println("Error handling after div3 failed!");
+        }
+
+        // Part 4:
+        final Result res4 = div4(42, 0);
+        if (res4.exists) {
+            System.out.println("Div4 result: " + res4);
+        } else {
+            System.out.println("Error handling after div4 failed!");
+        }
+
+        // Part 5:
+        final Maybe<Integer> safeRes = safeDiv(24, 0);
+        if (safeRes instanceof Maybe.Just) {
+            System.out.println("SafeDiv result: " + ((Maybe.Just) safeRes).value);
+        } else {
+            System.out.println("Error handling after safeDiv failed!");
+        }
+    }
+}
+
+// Part of Part 5 because Java is like that :-(
+@SuppressWarnings("unused")
+abstract class Maybe<A> {
+    public static class Just<A> extends Maybe<A> {
+        public final A value;
+
+        public Just(final A value) {
+            this.value = value;
+        }
+    }
+
+    public static class Nothing<A> extends Maybe<A> {
+    }
+
+    private Maybe() {
     }
 }

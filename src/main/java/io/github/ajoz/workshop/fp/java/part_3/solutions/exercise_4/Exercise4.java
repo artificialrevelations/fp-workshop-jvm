@@ -1,102 +1,82 @@
 package io.github.ajoz.workshop.fp.java.part_3.solutions.exercise_4;
 
-@SuppressWarnings({"WeakerAccess", "SameParameterValue"})
-public class Exercise4 {
+import java.util.NoSuchElementException;
 
-    static Integer div1(final Integer a, final Integer b) {
-        return a / b;
-    }
+import static io.github.ajoz.workshop.fp.java.part_3.solutions.exercise_4.SealedList.cons;
+import static io.github.ajoz.workshop.fp.java.part_3.solutions.exercise_4.SealedList.nil;
 
-    static class DivideByZero extends Exception {
-    }
+@SuppressWarnings("WeakerAccess")
+abstract class SealedList<A> {
+    @SuppressWarnings("WeakerAccess")
+    public static class Nil<A> extends SealedList<A> {
+        public Nil() {
+        }
 
-    static Integer div2(final Integer a, final Integer b) throws DivideByZero {
-        if (b == 0)
-            throw new DivideByZero();
+        @Override
+        public A head() {
+            throw new NoSuchElementException("Head of empty list!");
+        }
 
-        return a / b;
-    }
+        @Override
+        public SealedList<A> tail() {
+            throw new NoSuchElementException("Tail of empty list!");
+        }
 
-    static Integer div3(final Integer a, Integer b) {
-        return b != 0 ? a / b : null;
+        @Override
+        public String toString() {
+            return "Nil";
+        }
     }
 
     @SuppressWarnings("WeakerAccess")
-    static class Result {
-        public final Integer value;
-        public final boolean exists;
+    public static class Cons<A> extends SealedList<A> {
+        private final A head;
+        private final SealedList<A> tail;
 
-        public Result(Integer value, boolean exists) {
-            this.value = value;
-            this.exists = exists;
+        public Cons(final A head, final SealedList<A> tail) {
+            this.head = head;
+            this.tail = tail;
+        }
+
+        @Override
+        public A head() {
+            return head;
+        }
+
+        @Override
+        public SealedList<A> tail() {
+            return tail;
+        }
+
+        @Override
+        public String toString() {
+            return String.format("Cons(%s, %s)", head, tail.toString());
         }
     }
 
-    static Result div4(final Integer a, final Integer b) {
-        return b != 0
-                ? new Result(a / b, true)
-                : new Result(null, false);
+    private SealedList() {
     }
 
-    static Maybe<Integer> safeDiv(final Integer a, final Integer b) {
-        return b != 0
-                ? new Maybe.Just<>(a / b)
-                : new Maybe.Nothing<>();
+    public abstract A head();
+
+    public abstract SealedList<A> tail();
+
+    public static <A> SealedList<A> cons(final A element,
+                                         final SealedList<A> list) {
+        return new Cons<>(element, list);
     }
 
-
-    public static void main(final String[] args) {
-        // Part 1:
-        System.out.println(div1(42, 0));
-
-        // Part 2:
-        try {
-            final Integer res2 = div2(42, 0);
-            System.out.println(res2);
-        } catch (DivideByZero divideByZero) {
-            divideByZero.printStackTrace();
-        }
-
-        // Part 3:
-        final Integer res3 = div3(42, 0);
-        if (null != res3) {
-            System.out.println("Div3 result: " + res3);
-        } else {
-            System.out.println("Error handling after div3 failed!");
-        }
-
-        // Part 4:
-        final Result res4 = div4(42, 0);
-        if (res4.exists) {
-            System.out.println("Div4 result: " + res4);
-        } else {
-            System.out.println("Error handling after div4 failed!");
-        }
-
-        // Part 5:
-        final Maybe<Integer> safeRes = safeDiv(24, 0);
-        if (safeRes instanceof Maybe.Just) {
-            System.out.println("SafeDiv result: " + ((Maybe.Just) safeRes).value);
-        } else {
-            System.out.println("Error handling after safeDiv failed!");
-        }
+    public static <A> SealedList<A> nil() {
+        return new Nil<>();
     }
 }
 
-// Part of Part 5 because Java is like that :-(
-@SuppressWarnings("unused")
-abstract class Maybe<A> {
-    public static class Just<A> extends Maybe<A> {
-        public final A value;
+public class Exercise4 {
+    public static void main(final String[] args) {
+        // A new list is created
+        final SealedList<Integer> sealedList =
+                cons(1, cons(2, cons(3, nil())));
 
-        public Just(final A value) {
-            this.value = value;
-        }
-    }
-
-    public static class Nothing<A> extends Maybe<A> {
-    }
-
-    private Maybe() {
+        System.out.println("sealedList = " + sealedList);
     }
 }
