@@ -1,6 +1,6 @@
-package io.github.ajoz.workshop.fp.java.part_3.exercises.exercise_3;
+@file:Suppress("PackageName", "unused")
 
-import io.github.ajoz.workshop.fp.java.part_3.exercises.exercise_3.BetterPackageDeliveryStatus.RejectionCause;
+package io.github.ajoz.workshop.fp.kotlin.part_3.exercises.exercise_3
 
 /*
   -- Beyond Sum Types --
@@ -17,7 +17,7 @@ import io.github.ajoz.workshop.fp.java.part_3.exercises.exercise_3.BetterPackage
 
   Pair = A * B
 
-  In Java one might say that every class is a possible product type if you squint
+  In Kotlin one might say that every class is a possible product type if you squint
   your eyes a little.
 
   class User {
@@ -52,14 +52,11 @@ import io.github.ajoz.workshop.fp.java.part_3.exercises.exercise_3.BetterPackage
   - incorrect states are possible e.g. rejected package with a tracking code
   - we are not relaying on type system to prevent bugs
  */
-@SuppressWarnings("unused")
-class PackageDeliveryStatus {
-    Long id;
-    String trackingCode;
-    Stage stage;
-    RejectionCause rejectionCause;
-
-    enum Stage {
+data class PackageDeliveryStatus(val id: Long?,
+                                 val trackingCode: String?,
+                                 val stage: Stage?,
+                                 val rejectionCause: RejectionCause = RejectionCause.NO_CAUSE) {
+    enum class Stage {
         PREPARING,
         PREPARED,
         REJECTED,
@@ -67,7 +64,7 @@ class PackageDeliveryStatus {
         WAITING_FOR_RECIPIENT_TO_LEAVE_HOME_SO_HE_WILL_MISS_IT
     }
 
-    enum RejectionCause {
+    enum class RejectionCause {
         NO_CAUSE,
         RECIPIENT_UNKNOWN,
         PACKAGE_DAMAGED
@@ -78,7 +75,7 @@ class PackageDeliveryStatus {
   We can try to solve this with ADTs (Product and Sum Types). Let's write this
   type again (this time in F#):
 
-  type RejectionCause = RECEPIENT_UNKNOWN | PACKAGE_DEMAGED
+  type RejectionCause = RECIPIENT_UNKNOWN | PACKAGE_DAMAGED
 
   type PackageDeliveryStatus =
         | Preparing of Long
@@ -94,34 +91,17 @@ class PackageDeliveryStatus {
     will never appear in any other case
   - Dispatched that has an ID of type Long and a TrackingStatus of type String.
 
-  Let's rewrite it in Java
+  Let's rewrite it in Kotlin
  */
-@SuppressWarnings("unused")
-abstract class BetterPackageDeliveryStatus {
-    static class Preparing extends BetterPackageDeliveryStatus {
-        Long id;
-    }
+sealed class BetterPackageDeliveryStatus {
+    data class Preparing(val id: Long) : BetterPackageDeliveryStatus()
+    data class Prepared(val id: Long) : BetterPackageDeliveryStatus()
+    data class Rejected(val id: Long, val cause: RejectionCause) : BetterPackageDeliveryStatus()
+    data class Dispatched(val id: Long, val trackingCode: String) : BetterPackageDeliveryStatus()
 
-    static class Prepared extends BetterPackageDeliveryStatus {
-        Long id;
-    }
-
-    static class Rejected extends BetterPackageDeliveryStatus {
-        Long id;
-        RejectionCause rejectionCause;
-    }
-
-    static class Dispatched extends BetterPackageDeliveryStatus {
-        Long id;
-        String trackingCode;
-    }
-
-    enum RejectionCause {
+    enum class RejectionCause {
         RECIPIENT_UNKNOWN,
         PACKAGE_DAMAGED
-    }
-
-    private BetterPackageDeliveryStatus() {
     }
 }
 
@@ -192,53 +172,51 @@ abstract class BetterPackageDeliveryStatus {
   - this problem can be solved in two different ways
   - what is the thing that is common for all events?
  */
-class FoodOrderEvent {
-    // implement the type!
-}
+class FoodOrderEvent// implement the type!
 
-public class Exercise3 {
-    public static void main(final String[] args) {
-        // Discussion
+@Suppress("SpellCheckingInspection")
+fun main(args: Array<String>) {
+    // Discussion
 
-        // If we want to create a delivery status for a package that is
-        // dispatched to the designated address we need to do:
-        final PackageDeliveryStatus pds1 = new PackageDeliveryStatus();
-        // some id:
-        pds1.id = 1L;
-        // Depending on what we decide we need to either set this to null
-        // or create a special enum case called NO_CAUSE, we are on a null
-        // purging crusade so we go with NO_CAUSE instead
-        pds1.rejectionCause = PackageDeliveryStatus.RejectionCause.NO_CAUSE;
-        // this is obvious:
-        pds1.stage = PackageDeliveryStatus.Stage.DISPATCHED;
-        pds1.trackingCode = "a super fancy tracking code for web ui!";
+    // If we want to create a delivery status for a package that is
+    // dispatched to the designated address we need to do:
+    val pds1 = PackageDeliveryStatus(
+            // some id:
+            1L,
+            // this is obvious:
+            "a super fancy tracking code for web ui!",
+            PackageDeliveryStatus.Stage.DISPATCHED,
+            // Depending on what we decide we need to either set this to null
+            // or create a special enum case called NO_CAUSE, we are on a null
+            // purging crusade so we go with NO_CAUSE instead
+            PackageDeliveryStatus.RejectionCause.NO_CAUSE
+    )
 
-        // What about the a rejected package delivery?
-        final PackageDeliveryStatus pds2 = new PackageDeliveryStatus();
-        pds2.id = 42L;
-        pds2.rejectionCause = PackageDeliveryStatus.RejectionCause.RECIPIENT_UNKNOWN;
-        pds2.stage = PackageDeliveryStatus.Stage.REJECTED;
-        // We do not want a null so we use an empty string, but what about
-        // a case in which the type does not have such a nice neutral value?
-        // This is also a bit problematic because it causes our algorithms
-        // to have another layer of logic for checking if this trackingCode
-        // is not empty.
-        pds2.trackingCode = "";
+    println(pds1)
 
-        // This way we have only access to the fields that have sense in a
-        // particular case
-        final BetterPackageDeliveryStatus.Dispatched bpds1 =
-                new BetterPackageDeliveryStatus.Dispatched();
+    // What about the a rejected package delivery?
+    val pds2 = PackageDeliveryStatus(
+            42L,
+            null,
+            PackageDeliveryStatus.Stage.REJECTED,
+            PackageDeliveryStatus.RejectionCause.RECIPIENT_UNKNOWN
+    )
 
-        bpds1.id = 1L;
-        // we do not have to worry about the "" value
-        bpds1.trackingCode = "another code for the super fancy tracking ui!";
+    println(pds2)
 
-        final BetterPackageDeliveryStatus.Rejected bpds2 =
-                new BetterPackageDeliveryStatus.Rejected();
+    // This way we have only access to the fields that have sense in a
+    // particular case
+    val bpds1 = BetterPackageDeliveryStatus.Dispatched(
+            1L,
+            "another code for the super fancy tracking ui!"
+    )
 
-        bpds2.id = 42L;
-        // we do not have a need for an artificial case like NO_CAUSE
-        bpds2.rejectionCause = RejectionCause.RECIPIENT_UNKNOWN;
-    }
+    println(bpds1)
+
+    val bpds2 = BetterPackageDeliveryStatus.Rejected(
+            42L,
+            BetterPackageDeliveryStatus.RejectionCause.RECIPIENT_UNKNOWN
+    )
+
+    println(bpds2)
 }
