@@ -31,6 +31,18 @@ internal sealed class Maybe<out A> {
 }
 
 /*
+  Kotlin variance does not allow us to make this as a method of Maybe
+  - if we want the None to be an object we need to specify Maybe<out A>
+    so None is Maybe<Nothing>
+  - if we do the thing above then we cannot use A in an `in` position so it is
+    not possible to use it as an arg of `getOrElse` method :-(
+  - if we would make the None as class None<A> : Maybe<A> instead of an object
+    then we could have the `getOrElse` as a method
+  */
+internal fun <A> Maybe<A>.getOrElse(default: A): A =
+        TODO("Exercise 6 Maybe.getOrElse is missing!")
+
+/*
   You are working on a API for some device SDK. Currently you are working on
   function that will log information about the Architecture of the device's
   underlying hardware. Fortunately the SDK API allows to retrieve the
