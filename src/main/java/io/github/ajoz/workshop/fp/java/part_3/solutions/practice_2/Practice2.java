@@ -1,111 +1,67 @@
 package io.github.ajoz.workshop.fp.java.part_3.solutions.practice_2;
 
-import static io.github.ajoz.workshop.fp.java.part_3.solutions.practice_2.Expr.*;
+import static io.github.ajoz.workshop.fp.java.part_3.solutions.practice_2.BinaryTree.branch;
+import static io.github.ajoz.workshop.fp.java.part_3.solutions.practice_2.BinaryTree.leaf;
 
-abstract class Expr {
-    private Expr() {
-    }
+abstract class BinaryTree<A> {
+    public static class Leaf<A> extends BinaryTree<A> {
+        private final A value;
 
-    public abstract Integer eval();
-
-    public static Expr value(final Integer value) {
-        return new Val(value);
-    }
-
-    public static Expr add(final Expr left, final Expr right) {
-        return new Add(left, right);
-    }
-
-    public static Expr multiply(final Expr left, final Expr right) {
-        return new Mul(left, right);
-    }
-
-    public static Expr substract(final Expr left, final Expr right) {
-        return new Sub(left, right);
-    }
-
-    public static Expr divide(final Expr left, final Expr right) {
-        return new Div(left, right);
-    }
-
-    private static final class Val extends Expr {
-        private final Integer value;
-
-        private Val(final Integer value) {
+        Leaf(final A value) {
             this.value = value;
         }
 
         @Override
-        public Integer eval() {
-            return value;
+        public String toString() {
+            return String.format("Leaf(%s)", value);
         }
     }
 
-    private static final class Add extends Expr {
-        private final Expr left;
-        private final Expr right;
+    public static class Branch<A> extends BinaryTree<A> {
+        private final BinaryTree<A> left;
+        private final BinaryTree<A> right;
 
-        private Add(final Expr left,
-                    final Expr right) {
+        Branch(final BinaryTree<A> left,
+               final BinaryTree<A> right) {
             this.left = left;
             this.right = right;
         }
 
         @Override
-        public Integer eval() {
-            return left.eval() + right.eval();
+        public String toString() {
+            return String.format("Branch(%s, %s)", left, right);
         }
     }
 
-    private static final class Sub extends Expr {
-        private final Expr left;
-        private final Expr right;
-
-        private Sub(Expr left, Expr right) {
-            this.left = left;
-            this.right = right;
-        }
-
-        @Override
-        public Integer eval() {
-            return left.eval() - right.eval();
-        }
+    static <A> BinaryTree<A> leaf(final A value) {
+        return new Leaf<>(value);
     }
 
-    private static final class Mul extends Expr {
-        private final Expr left;
-        private final Expr right;
-
-        private Mul(Expr left, Expr right) {
-            this.left = left;
-            this.right = right;
-        }
-
-        @Override
-        public Integer eval() {
-            return left.eval() * right.eval();
-        }
+    static <A> BinaryTree<A> branch(final BinaryTree<A> left,
+                                    final BinaryTree<A> right) {
+        return new Branch<>(left, right);
     }
 
-    private static final class Div extends Expr {
-        private final Expr left;
-        private final Expr right;
-
-        private Div(Expr left, Expr right) {
-            this.left = left;
-            this.right = right;
-        }
-
-        @Override
-        public Integer eval() {
-            return left.eval() / right.eval();
-        }
+    private BinaryTree() {
     }
 }
 
 public class Practice2 {
     public static void main(String[] args) {
-        System.out.println(add(value(1), value(2)).eval());
-        System.out.println(multiply(add(value(1), value(2)), substract(value(42), value(2))).eval());
+        final BinaryTree<Integer> simpleTree = branch(leaf(1), leaf(2));
+        System.out.println("simpleTree = " + simpleTree);
+
+        final BinaryTree<Integer> complexTree =
+                branch(
+                        branch(
+                                leaf(1),
+                                leaf(2)
+                        ),
+                        branch(
+                                leaf(3),
+                                leaf(4)
+                        )
+                );
+        System.out.println("complexTree = " + complexTree);
     }
 }

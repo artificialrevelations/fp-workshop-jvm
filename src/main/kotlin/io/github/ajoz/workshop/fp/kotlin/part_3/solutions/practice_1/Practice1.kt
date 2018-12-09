@@ -114,7 +114,6 @@ internal enum class Architecture {
     EPIC
 }
 
-
 internal fun tryLogging(api: DeviceAPI?) {
     val message =
             Try.ofNullable(api)

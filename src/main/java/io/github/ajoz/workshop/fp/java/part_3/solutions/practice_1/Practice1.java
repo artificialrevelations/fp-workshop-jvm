@@ -168,7 +168,6 @@ enum Architecture {
     EPIC
 }
 
-
 @SuppressWarnings("WeakerAccess")
 public class Practice1 {
     public static void tryLogging(final DeviceAPI api) {
