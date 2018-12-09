@@ -3,6 +3,7 @@ package io.github.ajoz.workshop.fp.java.part_3.solutions.exercise_5;
 @SuppressWarnings({"WeakerAccess", "SameParameterValue"})
 public class Exercise5 {
 
+    @SuppressWarnings("unused")
     static Integer div1(final Integer a, final Integer b) {
         return a / b;
     }
