@@ -36,7 +36,7 @@ import static io.github.ajoz.workshop.fp.java.part_3.exercises.exercise_4.Sealed
 
   Let's create one in Java.
  */
-@SuppressWarnings("WeakerAccess")
+@SuppressWarnings({"WeakerAccess", "unused"})
 abstract class SealedList<A> {
     public static class Nil<A> extends SealedList<A> {
         private Nil() {
@@ -79,7 +79,7 @@ abstract class SealedList<A> {
         }
 
         /*
-          Part 3:
+          Part 2:
 
           Add missing `head` and `tail` methods for Cons case.
 
@@ -96,9 +96,19 @@ abstract class SealedList<A> {
             throw new UnsupportedOperationException("Exercise 3 SealedList.Cons.tail is missing!");
         }
 
+        /*
+          Part 3:
+
+          Add missing `toString` method for Cons case. The string should be
+          built from elements:
+          - "Cons("
+          - stored element as string
+          - tail converted to string
+          - ")"
+         */
         @Override
         public String toString() {
-            return String.format("Cons(%s, %s)", head, tail.toString());
+            throw new UnsupportedOperationException("Exercise 3 SealedList.Cons.toString is missing!");
         }
     }
 
