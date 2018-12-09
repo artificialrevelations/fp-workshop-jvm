@@ -1,4 +1,4 @@
-package io.github.ajoz.workshop.fp.java.part_3.solutions.practice;
+package io.github.ajoz.workshop.fp.java.part_3.solutions.practice_1;
 
 import io.github.ajoz.workshop.fp.java.tools.CheckedSupplier;
 import io.github.ajoz.workshop.fp.java.tools.Function1;
@@ -170,7 +170,7 @@ enum Architecture {
 
 
 @SuppressWarnings("WeakerAccess")
-public class Practice {
+public class Practice1 {
     public static void tryLogging(final DeviceAPI api) {
         final String message =
                 Try.ofNullable(api)

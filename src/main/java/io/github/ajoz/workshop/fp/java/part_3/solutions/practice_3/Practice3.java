@@ -1,7 +1,7 @@
-package io.github.ajoz.workshop.fp.java.part_3.solutions.practice;
+package io.github.ajoz.workshop.fp.java.part_3.solutions.practice_3;
 
-import io.github.ajoz.workshop.fp.java.part_3.solutions.practice.Expr2.Operator;
-import io.github.ajoz.workshop.fp.java.part_3.solutions.practice.Expr2.Value;
+import io.github.ajoz.workshop.fp.java.part_3.solutions.practice_3.Expr2.Operator;
+import io.github.ajoz.workshop.fp.java.part_3.solutions.practice_3.Expr2.Value;
 import io.github.ajoz.workshop.fp.java.tools.Function2;
 
 abstract class Expr2<A> {

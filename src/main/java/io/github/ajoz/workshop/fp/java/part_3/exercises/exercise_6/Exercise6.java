@@ -121,7 +121,7 @@ public class Exercise6 {
       - does it look like an arrow?
      */
     static void logging1(final DeviceAPI api) {
-        throw new UnsupportedOperationException("Execise 5 logging1 is missing!");
+        throw new UnsupportedOperationException("Execise 6 logging1 is missing!");
     }
 
     /*
@@ -142,7 +142,7 @@ public class Exercise6 {
       - does it look better or worse then the null version?
      */
     static void logging2(final DeviceAPI api) {
-        throw new UnsupportedOperationException("Execise 5 logging2 is missing!");
+        throw new UnsupportedOperationException("Execise 6 logging2 is missing!");
     }
 
     /*
@@ -203,7 +203,7 @@ public class Exercise6 {
         expression
      */
     static void logging3(final DeviceAPI api) {
-        throw new UnsupportedOperationException("Execise 5 logging3 is missing!");
+        throw new UnsupportedOperationException("Execise 6 logging3 is missing!");
     }
 
     public static void main(final String[] args) {

@@ -1,6 +1,6 @@
-package io.github.ajoz.workshop.fp.java.part_3.solutions.practice;
+package io.github.ajoz.workshop.fp.java.part_3.solutions.practice_2;
 
-import static io.github.ajoz.workshop.fp.java.part_3.solutions.practice.Expr.*;
+import static io.github.ajoz.workshop.fp.java.part_3.solutions.practice_2.Expr.*;
 
 abstract class Expr {
     private Expr() {
