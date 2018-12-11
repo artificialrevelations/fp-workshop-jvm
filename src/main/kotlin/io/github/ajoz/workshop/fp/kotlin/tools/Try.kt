@@ -7,11 +7,13 @@ sealed class Try<A> : Iterable<A> {
 
     abstract fun <B> map(function: (A) -> B): Try<B>
     abstract fun <B> flatMap(function: (A) -> Try<B>): Try<B>
+
     abstract fun recover(function: (Throwable) -> A): Try<A>
     abstract fun recoverWith(function: (Throwable) -> Try<A>): Try<A>
 
     abstract fun orElse(default: Try<A>): Try<A>
     abstract fun orElse(default: () -> Try<A>): Try<A>
+
     abstract fun getOrElse(default: A): A
     abstract fun get(): A
     abstract fun getCause(): Throwable
@@ -42,20 +44,19 @@ sealed class Try<A> : Iterable<A> {
                     Failure<B>(throwable)
                 }
 
-        override fun getOrElse(default: A) = value
-        override fun orElse(default: Try<A>) = this
-        override fun orElse(default: () -> Try<A>) = this
-        override fun get() = value
-
-        override fun getCause(): Throwable =
-                throw UnsupportedOperationException("Success is not a failure!")
 
         override fun recover(function: (Throwable) -> A) = this
         override fun recoverWith(function: (Throwable) -> Try<A>) = this
 
-        override fun ifSuccess(effect: (A) -> Unit) =
-                Success(value.also(effect))
+        override fun orElse(default: Try<A>) = this
+        override fun orElse(default: () -> Try<A>) = this
 
+        override fun getOrElse(default: A) = value
+        override fun get() = value
+        override fun getCause(): Throwable =
+                throw UnsupportedOperationException("Success is not a failure!")
+
+        override fun ifSuccess(effect: (A) -> Unit) = Success(value.also(effect))
         override fun ifFailure(effect: (Throwable) -> Unit) = this
     }
 
@@ -64,20 +65,6 @@ sealed class Try<A> : Iterable<A> {
 
         override fun <B> map(function: (A) -> B) = Failure<B>(error)
         override fun <B> flatMap(function: (A) -> Try<B>) = Failure<B>(error)
-
-        override fun getOrElse(default: A) = default
-        override fun orElse(default: Try<A>) = default
-        override fun orElse(default: () -> Try<A>) =
-                try {
-                    default()
-                } catch (t: Throwable) {
-                    this
-                }
-
-        override fun get() =
-                throw RuntimeException(error)
-
-        override fun getCause() = error
 
         override fun recover(function: (Throwable) -> A) =
                 try {
@@ -92,6 +79,20 @@ sealed class Try<A> : Iterable<A> {
                 } catch (error: Throwable) {
                     Failure<A>(error)
                 }
+
+        override fun orElse(default: Try<A>) = default
+        override fun orElse(default: () -> Try<A>) =
+                try {
+                    default()
+                } catch (t: Throwable) {
+                    this
+                }
+
+        override fun getOrElse(default: A) = default
+        override fun get() =
+                throw RuntimeException(error)
+
+        override fun getCause() = error
 
         override fun ifSuccess(effect: (A) -> Unit) = this
         override fun ifFailure(effect: (Throwable) -> Unit) =

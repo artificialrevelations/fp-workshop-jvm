@@ -26,59 +26,35 @@ sealed class Maybe<A> : Iterable<A> {
     data class Some<A>(private val value: A) : Maybe<A>() {
         override val isSome = true
 
-        override fun <B> map(function: (A) -> B) =
-                Some(function(value))
+        override fun <B> map(function: (A) -> B) = Some(function(value))
+        override fun <B> flatMap(function: (A) -> Maybe<B>) = function(value)
 
-        override fun <B> flatMap(function: (A) -> Maybe<B>) =
-                function(value)
+        override fun getOrElse(default: A) = value
+        override fun get() = value
 
-        override fun getOrElse(default: A) =
-                value
+        override fun orElse(default: Maybe<A>) = this
+        override fun orElse(default: () -> Maybe<A>) = this
 
-        override fun orElse(default: Maybe<A>) =
-                Some(value)
-
-        override fun orElse(default: () -> Maybe<A>) =
-                Some(value)
-
-        override fun get() =
-                value
-
-        override fun ifSome(effect: (A) -> Unit) =
-                Some(value.also(effect))
-
-        override fun ifNone(effect: () -> Unit) =
-                Some(value)
+        override fun ifSome(effect: (A) -> Unit) = Some(value.also(effect))
+        override fun ifNone(effect: () -> Unit) = this
     }
 
     class None<A> : Maybe<A>() {
-        override val isSome: Boolean
-            get() = false
+        override val isSome = false
 
-        override fun <B> map(function: (A) -> B) =
-                None<B>()
+        override fun <B> map(function: (A) -> B) = None<B>()
+        override fun <B> flatMap(function: (A) -> Maybe<B>) = None<B>()
 
-        override fun <B> flatMap(function: (A) -> Maybe<B>) =
-                None<B>()
-
-        override fun getOrElse(default: A) =
-                default
-
-        override fun orElse(default: Maybe<A>) =
-                default
-
-        override fun orElse(default: () -> Maybe<A>) =
-                default()
-
+        override fun getOrElse(default: A) = default
         override fun get(): A {
-            throw IllegalStateException("No value is stored in Nothing!")
+            throw IllegalStateException("No value is stored in None!")
         }
 
-        override fun ifSome(effect: (A) -> Unit) =
-                None<A>()
+        override fun orElse(default: Maybe<A>) = default
+        override fun orElse(default: () -> Maybe<A>) = default()
 
-        override fun ifNone(effect: () -> Unit) =
-                also(effect)
+        override fun ifSome(effect: (A) -> Unit) = this
+        override fun ifNone(effect: () -> Unit) = this.also(effect)
     }
 
     @Suppress("unused")
