@@ -1,5 +1,7 @@
 package io.github.ajoz.workshop.fp.java.tools;
 
+import kotlin.Pair;
+
 @FunctionalInterface
 public interface Function2<A, B, C> {
     C apply(A a, B b);
@@ -24,6 +26,10 @@ public interface Function2<A, B, C> {
         return (A a) -> (B b) -> this.apply(a, b);
     }
 
+    default Function1<Pair<A, B>, C> tupled() {
+        return (Pair<A, B> pair) -> this.apply(pair.getFirst(), pair.getSecond());
+    }
+
     default Function1<B, C> applyFirst(final Supplier<A> supplier) {
         return (B b) -> this.apply(supplier.get(), b);
     }
@@ -32,7 +38,24 @@ public interface Function2<A, B, C> {
         return (A a) -> this.apply(a, supplier.get());
     }
 
+    default Function2<A, B, C> memoized() {
+//        final ConcurrentHashMap<Pair<A, B>, C> memo = new ConcurrentHashMap<>();
+//        return (A a, B b) -> {
+//            final Pair<A, B> key = new Pair<>(a, b);
+//            if (!memo.containsKey(key)) {
+//                memo.put(key, this.apply(a, b));
+//            }
+//            return memo.get(key);
+//        };
+        // maybe a bit too much composition, nah! ;-)
+        return untuple(tupled().memoized());
+    }
+
     static <A, B, C> Function2<A, B, C> uncurry(final Function1<A, Function1<B, C>> function1) {
         return (A a, B b) -> function1.apply(a).apply(b);
+    }
+
+    static <A, B, C> Function2<A, B, C> untuple(final Function1<Pair<A, B>, C> function) {
+        return (a, b) -> function.apply(new Pair<>(a, b));
     }
 }
