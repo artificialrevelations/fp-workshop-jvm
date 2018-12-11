@@ -6,7 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 /*
-  -- Laziness and Memoization --
+  -- Laziness --
 
   "I've heard that hard work never killed anyone,
   but I say why take the chance?" - Ronald Regan
