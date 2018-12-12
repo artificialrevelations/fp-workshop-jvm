@@ -10,8 +10,8 @@ public final class TakeFlow<A> implements Flow<A> {
 
     private int taken;
 
-    public TakeFlow(final Flow<A> upstream,
-                    final int amount) {
+    TakeFlow(final Flow<A> upstream,
+             final int amount) {
         this.upstream = upstream;
         this.amount = amount;
     }
