@@ -1,6 +1,7 @@
 package io.github.ajoz.workshop.fp.java.tools;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 @SuppressWarnings({"unused", "WeakerAccess"})
 public abstract class Try<A> implements Iterable<A> {
@@ -29,6 +30,8 @@ public abstract class Try<A> implements Iterable<A> {
 
     public abstract Try<A> ifSuccess(final Consumer1<? super A> action);
     public abstract Try<A> ifFailure(final Consumer1<Throwable> action);
+
+    public abstract Try<A> filter(Predicate<? super A> predicate);
 
     @Override
     public Iterator<A> iterator() {
@@ -159,6 +162,19 @@ public abstract class Try<A> implements Iterable<A> {
         }
 
         @Override
+        public Try<A> filter(final Predicate<? super A> predicate) {
+            try {
+                if (predicate.test(value)) {
+                    return Try.success(value);
+                } else {
+                    return Try.failure(new NoSuchElementException("Success does not satisfy the Predicate!"));
+                }
+            } catch (final Throwable t) {
+                return Try.failure(t);
+            }
+        }
+
+        @Override
         public boolean equals(final Object other) {
             if (other == this) {
                 return true;
@@ -262,6 +278,11 @@ public abstract class Try<A> implements Iterable<A> {
         public Try<A> ifFailure(final Consumer1<Throwable> action) {
             action.accept(cause);
             return Try.failure(cause);
+        }
+
+        @Override
+        public Try<A> filter(final Predicate<? super A> predicate) {
+            return this;
         }
 
         @Override
