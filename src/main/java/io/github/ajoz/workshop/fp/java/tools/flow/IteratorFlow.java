@@ -1,4 +1,4 @@
-package io.github.ajoz.workshop.fp.java.tools.seq;
+package io.github.ajoz.workshop.fp.java.tools.flow;
 
 import io.github.ajoz.workshop.fp.java.tools.Try;
 

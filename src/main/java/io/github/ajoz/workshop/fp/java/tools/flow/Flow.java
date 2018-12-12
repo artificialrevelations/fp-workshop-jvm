@@ -1,4 +1,4 @@
-package io.github.ajoz.workshop.fp.java.tools.seq;
+package io.github.ajoz.workshop.fp.java.tools.flow;
 
 import io.github.ajoz.workshop.fp.java.tools.*;
 
@@ -66,6 +66,10 @@ public interface Flow<A> extends Iterable<A> {
         return Flows.toList(this);
     }
 
+    default <B> B foldLeft(final B initial, Function2<B, A, B> function) {
+        return Flows.foldLeft(function, initial, this);
+    }
+
     default Iterator<A> iterator() {
         return new FlowIterator<>(this);
     }
@@ -73,7 +77,6 @@ public interface Flow<A> extends Iterable<A> {
     @SafeVarargs
     @SuppressWarnings("varargs") // if creating a Stream from an array is safe then creating an Flow is ;-)
     static <A> Flow<A> from(final A... items) {
-        Objects.requireNonNull(items, "Array passed to Flow.from cannot be null!");
         return new ArrayFlow<>(items);
     }
 
@@ -81,8 +84,7 @@ public interface Flow<A> extends Iterable<A> {
         return new CycleArrayFlow<>(items);
     }
 
-    static <A> Flow<A> from(final A seed, final Function1<A, A> generator) {
-        Objects.requireNonNull(generator, "Generator function passed to Flow.from cannot be null!");
+    static <A> Flow<A> generate(final A seed, final Function1<A, A> generator) {
         return new Seed1Flow<>(seed, generator);
     }
 

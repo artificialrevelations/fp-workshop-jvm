@@ -54,16 +54,11 @@ import io.github.ajoz.workshop.fp.java.tools.Try;
 
   So how it would look like:
 
-  final Flow<String> strings = new Flow("JUG", "Lodz");
-  final Flow<Integer> lengths = strings.map(String::length);
-
-  final List<Integer> lenList = lengths.toList();
-
-  or
-
   final List<Integer> lenList =
                     Flow.of("JUG", "Lodz")
                         .map(String::length)
+                        .map(size -> size * 100)
+                        .map(size -> String.format("Size: %d", size))
                         .toList();
 
   Because fluent APIs are in fashion nowadays.
@@ -78,11 +73,11 @@ import io.github.ajoz.workshop.fp.java.tools.Try;
 
   Flow:
   - either is wrapping some Data
-  - either is wrapping another Flow and an operation it needs to perform ont
+  - either is wrapping another Flow and an operation it needs to perform on it
 
-  This would mean that that the Flow would look like:
+  This would mean that the Flow would look like:
 
-  Flow(Flow(Flow(Flow(Data), Operation 1), Operation 2), ...)
+  Flow(Flow(Flow(Flow(Flow(Data), Operation 1), Operation 2), ...), Operation N)
 
   Ok this is fine but how to make it lazy?
 
@@ -94,27 +89,6 @@ import io.github.ajoz.workshop.fp.java.tools.Try;
       A next();
   }
 
-  It is a bit troublesome to work with because the logic needs to be split into
-  two methods. It would be nice if we could wrap uncertainty of getting a result
-  into one simple type. I think we have such thing available.
-
-  Let's rework the Iterator interface a bit:
- */
-
-interface Flow<A> {
-    Try<A> next();
-}
-
-/*
-  We managed to bake hasNext checks into a single call. Let's start adding
-  missing methods.
-
-  Part 1:
-
-  Please add terminal default method called `toList()` to the Flow interface.
-  It should return a List of type A from the given Flow.
-
-  Hints:
   Let's think how did we use Iterator<A>?
 
   final Iterator<A> iter = ...
@@ -123,6 +97,74 @@ interface Flow<A> {
       final A element = iter.next();
       // do something with the element
   }
+
+  It would be nice if we could wrap uncertainty of getting a result into one
+  simple type, and be able to just call `next()` to get both information.
+
+  Questions:
+  - what do you think will it be better or worse to have only a single method?
+  - do you think we will find issues with this approach?
+
+  We need a thing that would let us express that the retrieving of the next
+  element in the Flow has failed. We created such type in the previous parts
+  it was called Try.
+
+  An instance of a Try can tell us the same thing that `hasNext` was telling,
+  with an additional upside of helping us encapsulate all the possible errors.
+
+  Ok, we can use Try, but how will this Flow even work?
+
+  Calling the method `next()` will cause a new Try instance to be created.
+  Calling it another time, will cause a next new Try instance to be created.
+  We should get Try.Success as long as the Flow has any elements. We will get
+  Try.Failure immediately if the Flow runs out of elements or for any other
+  reason.
+
+  Let's define Flow now:
+ */
+
+interface Flow<A> {
+    Try<A> next();
+}
+
+/*
+  It looks super simple, almost unusable but you will see that we will be able
+  to build whole "Stream-like" API with this.
+
+  First things first. We talked how one should work with an Iterator, but how
+  one should work with Flow?
+
+  We know that:
+  - calling the `next` method on an instance of Flow will return us a Try
+  - this Try can be either Success or Failure
+  - if a Failure was returned it means something happened with the Flow and
+    calling `next` again won't give us any more results, just another Failure :(
+
+  How working in a loop would look like?
+
+  final Flow<Integer> someFlow = ... //we got it or constructed it somehow
+
+  while (true) {
+      final Try<Integer> nextInt = someFlow.next();
+      if (nextInt.isFailure() {
+        // what should be done if the Flow does not have more elements
+        // or something bad happened while processing! Probably break the loop
+        break;
+      }
+
+      // everything is fine then do something with the element
+      ...
+  }
+
+
+
+  Part 1:
+
+  Please add terminal default method called `toList()` to the Flow interface.
+  It should return a List of type A from the given Flow.
+
+  Hints:
+
 
   In the Flow interface we have everything baked into one method and a single
   type. Try is either Success or Failure.

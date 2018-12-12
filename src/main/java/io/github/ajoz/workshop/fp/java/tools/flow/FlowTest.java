@@ -1,4 +1,4 @@
-package io.github.ajoz.workshop.fp.java.tools.seq;
+package io.github.ajoz.workshop.fp.java.tools.flow;
 
 import java.util.List;
 
@@ -33,7 +33,7 @@ public class FlowTest {
          of memory error.
          */
         final Flow<Integer> iterator =
-                Flow.from(0, i -> i + 1)
+                Flow.generate(0, i -> i + 1)
                         .map(x -> x * 2)
                         .take(10);
 
@@ -44,15 +44,15 @@ public class FlowTest {
 
         // Flow is very simple and it's not possible to traverse it multiple times
         // calling iterator.toList().size() will have different results
-        System.out.println("#1 Elements in the lazy seq: " + iterator.toList().size());
-        System.out.println("#2 Elements in the lazy seq: " + iterator.toList().size());
+        System.out.println("#1 Elements in the lazy flow: " + iterator.toList().size());
+        System.out.println("#2 Elements in the lazy flow: " + iterator.toList().size());
 
         // Zip test
         Flow<String> a = Flow.from("1", "2");
         Flow<String> b = Flow.from("a", "b");
 
         Flow<String> zipped = Flow.zip(a, b, (l, r) -> l + r);
-        System.out.println("Elements in the lazy seq: " + zipped.toList());
+        System.out.println("Elements in the lazy flow: " + zipped.toList());
 
         // cycle test
         List<String> cycled = Flow.cycle("foo", "bar").take(10).toList();

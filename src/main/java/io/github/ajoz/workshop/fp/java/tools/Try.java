@@ -7,29 +7,42 @@ import java.util.NoSuchElementException;
 public abstract class Try<A> implements Iterable<A> {
 
     public abstract <B> Try<B> map(final Function1<? super A, ? extends B> function);
+
     public abstract <B> Try<B> flatMap(final Function1<? super A, ? extends Try<? extends B>> function);
+
     public abstract Try<A> recover(final Function1<? super Throwable, ? extends A> function);
+
     public abstract Try<A> recoverWith(final Function1<? super Throwable, Try<? extends A>> function);
 
     public abstract Try<A> orElse(final Try<A> defaultTry);
+
     public abstract Try<A> orElse(final Supplier<Try<A>> supplier);
 
     @Deprecated
     public abstract A getChecked() throws Throwable;
+
     public abstract A getOrElse(final A defaultValue);
+
     public A getOrNull() {
         return getOrElse(null);
     }
+
     public abstract A get();
-    public abstract Throwable getCause();
+
+    public abstract Throwable getError();
 
     public abstract boolean isSuccess();
+
     public boolean isFailure() {
         return !isSuccess();
     }
 
     public abstract Try<A> ifSuccess(final Consumer1<? super A> action);
+
     public abstract Try<A> ifFailure(final Consumer1<Throwable> action);
+
+    public abstract <B> B match(final Function1<? super A, ? extends B> ifSuccess,
+                                final Function1<? super Throwable, ? extends B> ifFailure);
 
     public abstract Try<A> filter(Predicate<? super A> predicate);
 
@@ -127,7 +140,7 @@ public abstract class Try<A> implements Iterable<A> {
         }
 
         @Override
-        public Throwable getCause() {
+        public Throwable getError() {
             throw new UnsupportedOperationException("Success is not a failure!");
         }
 
@@ -159,6 +172,12 @@ public abstract class Try<A> implements Iterable<A> {
 
         public Try<A> ifFailure(final Consumer1<Throwable> ignored) {
             return Try.success(value);
+        }
+
+        @Override
+        public <B> B match(final Function1<? super A, ? extends B> ifSuccess,
+                           final Function1<? super Throwable, ? extends B> ifFailure) {
+            return ifSuccess.apply(value);
         }
 
         @Override
@@ -195,20 +214,20 @@ public abstract class Try<A> implements Iterable<A> {
     }
 
     public static final class Failure<A> extends Try<A> {
-        private final Throwable cause;
+        private final Throwable error;
 
         private Failure(final Throwable cause) {
-            this.cause = cause;
+            this.error = cause;
         }
 
         @Override
         public <B> Try<B> map(final Function1<? super A, ? extends B> ignored) {
-            return Try.failure(cause);
+            return Try.failure(error);
         }
 
         @Override
         public <B> Try<B> flatMap(final Function1<? super A, ? extends Try<? extends B>> ignored) {
-            return Try.failure(cause);
+            return Try.failure(error);
         }
 
         @Override
@@ -232,17 +251,17 @@ public abstract class Try<A> implements Iterable<A> {
 
         @Override
         public A getChecked() throws Throwable {
-            throw cause;
+            throw error;
         }
 
         @Override
         public A get() {
-            throw new RuntimeException(cause);
+            throw new RuntimeException(error);
         }
 
         @Override
-        public Throwable getCause() {
-            return cause;
+        public Throwable getError() {
+            return error;
         }
 
         @Override
@@ -253,7 +272,7 @@ public abstract class Try<A> implements Iterable<A> {
         @Override
         public Try<A> recover(final Function1<? super Throwable, ? extends A> function) {
             try {
-                return Try.success(function.apply(cause));
+                return Try.success(function.apply(error));
             } catch (final Throwable t) {
                 return Try.failure(t);
             }
@@ -263,7 +282,7 @@ public abstract class Try<A> implements Iterable<A> {
         @Override
         public Try<A> recoverWith(final Function1<? super Throwable, Try<? extends A>> function) {
             try {
-                return (Try<A>) function.apply(cause);
+                return (Try<A>) function.apply(error);
             } catch (final Throwable t) {
                 return Try.failure(t);
             }
@@ -271,13 +290,19 @@ public abstract class Try<A> implements Iterable<A> {
 
         @Override
         public Try<A> ifSuccess(final Consumer1<? super A> ignored) {
-            return Try.failure(cause);
+            return Try.failure(error);
         }
 
         @Override
         public Try<A> ifFailure(final Consumer1<Throwable> action) {
-            action.accept(cause);
-            return Try.failure(cause);
+            action.accept(error);
+            return Try.failure(error);
+        }
+
+        @Override
+        public <B> B match(final Function1<? super A, ? extends B> ifSuccess,
+                           final Function1<? super Throwable, ? extends B> ifFailure) {
+            return ifFailure.apply(error);
         }
 
         @Override
@@ -296,12 +321,12 @@ public abstract class Try<A> implements Iterable<A> {
             }
 
             final Failure<?> failure = (Failure<?>) other;
-            return cause == failure.cause || cause.equals(failure.cause);
+            return error == failure.error || error.equals(failure.error);
         }
 
         @Override
         public int hashCode() {
-            return cause.hashCode();
+            return error.hashCode();
         }
     }
 

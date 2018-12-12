@@ -1,15 +1,15 @@
-package io.github.ajoz.workshop.fp.java.tools.seq;
+package io.github.ajoz.workshop.fp.java.tools.flow;
 
 import io.github.ajoz.workshop.fp.java.tools.Try;
 
 import java.util.NoSuchElementException;
 
-public final class ArrayFlow<A> implements Flow<A> {
+public final class CycleArrayFlow<A> implements Flow<A> {
     private final A[] array;
     private int current;
 
     @SafeVarargs
-    ArrayFlow(final A... array) {
+    CycleArrayFlow(final A... array) {
         this.array = array;
     }
 
@@ -19,7 +19,7 @@ public final class ArrayFlow<A> implements Flow<A> {
             return Try.failure(new NoSuchElementException("No elements in this Flow!"));
 
         if (current >= array.length)
-            return Try.failure(new NoSuchElementException("No more elements in this Flow!"));
+            current = 0; //we move the cycle to the beginning
 
         final Try<A> next = Try.success(array[current]);
         current++;
