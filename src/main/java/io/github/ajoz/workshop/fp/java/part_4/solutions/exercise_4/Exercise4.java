@@ -142,6 +142,8 @@ final class AccidentMetadata {
         System.out.println(Arrays.toString(record));
     }
 
+    // This could probably moved out of this class into something more suitable:
+    // a separate Type for the result of parsing
     private static String[] dataToRecord(final String data) {
         return data.split(",");
     }

@@ -46,6 +46,7 @@ public abstract class Try<A> implements Iterable<A> {
 
     public abstract Try<A> filter(Predicate<? super A> predicate);
 
+    @SuppressWarnings("NullableProblems")
     @Override
     public Iterator<A> iterator() {
         return isSuccess()
