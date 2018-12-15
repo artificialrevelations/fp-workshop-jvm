@@ -4,6 +4,8 @@ import io.github.ajoz.workshop.fp.java.tools.CheckedSupplier;
 import io.github.ajoz.workshop.fp.java.tools.Maybe;
 import io.github.ajoz.workshop.fp.java.tools.Try;
 
+import java.util.concurrent.atomic.AtomicReference;
+
 /*
   -- Further Enhancing the Supplier --
 
@@ -87,6 +89,7 @@ import io.github.ajoz.workshop.fp.java.tools.Try;
     A get() throws Exception;
   }
  */
+@SuppressWarnings("unused")
 interface Supplier<A> {
     A get();
 
@@ -94,38 +97,72 @@ interface Supplier<A> {
       Part 1:
 
       Please implement static method `ofChecked` that can create a `Supplier<A>`
-      out of the passed 
+      out of the passed `CheckedSupplier`. This method should produce a Supplier
+      that throw a RuntimeException in case the wrapped CheckSupplier throws
+      an exception.
      */
     static <A> Supplier<A> ofChecked(final CheckedSupplier<A> supplier) {
+        throw new UnsupportedOperationException("Practice 1 Supplier.ofChecked is missing!");
+    }
+
+    /*
+      Part 2:
+
+      Please implement default method `tryGet` that returns an instance of
+      `Try<A>` instead of just `A`. It should return Try.Failure if using `get`
+      would cause an exception, it should return the result wrapped inside the
+      Try.Success otherwise.
+     */
+    default Try<A> tryGet() {
+        throw new UnsupportedOperationException("Practice 1 Supplier.tryGet is missing!");
+    }
+
+    /*
+      Part 3:
+
+      Please implement default method `maybeGet` that returns an instance of
+      `Maybe<A>` instead of `A`. It should return Maybe.None if using `get`
+      would cause an exception, it should return the result wrapped inside the
+      Maybe.Some otherwise.
+     */
+    default Maybe<A> maybeGet() {
+        throw new UnsupportedOperationException("Practice 1 Supplier.tryGet is missing!");
+    }
+
+    /*
+      Part 4:
+
+      Please implement default method `getOrElse` that returns a supplied value
+      in case the operation deferred by the Supplier throws an exception.
+     */
+    default A getOrElse(final A defaultValue) {
+        throw new UnsupportedOperationException("Practice 1 Supplier.getOrElse is missing!");
+    }
+
+    default Supplier<A> memoized() {
+        final AtomicReference<A> value = new AtomicReference<>();
         return () -> {
-            try {
-                return supplier.get();
-            } catch (final Exception e) {
-                throw new RuntimeException(e);
+            synchronized (value) {
+                if (value.get() == null) {
+                    value.set(get());
+                }
+                return value.get();
             }
         };
-    }
-
-    default Try<A> tryGet() {
-        try {
-            return Try.success(get());
-        } catch (final Exception e) {
-            return Try.failure(e);
-        }
-    }
-
-    default Maybe<A> maybeGet() {
-        try {
-            return Maybe.some(get());
-        } catch (final Exception e) {
-            return Maybe.none();
-        }
     }
 }
 
 class SomethingHappenedToFoo extends Exception {
+    SomethingHappenedToFoo() {
+        super("Something very very very bad happened!");
+    }
 }
 
+/*
+  Part 5:
+
+  What will happen if an exception is thrown in a memoized supplier?
+ */
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class Practice1 {
     public static String foo() throws Exception {
@@ -136,6 +173,24 @@ public class Practice1 {
         throw new SomethingHappenedToFoo();
     }
 
-    private final CheckedSupplier<String> cs = Practice1::foo;
-    private final Supplier<String> s = Supplier.ofChecked(Practice1::foo2);
+    private static final CheckedSupplier<String> checkedSupplier = Practice1::foo;
+    private static final Supplier<String> supplier = Supplier.ofChecked(Practice1::foo2);
+
+    public static void main(final String[] args) {
+        try {
+            checkedSupplier.get();
+        } catch (Exception e) {
+            System.out.println(String.format("Exception thrown: %s", e.getMessage()));
+        }
+
+        supplier.maybeGet()
+                .ifSome(System.out::println)
+                .ifNone(() -> System.out.println("none result :("));
+
+        supplier.tryGet()
+                .ifSuccess(System.out::println)
+                .ifFailure(System.out::println);
+
+        System.out.println(supplier.getOrElse("Value in case of error!"));
+    }
 }
