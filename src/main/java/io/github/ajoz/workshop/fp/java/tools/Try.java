@@ -212,6 +212,11 @@ public abstract class Try<A> implements Iterable<A> {
         public int hashCode() {
             return value.hashCode();
         }
+
+        @Override
+        public String toString() {
+            return String.format("Try.Success(value = %s)", value);
+        }
     }
 
     public static final class Failure<A> extends Try<A> {
@@ -328,6 +333,11 @@ public abstract class Try<A> implements Iterable<A> {
         @Override
         public int hashCode() {
             return error.hashCode();
+        }
+
+        @Override
+        public String toString() {
+            return String.format("Try.Failure(error = %s)", error);
         }
     }
 
