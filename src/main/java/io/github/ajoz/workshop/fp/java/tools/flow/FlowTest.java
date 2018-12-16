@@ -12,7 +12,7 @@ public class FlowTest {
          code won't process the given array of Strings.
          */
         final Flow<String> strings = new ArrayFlow<>("This", "is", "a", "basic", "test");
-        final Flow<String> peeks = new OnEachFlow<>(strings, System.out::println);
+        final Flow<String> peeks = new PeekFlow<>(strings, System.out::println);
         final Flow<Integer> mapped = new MapFlow<>(peeks, String::length);
         final Flow<Integer> filtered = new FilterFlow<>(mapped, length -> length > 2);
         final Flow<Integer> taken = new TakeFlow<>(filtered, 2);
@@ -21,7 +21,7 @@ public class FlowTest {
 
 //        final Flow<Integer> iterator =
         Flow.from("This", "is", "a", "very", "basic", "test", "of", "Flow")
-                .onEach(System.out::println)
+                .peek(System.out::println)
                 .map(String::length)
                 .filter(len -> len > 2)
                 .take(1);

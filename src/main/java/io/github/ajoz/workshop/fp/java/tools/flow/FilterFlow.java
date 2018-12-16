@@ -3,12 +3,12 @@ package io.github.ajoz.workshop.fp.java.tools.flow;
 import io.github.ajoz.workshop.fp.java.tools.Predicate;
 import io.github.ajoz.workshop.fp.java.tools.Try;
 
-public final class FilterFlow<A> implements Flow<A> {
+final class FilterFlow<A> implements Flow<A> {
     private final Flow<A> upstream;
     private final Predicate<? super A> predicate;
 
-    public FilterFlow(final Flow<A> upstream,
-                      final Predicate<? super A> predicate) {
+    FilterFlow(final Flow<A> upstream,
+               final Predicate<? super A> predicate) {
         this.upstream = upstream;
         this.predicate = predicate;
     }

@@ -4,7 +4,6 @@ import io.github.ajoz.workshop.fp.java.tools.*;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
 
 /*
  This is an example of a Iterator<A> without the need for specialized hasNext
@@ -31,28 +30,29 @@ import java.util.Objects;
 
  Also didn't choose Seq, Sequence or Stream for similar reason.
 */
+@SuppressWarnings("unused")
 public interface Flow<A> extends Iterable<A> {
 
     Try<A> next();
 
     default <B> Flow<B> map(final Function1<? super A, ? extends B> mapper) {
-        Objects.requireNonNull(mapper, "Function passed to Flow.map cannot be null!");
         return new MapFlow<>(this, mapper);
     }
 
     default <B> Flow<B> flatMap(final Function1<? super A, ? extends Flow<? extends B>> mapper) {
-        Objects.requireNonNull(mapper, "Function passed to Flow.flatMap cannot be null!");
         return new FlatMapFlow<>(this, mapper);
     }
 
     default Flow<A> filter(final Predicate<? super A> predicate) {
-        Objects.requireNonNull(predicate, "Predicate passed to Flow.filter cannot be null!");
         return new FilterFlow<>(this, predicate);
     }
 
-    default Flow<A> onEach(final Consumer1<? super A> action) {
-        Objects.requireNonNull(action, "Consumer passed to Flow.onEach cannot be null!");
-        return new OnEachFlow<>(this, action);
+    default Flow<A> peek(final Consumer1<? super A> action) {
+        return new PeekFlow<>(this, action);
+    }
+
+    default Flow<A> distinct() {
+        return new DistinctFlow<>(this);
     }
 
     // there is no type that would allow expressing a need for positive integers
