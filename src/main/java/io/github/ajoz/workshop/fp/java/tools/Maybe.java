@@ -38,6 +38,20 @@ public abstract class Maybe<A> implements Iterable<A> {
         return new None<>();
     }
 
+    public static <A, B> Function1<Maybe<A>, Maybe<B>> lift(final Function1<A, B> function) {
+        return ma -> ma.map(function);
+    }
+
+    public static <A, B> Function1<A, Maybe<B>> liftP(final Function1<A, B> function) {
+        return a -> {
+            try {
+                return Maybe.some(function.apply(a));
+            } catch (final Exception e) {
+                return Maybe.none();
+            }
+        };
+    }
+
     @Override
     public Iterator<A> iterator() {
         return isSome()

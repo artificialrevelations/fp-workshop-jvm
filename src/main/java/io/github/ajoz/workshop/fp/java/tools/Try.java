@@ -7,38 +7,29 @@ import java.util.NoSuchElementException;
 public abstract class Try<A> implements Iterable<A> {
 
     public abstract <B> Try<B> map(final Function1<? super A, ? extends B> function);
-
     public abstract <B> Try<B> flatMap(final Function1<? super A, ? extends Try<? extends B>> function);
 
     public abstract Try<A> recover(final Function1<? super Throwable, ? extends A> function);
-
     public abstract Try<A> recoverWith(final Function1<? super Throwable, Try<? extends A>> function);
 
     public abstract Try<A> orElse(final Try<A> defaultTry);
-
     public abstract Try<A> orElse(final Supplier<Try<A>> supplier);
 
     @Deprecated
     public abstract A getChecked() throws Throwable;
-
     public abstract A getOrElse(final A defaultValue);
-
     public A getOrNull() {
         return getOrElse(null);
     }
-
     public abstract A get();
-
     public abstract Throwable getError();
 
     public abstract boolean isSuccess();
-
     public boolean isFailure() {
         return !isSuccess();
     }
 
     public abstract Try<A> ifSuccess(final Consumer1<? super A> action);
-
     public abstract Try<A> ifFailure(final Consumer1<Throwable> action);
 
     public abstract <B> B match(final Function1<? super A, ? extends B> ifSuccess,
@@ -54,7 +45,7 @@ public abstract class Try<A> implements Iterable<A> {
                 : new EmptyIterator<>();
     }
 
-    public static <R> Try<R> of(final Supplier<R> supplier) {
+    public static <A> Try<A> of(final Supplier<A> supplier) {
         try {
             return Try.success(supplier.get());
         } catch (final Throwable t) {
@@ -62,7 +53,7 @@ public abstract class Try<A> implements Iterable<A> {
         }
     }
 
-    public static <R> Try<R> ofChecked(final CheckedSupplier<R> supplier) {
+    public static <A> Try<A> ofChecked(final CheckedSupplier<A> supplier) {
         try {
             return Try.success(supplier.get());
         } catch (final Throwable t) {
@@ -70,12 +61,20 @@ public abstract class Try<A> implements Iterable<A> {
         }
     }
 
-    public static <R> Try<R> ofNullable(final R value) {
+    public static <A> Try<A> ofNullable(final A value) {
         if (null != value) {
             return Try.success(value);
         }
 
-        return Try.failure(new NullPointerException("Null value passed to fromNullable"));
+        return Try.failure(new NullPointerException("Null value passed to ofNullable"));
+    }
+
+    public static <A, B> Function1<Try<A>, Try<B>> lift(final Function1<A, B> function) {
+        return ta -> ta.map(function);
+    }
+
+    public static <A, B> Function1<A, Try<B>> liftP(final Function1<A, B> function) {
+        return a -> Try.of(() -> function.apply(a));
     }
 
     public static <R> Try<R> failure(final Throwable throwable) {
@@ -85,6 +84,8 @@ public abstract class Try<A> implements Iterable<A> {
     public static <R> Try<R> success(final R value) {
         return new Success<>(value);
     }
+
+
 
     public static final class Success<A> extends Try<A> {
         private final A value;
