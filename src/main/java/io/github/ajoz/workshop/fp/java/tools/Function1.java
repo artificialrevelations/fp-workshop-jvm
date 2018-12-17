@@ -34,4 +34,8 @@ public interface Function1<A, B> {
     static <A, B> Function1<A, B> constant(final B b) {
         return ignored -> b;
     }
+
+    static <A, B> Function1<A, B> of(final Function1<A, B> function) {
+        return function;
+    }
 }
