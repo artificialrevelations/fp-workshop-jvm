@@ -21,6 +21,8 @@ sealed class Try<A> : Iterable<A> {
     abstract fun ifSuccess(effect: (A) -> Unit): Try<A>
     abstract fun ifFailure(effect: (Throwable) -> Unit): Try<A>
 
+    abstract fun filter(predicate: (A) -> Boolean): Try<A>
+
     override fun iterator() =
             if (isSuccess)
                 ValueIterator(get())
@@ -58,6 +60,12 @@ sealed class Try<A> : Iterable<A> {
 
         override fun ifSuccess(effect: (A) -> Unit) = Success(value.also(effect))
         override fun ifFailure(effect: (Throwable) -> Unit) = this
+
+        override fun filter(predicate: (A) -> Boolean): Try<A> =
+                if (predicate(value)) {
+                    this
+                } else
+                    Failure(NoSuchElementException("Element does not satisfy the predicate!"))
     }
 
     data class Failure<A>(val error: Throwable) : Try<A>() {
@@ -97,6 +105,8 @@ sealed class Try<A> : Iterable<A> {
         override fun ifSuccess(effect: (A) -> Unit) = this
         override fun ifFailure(effect: (Throwable) -> Unit) =
                 Failure<A>(error.also(effect))
+
+        override fun filter(predicate: (A) -> Boolean): Try<A> = this
     }
 
     @Suppress("unused")

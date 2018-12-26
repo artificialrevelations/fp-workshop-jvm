@@ -1,4 +1,30 @@
+@file:Suppress("unused")
+
 package io.github.ajoz.workshop.fp.kotlin.tools
+
+import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.atomic.AtomicReference
+
+fun <A, B> ((A) -> B).memoized(): (A) -> B {
+    val memo = ConcurrentHashMap<A, B>()
+    return { a: A ->
+        if (!memo.containsKey(a)) {
+            memo[a] = invoke(a)
+        }
+        memo[a]!!
+    }
+}
+
+fun <A, B, C> ((A, B) -> C).memoized(): (A, B) -> C {
+    val memo = ConcurrentHashMap<Pair<A, B>, C>()
+    return { a: A, b: B ->
+        val key = Pair(a, b)
+        if (!memo.containsKey(key)) {
+            memo[key] = invoke(a, b)
+        }
+        memo[key]!!
+    }
+}
 
 // flips the order of the arguments of a two argument function
 fun <A, B, C> ((A, B) -> C).flipped() =
@@ -11,7 +37,6 @@ fun <A, B, C> ((A, B) -> C).curried() =
         { a: A ->
             { b: B ->
                 this(a, b)
-
             }
         }
 

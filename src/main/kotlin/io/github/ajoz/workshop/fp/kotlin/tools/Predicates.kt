@@ -1,6 +1,4 @@
-@file:Suppress("PackageName")
-
-package io.github.ajoz.workshop.fp.kotlin.part_1.solutions.practice
+package io.github.ajoz.workshop.fp.kotlin.tools
 
 // foo
 infix fun <A> ((A) -> Boolean).and(other: (A) -> Boolean): (A) -> Boolean =
