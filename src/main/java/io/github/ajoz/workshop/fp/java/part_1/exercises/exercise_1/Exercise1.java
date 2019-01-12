@@ -18,8 +18,6 @@ package io.github.ajoz.workshop.fp.java.part_1.exercises.exercise_1;
 
   This is a super verbose definition let's use an interface instead:
   */
-
-
 interface IntegerFunction {
     Integer apply(Integer argument);
 }
