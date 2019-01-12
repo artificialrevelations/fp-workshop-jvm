@@ -29,12 +29,13 @@ interface IntegerFunction {
   - y = x + 1
   - y = (x + 2)^2
   - y = -x + 10
+  - y = x^2 + 4x + 1
   */
 
 class Exercise1 {
     // y = x + 1
     @SuppressWarnings("Convert2Lambda")
-    private static final IntegerFunction f1 = new IntegerFunction() {
+    static final IntegerFunction f1 = new IntegerFunction() {
         @Override
         public Integer apply(final Integer argument) {
             return argument + 1;
@@ -62,19 +63,27 @@ class Exercise1 {
 
     In this situation a `return` statement is needed to mark what should be
     returned as a result of the function.
-
     */
 
     // y = (x + 2)^2
-    private static final IntegerFunction f2 = x -> {
+    static final IntegerFunction f2 = x -> {
         throw new UnsupportedOperationException("Exercise 1 function f2 body is missing!");
     };
 
+    // y = -x + 10
+    static final IntegerFunction f3 = x -> {
+        throw new UnsupportedOperationException("Exercise 1 function f3 body is missing!");
+    };
 
+    // y = x^2 + 4x + 1
+    static final IntegerFunction f4 = x -> {
+        throw new UnsupportedOperationException("Exercise 1 function f4 body is missing!");
+    };
+
+    /*
+    What about different types of functions? From Double to Double, from Float
+    to Float or from String to String? What about more exciting functions from
+    String to Integer or from MyType to YourType?
+     */
 }
-
-/*
-  Expressing only simple Integer to Integer functions does not look very powerful
-  and useful can this Function definition be enhanced to work on any type?
- */
 
