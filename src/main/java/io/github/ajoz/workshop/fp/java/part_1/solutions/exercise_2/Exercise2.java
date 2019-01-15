@@ -1,67 +1,31 @@
 package io.github.ajoz.workshop.fp.java.part_1.solutions.exercise_2;
 
-// We can mark the interface as Functional Interface, this is only an indication
-// that the interface has a Single Abstract Method
+
 @FunctionalInterface
 interface Function1<A, B> {
     B apply(A argument);
 }
 
-// We can express the Function also as an abstract class:
-/*
-abstract class Function1<A, B> {
-    abstract B apply(A argument);
-}
- */
-
 class Exercise2 {
-    public static void main(String[] args) {
-        //noinspection Convert2Lambda
-        final Function1<String, String> function = new Function1<String, String>() {
-            @Override
-            public String apply(String argument) {
-                return argument + "foo";
-            }
-        };
+    // Part 1:
+    static final Function1<Integer, Integer> f1 = x -> x + 1;
+    static final Function1<String, Integer> f2 = str -> str.length();
+    static final Function1<String, String> f3 = str -> str + "foo";
 
-        // as we are using a Functional Interface then we can
-        // use a very nice short notation
-        final Function1<String, String> lambda =
-                string -> string + "foo";
+    // Part 2:
+    static final Function1<String, Integer> str2int = Integer::valueOf;
+    static final Function1<Integer, Boolean> int2bool = i -> i == 42;
+    static final Function1<String, Boolean> str2bool = str -> int2bool.apply(str2int.apply(str));
+    /*
+    Questions:
 
-        printFunction(function, "bar");
-        printFunction(lambda, "baz");
-        printFunction(s -> s + "foo", "qux");
+    Can we generify the composition of two functions somehow?
+    What types should the functions have?
 
-        final Function1<Integer, Integer> xPlusOne = x -> x + 1;
-        final Function1<Integer, Integer> xPlusTwoSquared = x -> (x + 2) * (x + 2);
-        final Function1<Integer, Integer> minusXPlusTen = x -> -x + 10;
+    Our first function str2int is like a function from A to B
+    Our second function int2bool is like a function from B to some type C
+    Our third function str2bool is like a function from A to C
 
-        printFunction(xPlusOne, 1);
-        printFunction(xPlusOne, 2);
-
-        printFunction(xPlusTwoSquared, 3);
-        printFunction(xPlusTwoSquared, 4);
-
-        printFunction(minusXPlusTen, 5);
-        printFunction(minusXPlusTen, 6);
-
-        // for easier reading we will drop f and g as a name
-        // and use something more descriptive
-        final Function1<String, Integer> stringToInt = Integer::valueOf;
-        final Function1<Integer, Boolean> intToBool = integer -> integer == 42;
-
-        final Function1<String, Boolean> stringToBool = string -> {
-            final Integer result = stringToInt.apply(string);
-            return intToBool.apply(result);
-        };
-
-        printFunction(stringToBool, "41");
-        printFunction(stringToBool, "42");
-    }
-
-    private static <A, B> void printFunction(final Function1<A, B> function,
-                                             final A argument) {
-        System.out.println(String.format("x: A = %s y: B = %s", argument, function.apply(argument)));
-    }
+    We could try to generify this composition of functions with a method.
+     */
 }

@@ -5,17 +5,29 @@ package io.github.ajoz.workshop.fp.java.part_1.exercises.exercise_2;
 
   In the previous exercise we create a simple Integer to Integer function. This
   kind of type was very limiting because we had to create a function type for
-  each pair of types we wanted to create an association.
+  each pair of types we wanted to create an association:
+  */
+@FunctionalInterface
+interface StringToIntegerFunction {
+    Integer apply(String argument);
+}
 
+@FunctionalInterface
+interface StringFunction {
+    String apply(String argument);
+}
+
+@FunctionalInterface
+interface IntegerFunction {
+    Integer apply(Integer argument);
+}
+
+/*
   To achieve something more flexible we need generics. We can rework our
-  previous example
-
-  interface IntegerFunction {
-      Integer apply(Integer argument);
-  }
-
-  We need a separate type for the argument and a separate type for the result:
- */
+  "function" types into something that will use generic type for the argument
+  and a generic type for the result.
+  */
+@FunctionalInterface
 interface Function1<A, B> {
     B apply(A argument);
 }
@@ -41,23 +53,16 @@ class Exercise2 {
       - str2bool that takes a String and returns a Boolean:
         * this function should do what a combination of str2int and int2bool would
         * you can use str2int and int2bool to solve this exercise
+
+      Hints:
+      - to convert String to an Integer please use Integer.valueOf(String)
+
+      Questions:
+      - Can we generify the composition of two functions somehow?
+      - What types should the functions have?
      */
 
-    
-
-    public static void main(final String[] args) {
-
-    }
-}
-
-interface StringToIntegerFunction {
-    Integer apply(String argument);
-}
-
-interface StringFunction {
-    String apply(String argument);
-}
-
-interface IntegerFunction {
-    Integer apply(Integer argument);
+    // static final Function<???, ???> str2int = ???
+    // static final Function<???, ???> int2bool = ???
+    // static final Function<???, ???> str2bool = ???
 }
