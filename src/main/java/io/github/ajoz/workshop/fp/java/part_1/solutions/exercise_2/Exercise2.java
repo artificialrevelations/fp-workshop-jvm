@@ -19,13 +19,21 @@ class Exercise2 {
     /*
     Questions:
 
-    Can we generify the composition of two functions somehow?
-    What types should the functions have?
+    - Can we generify the composition of two functions somehow?
+    - What types should the functions have?
 
     Our first function str2int is like a function from A to B
     Our second function int2bool is like a function from B to some type C
     Our third function str2bool is like a function from A to C
 
-    We could try to generify this composition of functions with a method.
+    We could try to generify this composition of functions with a method in the
+    type Function1, or we could create some static method that would take
+    two functions as arguments and return a third one.
+
+    - Is there a problem with the function str2int?
+
+    Yes, this function is not a total function, there is a large part of the
+    function domain that it cannot return a result for. We will talk more about
+    partial functions in future exercises.
      */
 }

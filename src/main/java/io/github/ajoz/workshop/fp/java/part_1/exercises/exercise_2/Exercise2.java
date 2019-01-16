@@ -42,7 +42,6 @@ class Exercise2 {
     static final StringToIntegerFunction f2 = str -> str.length();
     static final StringFunction f3 = str -> "foo" + str;
 
-
     /*
       Part 2:
 
@@ -63,6 +62,7 @@ class Exercise2 {
       Questions:
       - Can we generify the composition of two functions somehow?
       - What types should the functions have?
+      - Is there a problem with the function str2int?
      */
 
     // static final Function<???, ???> str2int = ???
