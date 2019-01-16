@@ -48,10 +48,6 @@ package io.github.ajoz.workshop.fp.kotlin.part_1.exercises.exercise_1
   In the Java version of the same exercise we were working towards building
   a specialized type for expressing a function. Due to how Kotlin is designed
   we can focus only on the built in type as it allows for adding extensions.
-
-  Express the function y = x + 1 with your class.
-  Express the function y = (x + 2)^2 with your class.
-  Express the function y = -x + 100 with you class.
  */
 
 /*
