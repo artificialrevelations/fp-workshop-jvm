@@ -40,7 +40,8 @@ class Exercise2 {
      */
     static final IntegerFunction f1 = x -> x + 1;
     static final StringToIntegerFunction f2 = str -> str.length();
-    static final StringFunction f3 = str -> str + "foo";
+    static final StringFunction f3 = str -> "foo" + str;
+
 
     /*
       Part 2:
@@ -53,6 +54,8 @@ class Exercise2 {
       - str2bool that takes a String and returns a Boolean:
         * this function should do what a combination of str2int and int2bool would
         * you can use str2int and int2bool to solve this exercise
+
+      Uncomment tests for this part!
 
       Hints:
       - to convert String to an Integer please use Integer.valueOf(String)
