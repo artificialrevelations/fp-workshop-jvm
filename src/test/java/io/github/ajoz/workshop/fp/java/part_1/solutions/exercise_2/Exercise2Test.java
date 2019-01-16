@@ -92,7 +92,7 @@ public class Exercise2Test {
                     Exercise2.int2bool.apply(value);
 
             // then:
-            assertFalse(actual);
+            assertTrue(actual);
         }
 
         @Test
