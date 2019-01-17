@@ -121,4 +121,66 @@ public class Exercise2Test {
             assertFalse(actual);
         }
     }
+
+    public final static class Part3 {
+        @Test
+        public void identity_for_String() {
+            // given:
+            final String value = "JUG Lodz!";
+            final String expected = "JUG Lodz!";
+
+            // when:
+            final String actual =
+                    Exercise2.<String>identity().apply(value);
+
+            // then:
+            assertEquals(expected, actual);
+        }
+
+        @Test
+        public void identity_for_Integer() {
+            // given:
+            final Integer value = 42;
+            final Integer expected = 42;
+
+            // when:
+            final Integer actual =
+                    Exercise2.<Integer>identity().apply(value);
+
+            // then:
+            assertEquals(expected, actual);
+        }
+    }
+
+    public static final class Part4 {
+        @Test
+        public void constant_String_to_String() {
+            // given:
+            final String value = "Mobilization.pl";
+            final String constant = "JUG Lodz!";
+            final String expected = "JUG Lodz!";
+
+            // when:
+            final String actual =
+                    Exercise2.<String, String>constant(constant).apply(value);
+
+            // then:
+            assertEquals(expected, actual);
+        }
+
+        @Test
+        public void constant_String_to_Integer() {
+            // given:
+            final String value = "Mobilization.pl";
+            final Integer constant = 42;
+            final Integer expected = 42;
+
+            // when:
+            final Integer actual =
+                    Exercise2.<String, Integer>constant(constant).apply(value);
+
+            // then:
+            assertEquals(expected, actual);
+        }
+    }
 }

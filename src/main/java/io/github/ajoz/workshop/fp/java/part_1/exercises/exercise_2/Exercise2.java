@@ -68,4 +68,29 @@ class Exercise2 {
     // static final Function<???, ???> str2int = ???
     // static final Function<???, ???> int2bool = ???
     // static final Function<???, ???> str2bool = ???
+
+    /*
+      Part 3:
+
+      Create a method called identity that returns a function. This function
+      should take an argument and return it immediately. This function should
+      work for any type passed to it.
+
+      Questions:
+      - Is this function useful?
+      - Can we express such function like previous ones (as a field)?
+     */
+    // static Function<???, ???> identity() {}
+
+    /*
+      Part 4:
+
+      Create a method called constant that takes a value and returns a function
+      that always returns this value regardless of the arguments that are passed
+      to it.
+
+      Questions:
+      - Is this function useful?
+     */
+    // static Function<???, ???> constant(??? value) {}
 }
