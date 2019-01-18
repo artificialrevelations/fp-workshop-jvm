@@ -5,25 +5,6 @@ package io.github.ajoz.workshop.fp.java.part_1.exercises.exercise_3;
 
   Please test your solutions against available unit tests!
 
-  part 1:
-
-  Create a function/method called composeIntFuns for composing two functions
-  from Integer to Integer. The result of the composition should be the third
-  function.
-
-  part 2:
-
-  Create a function/method called compose for composing two functions. One from
-  type A to type B, second from type B to type C. The result of the composition
-  should be a function from type A to type C.
-
-  part 3:
-
-  Create a function/method called composeAll for composing multiple functions
-  passed as an argument. Try to solve this part in several ways:
-  - use the compose(Function1, Function1)
-  - use function application
-
   Question: Does it matter in what order we will compose the functions?
   Question: How should the composeAll behave for one argument?
   Question: How should the composeAll behave for zero arguments?
@@ -37,20 +18,68 @@ package io.github.ajoz.workshop.fp.java.part_1.exercises.exercise_3;
 
 @SuppressWarnings("unused")
 class Exercise3 {
+    /*
+      Part 1:
+
+      Create a function/method called composeIntFuns for composing two functions
+      from Integer to Integer. The result of the composition should be the third
+      function.
+     */
     static Function1<Integer, Integer> composeIntFuns(final Function1<Integer, Integer> first,
                                                       final Function1<Integer, Integer> second) {
         throw new UnsupportedOperationException("Exercise3 composeIntFuns is missing!");
     }
 
-    // hint: Allow the types to guide you with the composition
+    /*
+      Part 2:
+
+      Create a function/method called compose for composing two functions. One from
+      type A to type B, second from type B to type C. The result of the composition
+      should be a function from type A to type C.
+
+      Hint:
+      - Allow the types to guide you with the composition
+
+      Questions:
+      - Was there any other way to solve this exercise?
+     */
     static <A, B, C> Function1<A, C> compose(final Function1<A, B> f,
                                              final Function1<B, C> g) {
         throw new UnsupportedOperationException("Exercise3 compose is missing!");
     }
 
+    /*
+      Part 3:
+
+      Create a function called composeAll_1 for composing multiple functions
+      passed as an argument. Solve this exercise by using function application.
+
+      Hints:
+      - the result of the previous function should be the argument of the next
+
+      Questions:
+      - Does it matter in what order we will compose the functions?
+      - How should the composeAll_1 behave for one argument?
+      - How should the composeAll_1 behave for zero arguments?
+     */
     @SafeVarargs
-    static <A> Function1<A, A> composeAll(final Function1<A, A>... functions) {
-        throw new UnsupportedOperationException("Exercise3 composeAll is missing!");
+    static <A> Function1<A, A> composeAll_1(final Function1<A, A>... functions) {
+        throw new UnsupportedOperationException("Exercise3 composeAll_1 is missing!");
+    }
+
+    /*
+      Part 4:
+
+      Create a function called composeAll_2 for composing multiple functions
+      passed as an argument. Solve this exercise by using the function
+      compose(Function1, Function1).
+
+      Hints:
+      -
+     */
+    @SafeVarargs
+    static <A> Function1<A, A> composeAll_2(final Function1<A, A>... functions) {
+        throw new UnsupportedOperationException("Exercise3 composeAll_2 is missing!");
     }
 }
 

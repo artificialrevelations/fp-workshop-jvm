@@ -1,7 +1,7 @@
 package io.github.ajoz.workshop.fp.java.part_1.exercises.exercise_3;
 
 import static io.github.ajoz.workshop.fp.java.part_1.exercises.exercise_3.Exercise3.compose;
-import static io.github.ajoz.workshop.fp.java.part_1.exercises.exercise_3.Exercise3.composeAll;
+import static io.github.ajoz.workshop.fp.java.part_1.exercises.exercise_3.Exercise3.composeAll_1;
 import static io.github.ajoz.workshop.fp.java.part_1.exercises.exercise_3.Exercise3.composeIntFuns;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
@@ -80,7 +80,7 @@ public class Exercise3Test {
             final Function1<Integer, Integer> i = x -> x + 4;
 
             // when:
-            final Function1<Integer, Integer> j = composeAll(
+            final Function1<Integer, Integer> j = composeAll_1(
                     f, g, h, i
             );
 
