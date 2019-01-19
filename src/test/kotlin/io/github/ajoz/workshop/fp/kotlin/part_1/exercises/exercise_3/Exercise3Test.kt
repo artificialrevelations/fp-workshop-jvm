@@ -1,6 +1,6 @@
 @file:Suppress("PackageName")
 
-package io.github.ajoz.workshop.fp.kotlin.part_1.solutions.exercise_3
+package io.github.ajoz.workshop.fp.kotlin.part_1.exercises.exercise_3
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
@@ -8,7 +8,7 @@ import org.junit.experimental.runners.Enclosed
 import org.junit.runner.RunWith
 
 @RunWith(Enclosed::class)
-class KExercise3Test {
+class Exercise3Test {
     class ComposeIntFuns {
         @Test
         fun `should compose two simple functions`() {
@@ -21,7 +21,7 @@ class KExercise3Test {
 
             // then:
             assertEquals(3, h(0))
-            assertEquals(4, h(1))
+            assertEquals(4, h(0))
         }
 
         @Test
@@ -72,7 +72,7 @@ class KExercise3Test {
 
     class ComposeAll {
         @Test
-        fun `multiple functions`() {
+        fun `multiple functions first solution`() {
             // given:
             val f: (Int) -> Int = { x -> x + 1 }
             val g: (Int) -> Int = { x -> x + 2 }
@@ -80,7 +80,23 @@ class KExercise3Test {
             val i: (Int) -> Int = { x -> x + 4 }
 
             // when:
-            val j = composeAll(f, g, h, i)
+            val j = composeAll_1(f, g, h, i)
+
+            // then:
+            assertEquals(10, j(0))
+            assertEquals(0, j(-10))
+        }
+
+        @Test
+        fun `multiple functions second solution`() {
+            // given:
+            val f: (Int) -> Int = { x -> x + 1 }
+            val g: (Int) -> Int = { x -> x + 2 }
+            val h: (Int) -> Int = { x -> x + 3 }
+            val i: (Int) -> Int = { x -> x + 4 }
+
+            // when:
+            val j = composeAll_2(f, g, h, i)
 
             // then:
             assertEquals(10, j(0))
@@ -96,7 +112,7 @@ class KExercise3Test {
             val g: (Int) -> Boolean = { it == 42 }
 
             // when:
-            val h = f.andThen(g)
+            val h = f andThen g
 
             // then:
             assertEquals(true, h("42"))
@@ -104,17 +120,36 @@ class KExercise3Test {
         }
 
         @Test
-        fun `should use compose`() {
+        fun `should compose functions with compose`() {
             // given:
             val f: (String) -> Int = { Integer.valueOf(it) }
             val g: (Int) -> Boolean = { it == 42 }
 
             // when:
-            val h = g.compose(f)
+            val h = g compose f
 
             // then:
             assertEquals(true, h("42"))
             assertEquals(false, h("24"))
+        }
+    }
+
+    class ProductPurchaseUrl {
+        @Test
+        fun `should return a valid secure url`() {
+            // given:
+            val productId = "WORKSHOPTESTS42"
+            val product = Product(
+                    Id(productId),
+                    Description("The more tests the better?")
+            )
+            val expected = "https://nozama.com/shop/purchase?=$productId"
+
+            // when:
+            val actual = getSecureProductPurchaseUrl(product)
+
+            // then:
+            assertEquals(expected, actual)
         }
     }
 }

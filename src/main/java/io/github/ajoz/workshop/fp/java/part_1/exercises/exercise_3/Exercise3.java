@@ -95,7 +95,6 @@ interface Function1<A, B> {
 
       // composition:
       final Function1<String, Integer> fooifiedLength = fooify.andThen(length);
-
      */
     @SuppressWarnings("unused")
     default <C> Function1<A, C> andThen(final Function1<B, C> after) {
@@ -201,6 +200,10 @@ class Example {
                         )
                 );
 
+        /*
+          As you can clearly see, this approach gives us a very high reusability
+          as we can mix and match our "lego" pieces to create new business logic.
+         */
         for (final Product product : products) {
             System.out.println(getSecureProductPurchaseUrl.apply(product));
         }

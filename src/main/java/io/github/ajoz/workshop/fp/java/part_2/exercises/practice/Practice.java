@@ -46,7 +46,7 @@ public class Practice {
     /*
       Part 3:
 
-      Create a function called `composeAll` that returns a single function that
+      Create a function called `composeAll_1` that returns a single function that
       is a result of composing every function given as the argument.
 
       Hints:
@@ -57,6 +57,6 @@ public class Practice {
       - what do you think should be passed if the List of argument functions is empty?
      */
     static <A> Function1<A, A> composeAll(final Function1<A, A>... functions) {
-        throw new UnsupportedOperationException("Practice composeAll is missing!");
+        throw new UnsupportedOperationException("Practice composeAll_1 is missing!");
     }
 }
