@@ -1,9 +1,15 @@
 package io.github.ajoz.workshop.fp.java.part_1.exercises.exercise_3;
 
+import static io.github.ajoz.workshop.fp.java.part_1.exercises.exercise_3.Example.getSecureProductPurchaseUrl;
 import static io.github.ajoz.workshop.fp.java.part_1.exercises.exercise_3.Exercise3.compose;
 import static io.github.ajoz.workshop.fp.java.part_1.exercises.exercise_3.Exercise3.composeAll_1;
+import static io.github.ajoz.workshop.fp.java.part_1.exercises.exercise_3.Exercise3.composeAll_2;
 import static io.github.ajoz.workshop.fp.java.part_1.exercises.exercise_3.Exercise3.composeIntFuns;
 import static org.junit.Assert.assertEquals;
+
+import io.github.ajoz.workshop.fp.java.part_1.exercises.exercise_3.Example.Description;
+import io.github.ajoz.workshop.fp.java.part_1.exercises.exercise_3.Example.Id;
+import io.github.ajoz.workshop.fp.java.part_1.exercises.exercise_3.Example.Product;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -72,7 +78,7 @@ public class Exercise3Test {
 
     public static class ComposeAll {
         @Test
-        public void multiple_functions() {
+        public void multiple_functions_first_solution() {
             // given:
             final Function1<Integer, Integer> f = x -> x + 1;
             final Function1<Integer, Integer> g = x -> x + 2;
@@ -81,6 +87,24 @@ public class Exercise3Test {
 
             // when:
             final Function1<Integer, Integer> j = composeAll_1(
+                    f, g, h, i
+            );
+
+            // then:
+            assertEquals(new Integer(10), j.apply(0));
+            assertEquals(new Integer(0), j.apply(-10));
+        }
+
+        @Test
+        public void multiple_functions_second_solution() {
+            // given:
+            final Function1<Integer, Integer> f = x -> x + 1;
+            final Function1<Integer, Integer> g = x -> x + 2;
+            final Function1<Integer, Integer> h = x -> x + 3;
+            final Function1<Integer, Integer> i = x -> x + 4;
+
+            // when:
+            final Function1<Integer, Integer> j = composeAll_2(
                     f, g, h, i
             );
 
@@ -117,6 +141,27 @@ public class Exercise3Test {
             // then:
             assertEquals(Boolean.TRUE, h.apply("42"));
             assertEquals(Boolean.FALSE, h.apply("24"));
+        }
+    }
+
+
+    public static class ProductPurchaseUrl {
+        @Test
+        public void should_return_a_valid_secure_url() {
+            // given:
+            final String productId = "WORKSHOPTESTS42";
+            final Product product =
+                    new Product(
+                            new Id(productId),
+                            new Description("The more tests the better?")
+                    );
+            final String expected = "https://nozama.com/shop/purchase?=" + productId;
+
+            // when:
+            final String actual = getSecureProductPurchaseUrl.apply(product);
+
+            // then:
+            assertEquals(expected, actual);
         }
     }
 }
