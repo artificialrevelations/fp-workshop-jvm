@@ -3,18 +3,18 @@ package io.github.ajoz.workshop.fp.java.part_1.solutions.exercise_4;
 import io.github.ajoz.workshop.fp.java.tools.Function1;
 import io.github.ajoz.workshop.fp.java.tools.Function2;
 
-class Exercise4 {
-    // Part 2
-    static class Pair<A, B> {
-        final A first;
-        final B second;
+// Part 2
+class Pair<A, B> {
+    final A first;
+    final B second;
 
-        Pair(A a, B b) {
-            first = a;
-            second = b;
-        }
+    Pair(A a, B b) {
+        first = a;
+        second = b;
     }
+}
 
+class Exercise4 {
     static <A, B, C> Function1<Pair<A, B>, C> tuple(final Function2<A, B, C> function2) {
         return tuple -> function2.apply(tuple.first, tuple.second);
     }

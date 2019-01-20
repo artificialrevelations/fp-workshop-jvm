@@ -52,25 +52,26 @@ interface Function9<A, B, C, D, E, F, G, H, I, J> {
   We need special types like Pair or Triple. Some languages have support for
   tuples but in java we need to make them on our own.
  */
+
+/*
+  Part 2:
+
+  Create function called `tuple` that takes a Function2 as an argument and
+  returns a Function1 as a result. As Java does not have native tuple support
+  please use the Pair class defined below.
+  */
+class Pair<A, B> {
+    final A first;
+    final B second;
+
+    Pair(A a, B b) {
+        first = a;
+        second = b;
+    }
+}
+
 @SuppressWarnings("unused")
 class Exercise4 {
-    /*
-      Part 2:
-
-      Create function called `tuple` that takes a Function2 as an argument and
-      returns a Function1 as a result. As Java does not have native tuple support
-      please use the Pair class defined below.
-      */
-    static class Pair<A, B> {
-        final A first;
-        final B second;
-
-        Pair(A a, B b) {
-            first = a;
-            second = b;
-        }
-    }
-
     static <A, B, C> Function1<Pair<A, B>, C> tuple(final Function2<A, B, C> function2) {
         throw new UnsupportedOperationException("Exercise 4 tuple is missing!");
     }
