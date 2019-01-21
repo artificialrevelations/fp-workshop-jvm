@@ -14,11 +14,11 @@ fun <A, B, C> unTuple(function: (Pair<A, B>) -> C): (A, B) -> C = { a: A, b: B -
 
 // Part 4
 internal object TupleExample {
-    val addPrefixUT: (String, String) -> String = { prefix, text ->
+    private val addPrefixUT: (String, String) -> String = { prefix, text ->
         prefix + text
     }
 
-    val addIntsT: (Pair<Int, Int>) -> Int = { pint ->
+    private val addIntsT: (Pair<Int, Int>) -> Int = { pint ->
         pint.first + pint.second
     }
 
