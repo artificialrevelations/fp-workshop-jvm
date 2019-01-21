@@ -1,73 +1,59 @@
-@file:Suppress("PackageName")
+@file:Suppress("PackageName", "UNUSED_PARAMETER")
 
 package io.github.ajoz.workshop.fp.kotlin.part_1.exercises.exercise_6
 
 /*
-  -- Putting the knowledge to use --
+  -- Other types of Functions --
 
-  Functional programming is about building complexity from small parts. Let's
-  try to use the knowledge we gained so far to solve this simple example.
+  part 1:
 
-  Our apps domain is responsible for handling Customers and Orders. We
-  already have a function implemented for retrieving Orders for a given Customer
-  from a given Database. This function has a lot of domain logic and it is not
-  feasible to refactor it now. We will have to use it while preparing our logic.
+  Java 8 introduced few additional "function" like types due to its peculiar
+  type system.
+  - Supplier<T> it replaces the need to have Function<Void, T>
+  - Consumer<T> it replaces the need to have Function<T, Void>
 
-  One of the other teams we are working with prepared a code that expects a
-  function from a Customer to hash (Long), but they would like us to provide
-  the database for it.
+  One can treat them as handy "aliases". In most cases they are used to model
+  some impure effects like reading from a network resource or writing to a database.
 
-  Our task is to write such function. We have all the necessary tools.
+  A pure referential transparent function from Void to T would need to return
+  the same result when called each time and it would not be very interesting.
 
-  Please pick and use methods/functions from previous exercises to finish this
-  task.
+  A pure referential transparent function from T to Void is even less interesting
+  as there is only value a Void type can take which is null.
+
+  In Kotlin the type system is more "modern" and we can cleanly express the
+  "supplier" and "consumer" with usual KFunction1 and Unit type.
+
+  part 2:
+
+  Create a function for composing a (A) -> B function and (B) -> Unit function.
+
+  Question: Do we need any trickery? or special methods?
+
+  part 3:
+
+  Create a function for composing a (Unit) -> A function with a (A) -> B function.
+
+  Question: The same as for part2, maybe we already have everything what we need?
+
+  part 4:
+
+  Create a function for partially applying the first argument of a curried
+  function with the use of a Supplier.
  */
 
-// other fields like: surname, address, etc.
-data class Customer(val name: String)
-
-// other fields like: amount, currency, tax, etc.
-data class Order(val title: Title, val date: Timestamp)
-
-data class Title(val title: String)
-
-data class Timestamp(val unixTimestamp: Long)
-
-data class Hash(val value: Long)
-
-internal class Database {
-    // for now let's assume that the DB will always return an Order for a
-    // given Customer
-    fun findOrder(customer: Customer): Order {
-        return Order(
-                Title(String.format("FP Workshop - %s", customer.name)),
-                Timestamp(42L)
-        )
-    }
+fun <A, B> composeConsumer(function: (A) -> B, consumer: (B) -> Unit): (A) -> Unit {
+    TODO("Exercise 5 composeConsumer is missing!")
 }
 
-object Exercise6 {
-    // Please do not change this function!
-    private val getOrderForCustomer: (Customer, Database) -> Order =
-            { customer, database ->
-                database.findOrder(customer)
-            }
+fun <A, B> composeSupplier(function: (A) -> B, supplier: () -> A): () -> B {
+    TODO("Exercise 5 composeSupplier is missing!")
+}
 
-    // Please do not change this function!
-    private val getProductionDatabase =
-            { Database() }
+fun <A, B, C> applyCurriedFirst(function: (A) -> (B) -> C, supplier: () -> A): (B) -> C {
+    TODO("Exercise 5 applyCurriedFirst is missing!")
+}
 
-    // Please do not change this function!
-    private val getOrderTitle: (Order) -> Title =
-            { it.title }
-
-    // Please do not change this function!
-    private val getTitleHash: (Title) -> Hash =
-            {
-                Hash(it.title.length.toLong())
-            }
-
-    fun customerToHash(): (Customer) -> Hash {
-        TODO("Exercise 6 customerToHash is missing!")
-    }
+fun <A, B, C> applyCurriedSecond(function: (A) -> (B) -> C, supplier: () -> B): (A) -> C {
+    TODO("Exercise 5 applyCurriedSecond is missing!")
 }

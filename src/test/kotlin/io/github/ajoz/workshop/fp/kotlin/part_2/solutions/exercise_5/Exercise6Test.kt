@@ -6,7 +6,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Test
 import java.util.*
 
-class Exercise5Test {
+class Exercise6Test {
     @Test
     fun should_map_ints() {
         // given:

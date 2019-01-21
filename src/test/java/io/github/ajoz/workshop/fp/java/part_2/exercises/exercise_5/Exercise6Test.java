@@ -1,4 +1,4 @@
-package io.github.ajoz.workshop.fp.java.part_2.solutions.exercise_5;
+package io.github.ajoz.workshop.fp.java.part_2.exercises.exercise_5;
 
 import io.github.ajoz.workshop.fp.java.tools.Function1;
 import org.junit.Test;
@@ -6,10 +6,10 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static io.github.ajoz.workshop.fp.java.part_2.solutions.exercise_5.Exercise5.*;
+import static io.github.ajoz.workshop.fp.java.part_2.exercises.exercise_5.Exercise5.*;
 import static org.junit.Assert.assertEquals;
 
-public class Exercise5Test {
+public class Exercise6Test {
     @Test
     public void should_map_ints() {
         // given:

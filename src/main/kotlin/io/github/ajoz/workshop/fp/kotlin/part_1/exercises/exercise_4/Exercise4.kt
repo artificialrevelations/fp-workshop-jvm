@@ -1,4 +1,4 @@
-@file:Suppress("PackageName", "UNUSED_PARAMETER", "unused")
+@file:Suppress("PackageName", "UNUSED_PARAMETER", "unused", "UNUSED_VARIABLE")
 
 package io.github.ajoz.workshop.fp.kotlin.part_1.exercises.exercise_4
 

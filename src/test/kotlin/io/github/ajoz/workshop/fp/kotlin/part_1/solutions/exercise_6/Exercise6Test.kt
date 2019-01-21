@@ -1,11 +1,11 @@
 @file:Suppress("PackageName")
 
-package io.github.ajoz.workshop.fp.kotlin.part_1.exercises.exercise_5
+package io.github.ajoz.workshop.fp.kotlin.part_1.solutions.exercise_6
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class KExercise5Test {
+class Exercise6Test {
     @Test
     fun `should compose function with consumer`() {
         // given:
