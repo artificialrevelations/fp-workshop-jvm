@@ -5,7 +5,7 @@ package io.github.ajoz.workshop.fp.java.part_1.exercises.exercise_4;
 
   Part 1:
 
-  Take a look at definitions the definitions below
+  Take a look at the function definitions below:
  */
 @FunctionalInterface
 interface Function1<A, B> {
@@ -33,8 +33,8 @@ interface Function9<A, B, C, D, E, F, G, H, I, J> {
 
 /*
   Questions:
-  - Do Function2 or Function3 (or Function9 for that matter) even exist?
-  - Do you see problems with working with them?
+  - Does a Function2 or a Function3 (or a Function9 for that matter) even exists?
+  - Do you see any problems with working with them?
   - Are there ways to make the code look more readable?
 
   Let's assume they do not exist and try to express them with only Function1. We
@@ -143,7 +143,6 @@ class Exercise4 {
       Function3<A, B, C, D> == Function1<A, Function1<B, Function1<C, D>>>
 
       This method of expressing functions is called currying.
-
       */
     // Example:
     // Most verbose version
