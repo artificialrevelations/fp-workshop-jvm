@@ -2,7 +2,7 @@
 
 package io.github.ajoz.workshop.fp.kotlin.tools.flow
 
-import io.github.ajoz.workshop.fp.kotlin.tools.Try
+import io.github.ajoz.workshop.fp.kotlin.tools.control.Try
 
 /**
  *

@@ -1,4 +1,4 @@
-import io.github.ajoz.workshop.fp.kotlin.tools.Try
+import io.github.ajoz.workshop.fp.kotlin.tools.control.Try
 import io.github.ajoz.workshop.fp.kotlin.tools.flow.Flow
 import io.github.ajoz.workshop.fp.kotlin.tools.flow.of
 import io.github.ajoz.workshop.fp.kotlin.tools.flow.select

@@ -4,7 +4,7 @@ package io.github.ajoz.workshop.fp.kotlin.part_4.exercises.exercise_6
 
 import io.github.ajoz.workshop.fp.kotlin.part_4.exercises.exercise_6.Flows.cycle
 import io.github.ajoz.workshop.fp.kotlin.part_4.exercises.exercise_6.Flows.generate
-import io.github.ajoz.workshop.fp.kotlin.tools.Try
+import io.github.ajoz.workshop.fp.kotlin.tools.control.Try
 import java.util.LinkedList
 
 import java.util.Arrays.asList

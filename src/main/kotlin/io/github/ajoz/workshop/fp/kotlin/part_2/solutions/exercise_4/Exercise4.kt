@@ -2,7 +2,7 @@
 
 package io.github.ajoz.workshop.fp.kotlin.part_2.solutions.exercise_4
 
-import io.github.ajoz.workshop.fp.kotlin.tools.*
+import io.github.ajoz.workshop.fp.kotlin.tools.collections.*
 import kotlin.Pair
 
 fun maximum(list: List<Int>): Int? {

@@ -2,8 +2,8 @@
 
 package io.github.ajoz.workshop.fp.kotlin.part_4.exercises.practice_1
 
-import io.github.ajoz.workshop.fp.kotlin.tools.Maybe
-import io.github.ajoz.workshop.fp.kotlin.tools.Try
+import io.github.ajoz.workshop.fp.kotlin.tools.control.Maybe
+import io.github.ajoz.workshop.fp.kotlin.tools.control.Try
 import java.util.concurrent.atomic.AtomicReference
 
 /*

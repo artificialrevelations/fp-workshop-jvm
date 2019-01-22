@@ -1,4 +1,8 @@
-package io.github.ajoz.workshop.fp.kotlin.tools
+package io.github.ajoz.workshop.fp.kotlin.tools.control
+
+import io.github.ajoz.workshop.fp.kotlin.tools.also
+import io.github.ajoz.workshop.fp.kotlin.tools.iterators.EmptyIterator
+import io.github.ajoz.workshop.fp.kotlin.tools.iterators.ValueIterator
 
 sealed class Maybe<A> : Iterable<A> {
     abstract val isSome: Boolean

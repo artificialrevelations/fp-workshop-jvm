@@ -1,6 +1,6 @@
 package io.github.ajoz.workshop.fp.kotlin.tools.flow
 
-import io.github.ajoz.workshop.fp.kotlin.tools.Try
+import io.github.ajoz.workshop.fp.kotlin.tools.control.Try
 
 fun <A> Flow.Companion.of(iterator: Iterator<A>): Flow<A> {
     class IteratorFlow(val iter: Iterator<A>) : Flow<A> {

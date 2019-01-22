@@ -2,7 +2,7 @@
 
 package io.github.ajoz.workshop.fp.kotlin.part_4.solutions.practice_2
 
-import io.github.ajoz.workshop.fp.kotlin.tools.Try
+import io.github.ajoz.workshop.fp.kotlin.tools.control.Try
 import io.github.ajoz.workshop.fp.kotlin.tools.map
 import io.github.ajoz.workshop.fp.kotlin.tools.memoized
 import io.github.ajoz.workshop.fp.kotlin.tools.tryGet

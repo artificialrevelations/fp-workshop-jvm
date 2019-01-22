@@ -2,7 +2,7 @@
 
 package io.github.ajoz.workshop.fp.kotlin.part_4.solutions.exercise_5
 
-import io.github.ajoz.workshop.fp.kotlin.tools.Try
+import io.github.ajoz.workshop.fp.kotlin.tools.control.Try
 import java.util.Arrays
 import java.util.LinkedList
 import java.util.NoSuchElementException

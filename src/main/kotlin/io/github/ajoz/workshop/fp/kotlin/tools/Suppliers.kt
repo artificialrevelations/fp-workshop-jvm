@@ -1,5 +1,7 @@
 package io.github.ajoz.workshop.fp.kotlin.tools
 
+import io.github.ajoz.workshop.fp.kotlin.tools.control.Maybe
+import io.github.ajoz.workshop.fp.kotlin.tools.control.Try
 import java.util.concurrent.atomic.AtomicReference
 
 fun <A> (() -> A).memoized(): () -> A {

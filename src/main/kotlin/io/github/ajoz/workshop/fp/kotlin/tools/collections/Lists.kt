@@ -1,4 +1,4 @@
-package io.github.ajoz.workshop.fp.kotlin.tools
+package io.github.ajoz.workshop.fp.kotlin.tools.collections
 
 import java.util.ArrayList
 import java.util.LinkedList

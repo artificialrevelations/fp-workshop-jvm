@@ -1,4 +1,4 @@
-package io.github.ajoz.workshop.fp.kotlin.tools
+package io.github.ajoz.workshop.fp.kotlin.tools.iterators
 
 import java.util.NoSuchElementException
 
