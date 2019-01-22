@@ -27,6 +27,10 @@ public interface Function1<A, B> {
         };
     }
 
+    static <A, B> Function1<A, B> memoize(final Function1<A, B> function) {
+        return function.memoized();
+    }
+
     static <A> Function1<A, A> identity() {
         return a -> a;
     }

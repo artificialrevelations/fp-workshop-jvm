@@ -3,7 +3,7 @@ package io.github.ajoz.workshop.fp.java.part_4.solutions.practice_3;
 import io.github.ajoz.workshop.fp.java.tools.Consumer1;
 import io.github.ajoz.workshop.fp.java.tools.Function1;
 import io.github.ajoz.workshop.fp.java.tools.Predicate;
-import io.github.ajoz.workshop.fp.java.tools.Try;
+import io.github.ajoz.workshop.fp.java.tools.control.Try;
 
 import java.util.*;
 

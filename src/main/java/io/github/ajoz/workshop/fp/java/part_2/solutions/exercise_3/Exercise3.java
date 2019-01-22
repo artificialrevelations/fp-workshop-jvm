@@ -1,7 +1,7 @@
 package io.github.ajoz.workshop.fp.java.part_2.solutions.exercise_3;
 
 import io.github.ajoz.workshop.fp.java.tools.Function2;
-import io.github.ajoz.workshop.fp.java.tools.Lists;
+import io.github.ajoz.workshop.fp.java.tools.collections.Lists;
 
 import java.util.List;
 

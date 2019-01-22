@@ -1,7 +1,7 @@
 package io.github.ajoz.workshop.fp.java.tools.flow;
 
 import io.github.ajoz.workshop.fp.java.tools.Consumer1;
-import io.github.ajoz.workshop.fp.java.tools.Try;
+import io.github.ajoz.workshop.fp.java.tools.control.Try;
 
 final class PeekFlow<A> implements Flow<A> {
     private final Flow<A> upstream;

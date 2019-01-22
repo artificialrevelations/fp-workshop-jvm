@@ -1,4 +1,11 @@
-package io.github.ajoz.workshop.fp.java.tools;
+package io.github.ajoz.workshop.fp.java.tools.control;
+
+import io.github.ajoz.workshop.fp.java.tools.Consumer1;
+import io.github.ajoz.workshop.fp.java.tools.Effect;
+import io.github.ajoz.workshop.fp.java.tools.Function1;
+import io.github.ajoz.workshop.fp.java.tools.Supplier;
+import io.github.ajoz.workshop.fp.java.tools.iterators.EmptyIterator;
+import io.github.ajoz.workshop.fp.java.tools.iterators.ValueIterator;
 
 import java.util.Iterator;
 import java.util.Objects;

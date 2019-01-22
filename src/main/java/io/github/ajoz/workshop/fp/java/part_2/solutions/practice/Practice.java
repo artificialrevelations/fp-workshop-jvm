@@ -1,7 +1,7 @@
 package io.github.ajoz.workshop.fp.java.part_2.solutions.practice;
 
 import io.github.ajoz.workshop.fp.java.tools.Function1;
-import io.github.ajoz.workshop.fp.java.tools.Lists;
+import io.github.ajoz.workshop.fp.java.tools.collections.Lists;
 import io.github.ajoz.workshop.fp.java.tools.Predicate;
 
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package io.github.ajoz.workshop.fp.java.tools;
+package io.github.ajoz.workshop.fp.java.tools.iterators;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;

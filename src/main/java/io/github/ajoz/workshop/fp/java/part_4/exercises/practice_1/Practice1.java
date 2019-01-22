@@ -1,8 +1,8 @@
 package io.github.ajoz.workshop.fp.java.part_4.exercises.practice_1;
 
 import io.github.ajoz.workshop.fp.java.tools.CheckedSupplier;
-import io.github.ajoz.workshop.fp.java.tools.Maybe;
-import io.github.ajoz.workshop.fp.java.tools.Try;
+import io.github.ajoz.workshop.fp.java.tools.control.Maybe;
+import io.github.ajoz.workshop.fp.java.tools.control.Try;
 
 import java.util.concurrent.atomic.AtomicReference;
 

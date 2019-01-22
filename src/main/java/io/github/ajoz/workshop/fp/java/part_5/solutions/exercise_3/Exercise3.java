@@ -1,6 +1,6 @@
 package io.github.ajoz.workshop.fp.java.part_5.solutions.exercise_3;
 
-import io.github.ajoz.workshop.fp.java.tools.Try;
+import io.github.ajoz.workshop.fp.java.tools.control.Try;
 
 final class Id {
 }

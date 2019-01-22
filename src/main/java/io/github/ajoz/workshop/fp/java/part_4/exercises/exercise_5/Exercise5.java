@@ -1,6 +1,6 @@
 package io.github.ajoz.workshop.fp.java.part_4.exercises.exercise_5;
 
-import io.github.ajoz.workshop.fp.java.tools.Try;
+import io.github.ajoz.workshop.fp.java.tools.control.Try;
 
 /*
   -- Another form of laziness --

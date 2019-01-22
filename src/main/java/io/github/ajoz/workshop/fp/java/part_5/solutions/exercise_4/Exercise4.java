@@ -1,6 +1,6 @@
 package io.github.ajoz.workshop.fp.java.part_5.solutions.exercise_4;
 
-import io.github.ajoz.workshop.fp.java.tools.Maybe;
+import io.github.ajoz.workshop.fp.java.tools.control.Maybe;
 
 @SuppressWarnings("unused")
 final class User {

@@ -1,8 +1,8 @@
 package io.github.ajoz.workshop.fp.java.part_5.exercises.exercise_2;
 
 import io.github.ajoz.workshop.fp.java.tools.Function1;
-import io.github.ajoz.workshop.fp.java.tools.Maybe;
-import io.github.ajoz.workshop.fp.java.tools.Try;
+import io.github.ajoz.workshop.fp.java.tools.control.Maybe;
+import io.github.ajoz.workshop.fp.java.tools.control.Try;
 
 import java.util.Collections;
 import java.util.List;

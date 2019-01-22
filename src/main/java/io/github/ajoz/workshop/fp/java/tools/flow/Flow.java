@@ -1,6 +1,7 @@
 package io.github.ajoz.workshop.fp.java.tools.flow;
 
 import io.github.ajoz.workshop.fp.java.tools.*;
+import io.github.ajoz.workshop.fp.java.tools.control.Try;
 
 import java.util.Iterator;
 import java.util.List;

@@ -1,5 +1,8 @@
 package io.github.ajoz.workshop.fp.java.tools;
 
+import io.github.ajoz.workshop.fp.java.tools.control.Maybe;
+import io.github.ajoz.workshop.fp.java.tools.control.Try;
+
 import java.util.concurrent.atomic.AtomicReference;
 
 @SuppressWarnings("unused")

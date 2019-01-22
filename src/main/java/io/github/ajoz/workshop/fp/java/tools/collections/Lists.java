@@ -1,4 +1,6 @@
-package io.github.ajoz.workshop.fp.java.tools;
+package io.github.ajoz.workshop.fp.java.tools.collections;
+
+import io.github.ajoz.workshop.fp.java.tools.Function2;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

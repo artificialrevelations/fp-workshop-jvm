@@ -2,7 +2,7 @@ package io.github.ajoz.workshop.fp.java.part_4.solutions.exercise_6;
 
 import io.github.ajoz.workshop.fp.java.tools.Function1;
 import io.github.ajoz.workshop.fp.java.tools.Function2;
-import io.github.ajoz.workshop.fp.java.tools.Try;
+import io.github.ajoz.workshop.fp.java.tools.control.Try;
 
 import java.util.LinkedList;
 import java.util.List;

@@ -2,7 +2,7 @@
 
 package io.github.ajoz.workshop.fp.kotlin.part_2.solutions.exercise_3
 
-import io.github.ajoz.workshop.fp.java.tools.Lists
+import io.github.ajoz.workshop.fp.java.tools.collections.Lists
 import io.github.ajoz.workshop.fp.kotlin.tools.flipped
 
 // Part 1:

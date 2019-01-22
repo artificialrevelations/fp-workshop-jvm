@@ -2,6 +2,8 @@ package io.github.ajoz.workshop.fp.java.tools;
 
 import kotlin.Pair;
 
+import static io.github.ajoz.workshop.fp.java.tools.Function1.memoize;
+
 @FunctionalInterface
 public interface Function2<A, B, C> {
     C apply(A a, B b);
@@ -48,7 +50,7 @@ public interface Function2<A, B, C> {
 //            return memo.get(key);
 //        };
         // maybe a bit too much composition, nah! ;-)
-        return untuple(tupled().memoized());
+        return untuple(memoize(tupled()));
     }
 
     static <A, B, C> Function2<A, B, C> uncurry(final Function1<A, Function1<B, C>> function1) {

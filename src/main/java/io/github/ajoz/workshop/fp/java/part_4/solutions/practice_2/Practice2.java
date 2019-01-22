@@ -1,7 +1,7 @@
 package io.github.ajoz.workshop.fp.java.part_4.solutions.practice_2;
 
 import io.github.ajoz.workshop.fp.java.tools.Supplier;
-import io.github.ajoz.workshop.fp.java.tools.Try;
+import io.github.ajoz.workshop.fp.java.tools.control.Try;
 
 import java.io.*;
 import java.net.MalformedURLException;
