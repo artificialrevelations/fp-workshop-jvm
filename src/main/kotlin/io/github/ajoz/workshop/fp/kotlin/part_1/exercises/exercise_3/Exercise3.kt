@@ -1,8 +1,6 @@
-@file:Suppress("PackageName", "UNUSED_PARAMETER", "FunctionName")
+@file:Suppress("PackageName", "UNUSED_PARAMETER", "FunctionName", "unused")
 
 package io.github.ajoz.workshop.fp.kotlin.part_1.exercises.exercise_3
-
-import java.util.*
 
 /*
   -- Function Composition --
