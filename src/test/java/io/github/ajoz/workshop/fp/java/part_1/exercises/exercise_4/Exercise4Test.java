@@ -20,8 +20,10 @@ public class Exercise4Test {
         public void should_convert_to_Function1_with_a_tuple() {
             // given:
             final Function2<Integer, Integer, Integer> add = (a, b) -> a + b;
+
             // when:
             final Function1<Pair<Integer, Integer>, Integer> tested = tuple(add);
+
             // then:
             assertEquals(add.apply(1, 1), tested.apply(new Pair<>(1, 1)));
             assertEquals(add.apply(0, 0), tested.apply(new Pair<>(0, 0)));
@@ -33,8 +35,10 @@ public class Exercise4Test {
             // given:
             final Function1<Pair<Integer, Integer>, Integer> add =
                     ab_pair -> ab_pair.first + ab_pair.second;
+
             // when:
             final Function2<Integer, Integer, Integer> tested = untuple(add);
+
             // then:
             assertEquals(add.apply(new Pair<>(1, 1)), tested.apply(1, 1));
             assertEquals(add.apply(new Pair<>(0, 0)), tested.apply(0, 0));
@@ -47,8 +51,10 @@ public class Exercise4Test {
         public void should_convert_to_Function1_with_a_Function1_return_type() {
             // given:
             final Function2<Integer, Integer, Integer> add = (a, b) -> a + b;
+
             // when:
             final Function1<Integer, Function1<Integer, Integer>> tested = curry(add);
+
             // then:
             assertEquals(add.apply(1, 1), tested.apply(1).apply(1));
             assertEquals(add.apply(0, 0), tested.apply(0).apply(0));
@@ -60,9 +66,11 @@ public class Exercise4Test {
             // given:
             final Function1<Integer, Function1<Integer, Integer>> add =
                     a -> b -> a + b;
+
             // when:
             final Function2<Integer, Integer, Integer> tested =
                     uncurry(add);
+
             // then:
             assertEquals(add.apply(1).apply(1), tested.apply(1, 1));
             assertEquals(add.apply(0).apply(0), tested.apply(0, 0));
