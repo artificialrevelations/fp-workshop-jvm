@@ -1,8 +1,10 @@
 # Beginner/Intermediate Functional Programming Workshop with examples in Java/Kotlin
 
-This repository contains materials (code examples, exercises and solutions, wiki with commentary and explanations) for the Functional Programming Workshop. The main idea behind the exercises is to teach how certain Functional Programming idioms can be implemented on the JVM (in Java/Kotlin), this means implementing things like functions, composition, control structures.
+This repository contains materials (code examples, exercises and solutions, wiki with commentary and explanations) for the Functional Programming Workshop. The main idea behind the exercises is to teach how certain Functional Programming idioms can be implemented on the JVM (in Java/Kotlin), this means implementing things like functions, composition, control structures etc.
 
 Instead of learning some particular API the participants will write the API from scratch as they go, learning the concepts, names, patterns. This is why the workshop does not focus on the existing API (like Function from Java 8 stdlib) or popular libraries (like Vavr or Arrow).
+
+The terms, names of functions/methods and types are chosen to be maximaly familiar regardless of the library or programming language used. After workshop even if using other libraries you should be familiar with the concepts.
 
 All parts of the workshop are planned to take around 3 hours (2 - 2.5h with 2x 15 min break) not counting the practice exercises.
 
@@ -30,4 +32,4 @@ All parts of the workshop are planned to take around 3 hours (2 - 2.5h with 2x 1
 
 ## Workshop plan:
 
-Please check out the [wiki](https://github.com/ajoz/fp-workshop-jvm/wiki)
+For a detailed workshop plan and a description of all parts please check out the [wiki](https://github.com/ajoz/fp-workshop-jvm/wiki).
