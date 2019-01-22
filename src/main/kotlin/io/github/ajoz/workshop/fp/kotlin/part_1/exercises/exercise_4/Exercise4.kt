@@ -25,6 +25,18 @@ val nineArg: (Int, Int, Int, Int, Int, Int, Int, Int, Int) -> Int = { a, _, _, _
 }
 
 /*
+  If you are moving to Kotlin from Java and your or your team is in a transition
+  period, you could make this Kotlin notation more familiar for people with
+  type aliases
+ */
+
+// Here type aliases that will be super familiar for folks using Java 8
+typealias Function<A, B> = (A) -> B
+
+typealias BiFunction<A, B, C> = (A, B) -> C
+// etc...
+
+/*
   The nine argument function like above can be shortened with a typealias, but
   depending on the types of arguments it might not help at all.
  */
