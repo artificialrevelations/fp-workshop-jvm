@@ -61,7 +61,12 @@ typealias BiFunction<A, B, C> = (A, B) -> C
   (A, B, C) -> D == (Triple<A, B, C>) -> D
 
   We need special types like Pair or Triple. Some languages have support for
-  tuples but in java we need to make them on our own.
+  tuples but in Kotlin we need to make them on our own (Kotlin dropped support
+  for tuples in M3).
+
+  In a JVM language called Ceylon each multi argument function is just a one
+  argument function that takes a tuple as an argument. This makes supporting
+  functions like Function2, Function3, ..., Function23 not necessary.
  */
 
 /*
@@ -142,6 +147,8 @@ internal object TupleExample {
   (A, B, C) -> D == (A) -> (B) -> (C) -> D
 
   This method of expressing functions is called currying.
+
+  In a CLR language called F# all functions are curried by default.
   */
 // Example:
 // Most verbose version

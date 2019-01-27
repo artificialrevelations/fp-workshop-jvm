@@ -51,6 +51,10 @@ interface Function9<A, B, C, D, E, F, G, H, I, J> {
 
   We need special types like Pair or Triple. Some languages have support for
   tuples but in java we need to make them on our own.
+
+  In a JVM language called Ceylon each multi argument function is just a one
+  argument function that takes a tuple as an argument. This makes supporting
+  functions like Function2, Function3, ..., Function23 not necessary.
  */
 
 /*
@@ -143,6 +147,8 @@ class Exercise4 {
       Function3<A, B, C, D> == Function1<A, Function1<B, Function1<C, D>>>
 
       This method of expressing functions is called currying.
+
+      In a CLR language called F# all functions are curried by default.
       */
     // Example:
     // Most verbose version
