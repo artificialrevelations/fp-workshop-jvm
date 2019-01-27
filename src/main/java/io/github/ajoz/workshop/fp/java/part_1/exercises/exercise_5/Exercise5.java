@@ -1,5 +1,7 @@
 package io.github.ajoz.workshop.fp.java.part_1.exercises.exercise_5;
 
+import io.github.ajoz.workshop.fp.java.tools.Function1;
+
 /*
   -- Partial Application --
 
@@ -50,6 +52,95 @@ package io.github.ajoz.workshop.fp.java.part_1.exercises.exercise_5;
   final Function1<Foo, Bar> barToFoo = loadBarFromFoo.apply(someParticularLoader);
   doSomeMightyProcessing(barToFoo);
  */
-public class Exercise5 {
 
+@SuppressWarnings("unused")
+public class Exercise5 {
+    /*
+      Part 1:
+
+      Please create function `applyFirst` that takes a curried two argument
+      function and the first argument. This method should return a one argument
+      function as the result.
+     */
+    public static <A, B, C> Function1<B, C> applyFirst(final Function1<A, Function1<B, C>> function,
+                                                       final A value) {
+        throw new UnsupportedOperationException("Exercise 5 applyFirst is missing!");
+    }
+
+    /*
+      Part 2:
+
+      Please create function `applySecond` that takes a curried two argument
+      function and the second argument. This method should return a one argument
+      function as the result.
+     */
+    public static <A, B, C> Function1<A, C> applySecond(final Function1<A, Function1<B, C>> function,
+                                                        final B value) {
+        throw new UnsupportedOperationException("Exercise 5 applySecond is missing!");
+    }
+
+    /*
+      Part 3:
+
+
+     */
+    //TODO: example usage exercise
+}
+
+@SuppressWarnings("unused")
+interface Function2<A, B, C> {
+    C apply(A a, B b);
+
+    /*
+      Part 4:
+
+      Although we mentioned about partial application in the context of the
+      one argument function. It can be achieved for a two argument function.
+      Please add a method called `applyFirst` to the `Function2` interface.
+      This method should return a one argument function as a result.
+     */
+    default Function1<B, C> applyFirst(final A value) {
+        throw new UnsupportedOperationException("Exercise 5 applyFirst is missing!");
+    }
+
+    /*
+      Part 5:
+
+      Please add a method called `applySecond` to the `Function2` interface.
+      This method should return a one argument function as a result.
+
+      Questions:
+      - Can Function2 be composed in any meaningful way?
+     */
+    default Function1<A, C> applySecond(final B value) {
+        throw new UnsupportedOperationException("Exercise 5 applySecond is missing!");
+    }
+
+    /*
+      Part 6:
+
+      Please use the newly created functions `applyFirst` or `applySecond` to
+      compose Function2 with Function1.
+     */
+    static void main(final String[] args) {
+        // this function drops a certain amount of chars from a given string
+        final Function2<String, Integer, String> drop =
+                (string, amount) -> {
+                    final int length = string.length();
+                    if (amount < length)
+                        return string.substring(amount, length);
+                    else
+                        return "";
+                };
+
+        final Function1<String, Integer> length = String::length;
+
+        // We want to compose function `drop` with function `length`
+        // We always want to drop 6 first characters from a given string
+
+        final Function1<String, Integer> substrlen =
+                string -> {
+                    throw new UnsupportedOperationException("Exercise 5 substrlen is missing!");
+                };
+    }
 }

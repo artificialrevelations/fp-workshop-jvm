@@ -36,8 +36,16 @@ public interface Function2<A, B, C> {
         return (B b) -> this.apply(supplier.get(), b);
     }
 
+    default Function1<B, C> applyFirst(final A value) {
+        return (B b) -> this.apply(value, b);
+    }
+
     default Function1<A, C> applySecond(final Supplier<B> supplier) {
         return (A a) -> this.apply(a, supplier.get());
+    }
+
+    default Function1<A, C> applySecond(final B value) {
+        return (A a) -> this.apply(a, value);
     }
 
     default Function2<A, B, C> memoized() {
