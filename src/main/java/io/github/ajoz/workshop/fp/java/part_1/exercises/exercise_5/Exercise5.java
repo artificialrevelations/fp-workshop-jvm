@@ -82,9 +82,43 @@ public class Exercise5 {
     /*
       Part 3:
 
-
+      Applying the first argument in a curried function is trivial. A bit less
+      trivial in case of the second.
      */
-    //TODO: example usage exercise
+    public static void main(final String[] args) {
+        // Partially apply `addInts` function so you will get as a result
+        // a function that always adds 1 to whatever it gets as an argument.
+        final Function1<Integer, Function1<Integer, Integer>> addInts =
+                a -> b -> a + b;
+
+        final Function1<Integer, Integer> addOne =
+                value -> {
+                    throw new UnsupportedOperationException("Exercise 5 addOne is missing!");
+                };
+
+        System.out.println(addOne.apply(0));
+        System.out.println(addOne.apply(1));
+        System.out.println(addOne.apply(41));
+
+        // Partially apply `concatStrings` so you will get as a result a function
+        final Function1<String, Function1<String, String>> concatStrings =
+                first -> second -> first + second;
+
+        // that adds a "foo" prefix to any String argument
+        final Function1<String, String> fooPrefix =
+                value -> {
+                    throw new UnsupportedOperationException("Exercise 5 fooPrefix is missing!");
+                };
+
+        // that adds a "bar" suffix to any String argument
+        final Function1<String, String> barSuffix =
+                value -> {
+                    throw new UnsupportedOperationException("Exercise 5 fooPrefix is missing!");
+                };
+
+        System.out.println(fooPrefix.apply("rever with JUG Łódź!"));
+        System.out.println(barSuffix.apply("Unfortunately no sponsors for an open "));
+    }
 }
 
 @SuppressWarnings("unused")
