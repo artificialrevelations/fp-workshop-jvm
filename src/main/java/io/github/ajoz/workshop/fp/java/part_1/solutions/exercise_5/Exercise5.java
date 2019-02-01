@@ -69,7 +69,6 @@ interface Function2<A, B, C> {
 
         final Function1<String, Integer> length = String::length;
 
-
         final Function1<String, Integer> substrlen =
                 drop.applySecond(6).andThen(length);
     }

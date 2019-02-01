@@ -176,5 +176,7 @@ interface Function2<A, B, C> {
                 string -> {
                     throw new UnsupportedOperationException("Exercise 5 substrlen is missing!");
                 };
+
+        System.out.println(substrlen.apply("This exercise is very easy?"));
     }
 }

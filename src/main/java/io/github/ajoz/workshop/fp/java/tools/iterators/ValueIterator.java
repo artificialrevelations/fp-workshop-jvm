@@ -8,7 +8,7 @@ public final class ValueIterator<T> implements Iterator<T> {
     private int mCurrentIndex;
 
     @SafeVarargs
-    ValueIterator(final T... values) {
+    public ValueIterator(final T... values) {
         this.mValues = values;
     }
 
