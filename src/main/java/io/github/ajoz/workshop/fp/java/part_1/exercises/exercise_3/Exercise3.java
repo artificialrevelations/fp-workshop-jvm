@@ -123,6 +123,7 @@ interface Function1<A, B> {
     }
 }
 
+@SuppressWarnings("unused")
 class Example {
     /*
       Part 7:
