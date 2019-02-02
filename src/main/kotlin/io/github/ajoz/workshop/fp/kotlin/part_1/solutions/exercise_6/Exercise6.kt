@@ -1,19 +1,49 @@
-@file:Suppress("PackageName")
+@file:Suppress("PackageName", "UnusedMainParameter")
 
 package io.github.ajoz.workshop.fp.kotlin.part_1.solutions.exercise_6
 
-fun <A, B> composeConsumer(function: (A) -> B, consumer: (B) -> Unit): (A) -> Unit = { a: A ->
-    consumer(function(a))
+// Part 1:
+infix fun <A, B> ((B) -> Unit).compose(function: (A) -> B): (A) -> Unit = { a: A ->
+    this(function(a))
 }
 
-fun <A, B> composeSupplier(function: (A) -> B, supplier: () -> A): () -> B = {
-    function(supplier())
+// Part 2:
+internal object ComposingConsumer {
+    @JvmStatic
+    fun main(args: Array<String>) {
+        val printInt: (Int) -> Unit = { println(it) }
+        val strlen: (String) -> Int = { it.length }
+
+        val printStrLen = printInt.compose(strlen)
+
+        printStrLen("https://www.meetup.com/Java-User-Group-Lodz/")
+    }
 }
 
-fun <A, B, C> applyCurriedFirst(function: (A) -> (B) -> C, supplier: () -> A): (B) -> C = { b: B ->
-    function(supplier())(b)
+// Part 3:
+infix fun <A, B> (() -> A).andThen(function: (A) -> B): () -> B = {
+    function(this())
 }
 
-fun <A, B, C> applyCurriedSecond(function: (A) -> (B) -> C, supplier: () -> B): (A) -> C = { a: A ->
-    function(a)(supplier())
+// Part 4:
+internal object ComposingSupplier {
+    @JvmStatic
+    fun main(args: Array<String>) {
+        val getFacebook = { "https://www.facebook.com/groups/juglodz/" }
+        val strlen: (String) -> Int = { it.length }
+
+        val getFBLen = getFacebook.andThen(strlen)
+
+        println(getFBLen())
+    }
+}
+
+// Part 5:
+fun <A, B, C> ((A) -> (B) -> C).applyFirst(supplier: () -> A): (B) -> C = { b: B ->
+    this(supplier())(b)
+}
+
+// Part 6:
+fun <A, B, C> ((A) -> (B) -> C).applySecond(supplier: () -> B): (A) -> C = { a: A ->
+    this(a)(supplier())
 }

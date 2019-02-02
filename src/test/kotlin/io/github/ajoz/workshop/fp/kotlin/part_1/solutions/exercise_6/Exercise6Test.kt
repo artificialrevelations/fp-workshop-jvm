@@ -16,31 +16,30 @@ class Exercise6Test {
         val function: (String) -> Int = { Integer.valueOf(it) }
 
         // when:
-        val tested = composeConsumer(function, consumer)
+        val tested = consumer.compose(function)
 
         // then:
         tested("42")
     }
 
     @Test
-    fun `should compose function with supplier`() {
+    fun `should compose function with the supplier`() {
         // given:
         val supplier = { "42" }
 
         val function: (String) -> Int = { Integer.valueOf(it) }
 
         // when:
-        val tested = composeSupplier(function, supplier)
+        val tested = supplier.andThen(function)
 
         // then:
         assertEquals(42, tested())
     }
 
     @Test
-    fun `should apply first argument`() {
+    fun `should apply the first argument`() {
         // given:
         val supplier = { "foo" }
-
         val function: (String) -> (Int) -> String = { string ->
             { integer ->
                 String.format("%s : %d", string, integer)
@@ -48,9 +47,25 @@ class Exercise6Test {
         }
 
         // when:
-        val tested = applyCurriedFirst(function, supplier)
+        val tested = function.applyFirst(supplier)
 
         // then:
         assertEquals(function("foo")(42), tested(42))
+    }
+
+    @Test
+    fun `should apply the second argument`() {
+        val supplier = { 42 }
+        val function: (String) -> (Int) -> String = { string ->
+            { integer ->
+                String.format("%s : %d", string, integer)
+            }
+        }
+
+        // when:
+        val tested = function.applySecond(supplier)
+
+        // then:
+        assertEquals(function("foo")(42), tested("foo"))
     }
 }

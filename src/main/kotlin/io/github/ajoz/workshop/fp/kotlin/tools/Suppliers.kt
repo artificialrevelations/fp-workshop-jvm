@@ -14,6 +14,9 @@ fun <A> (() -> A).memoized(): () -> A {
     }
 }
 
+fun <A, B> (() -> A).andThen(function: (A) -> B): () -> B =
+        map(function)
+
 fun <A, B> (() -> A).map(function: (A) -> B): () -> B = {
     function(this())
 }
