@@ -93,7 +93,7 @@ class Exercise6 {
      */
     static <A, B> Consumer1<A> composeConsumer(final Function1<A, B> function,
                                                final Consumer1<B> consumer) {
-        throw new UnsupportedOperationException("Exercise6 composeConsumer is missing!");
+        throw new UnsupportedOperationException("Exercise 6 composeConsumer is missing!");
     }
 
     /*
@@ -125,14 +125,15 @@ class Exercise6 {
      */
     static <A, B> Supplier<B> composeSupplier(final Supplier<A> supplier,
                                               final Function1<A, B> function) {
-        throw new UnsupportedOperationException("Exercise6 composeSupplier is missing!");
+        throw new UnsupportedOperationException("Exercise 6 composeSupplier is missing!");
     }
 
     /*
       Part 4:
 
       Please use the newly created function `composeSupplier` to compose
-      - a supplier
+      - a supplier that returns a String
+      - a function that returns length of a String
      */
     static final class ComposingSupplier {
         public static void main(final String[] args) {
@@ -156,7 +157,7 @@ class Exercise6 {
      */
     static <A, B, C> Function1<B, C> applyFirst(final Function1<A, Function1<B, C>> function,
                                                 final Supplier<A> supplier) {
-        throw new UnsupportedOperationException("Exercise6 applyFirst is missing!");
+        throw new UnsupportedOperationException("Exercise 6 applyFirst is missing!");
     }
 
     /*
@@ -167,6 +168,6 @@ class Exercise6 {
      */
     static <A, B, C> Function1<A, C> applySecond(final Function1<A, Function1<B, C>> function,
                                                  final Supplier<B> supplier) {
-        throw new UnsupportedOperationException("Exercise6 applySecond is missing!");
+        throw new UnsupportedOperationException("Exercise 6 applySecond is missing!");
     }
 }
