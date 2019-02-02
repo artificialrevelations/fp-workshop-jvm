@@ -82,13 +82,6 @@ interface Supplier<A> {
   some impure effects like reading from a network resource or writing to a
   database. Such modeling of impure effects can be done better ofc.
  */
-
-/*
-  part 4:
-
-  Create a function for partially applying the first argument of a curried
-  function with the use of a Supplier.
- */
 @SuppressWarnings("unused")
 class Exercise6 {
     /*
