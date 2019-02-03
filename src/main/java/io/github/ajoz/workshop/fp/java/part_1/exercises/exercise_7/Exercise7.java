@@ -10,22 +10,50 @@ import java.util.Objects;
   -- Putting the knowledge to use --
 
   Functional programming is about building complexity from small parts. Let's
-  try to use the knowledge we gained so far to solve this simple example.
+  use the knowledge we gained so far to solve the task below.
 
-  Our apps domain is responsible for handling Customers and Orders. We
-  already have a function implemented for retrieving Orders for a given Customer
-  from a given Database. This function has a lot of domain logic and it is not
-  feasible to refactor it now. We will have to use it while preparing our logic.
+  You are working for a large company called EyeKeyA that is delivering ultra
+  high quality furniture to the customers all over the world. Just as all other
+  respected furniture companies, it has an IT department that is maintaining
+  and improving company's software.
 
-  One of the other teams we are working with prepared a code that expects a
-  function from a Customer to hash (Long), but they would like us to provide
-  the database for it.
+  You are on the team that maintains the Cutomers and Orders related modules.
+  It's a very tough time as several teams including yours are working on a new
+  exciting feature. You are tasked with creating a function that takes a customer
+  information as an argument and returns a hash of the order that customer made.
 
-  Our task is to write such function. We have all the necessary tools.
-
-  Please pick and use methods/functions from previous exercises to finish this
-  task.
+  The module you and your team are working on already has a lot of useful
+  functions:
+  - to get the Order for a particular Customer
+  - to get the Database from which Orders can be retrieved
+  - to get the Metadata of the Order
+  - to get the Hash from the given Metadata
  */
+@SuppressWarnings({"unused", "WeakerAccess"})
+class Exercise7 {
+    // Please do not change this function!
+    private static final Function2<Customer, Database, Order> getOrderForCustomer =
+            (customer, database) -> database.findOrder(customer);
+
+    // Please do not change this function!
+    private static final Supplier<Database> getProductionDatabase =
+            Database::new;
+
+    // Please do not change this function!
+    private static final Function1<Order, Metadata> getOrderMetadata =
+            order -> order.metadata;
+
+    // Please do not change this function!
+    private static final Function1<Metadata, Hash> getHashFromMetadata =
+            metadata -> new Hash((long) metadata.info.length());
+
+    /*
+       Please solve this exercise using any of the tools we've built so far.
+     */
+    public static Function1<Customer, Hash> getCustomerOrderHash() {
+        throw new UnsupportedOperationException("Exercise 7 getCustomerOrderHash is missing!");
+    }
+}
 
 // this object represents data related to the company customers
 final class Customer {
@@ -38,28 +66,30 @@ final class Customer {
 }
 
 // this object represents data related to the order that customers make
+@SuppressWarnings("WeakerAccess")
 final class Order {
-    final Title title;
+    final Metadata metadata;
     final Timestamp date;
     // other fields like: amount, currency, tax, etc.
 
-    Order(final Title title,
+    Order(final Metadata metadata,
           final Timestamp date) {
-        this.title = title;
+        this.metadata = metadata;
         this.date = date;
     }
 }
 
 // this object is here to emphasise not using Strings for everything
-final class Title {
-    final String title;
+final class Metadata {
+    final String info;
 
-    Title(final String title) {
-        this.title = title;
+    Metadata(final String info) {
+        this.info = info;
     }
 }
 
-// this object is for the similar reason as the Title :>
+// this object is for the similar reason as the Metadata :>
+@SuppressWarnings("WeakerAccess")
 final class Timestamp {
     final Long unixTimestamp;
 
@@ -69,6 +99,7 @@ final class Timestamp {
 }
 
 // this object is for the similar reason as the Timestamp :>
+@SuppressWarnings("WeakerAccess")
 final class Hash {
     final Long value;
 
@@ -99,31 +130,8 @@ final class Database {
     // given Customer
     Order findOrder(final Customer customer) {
         return new Order(
-                new Title(String.format("FP Workshop - %s", customer.name)),
+                new Metadata(String.format("FP Workshop - %s", customer.name)),
                 new Timestamp(42L)
         );
-    }
-}
-
-@SuppressWarnings("unused")
-class Exercise7 {
-    // Please do not change this function!
-    private static final Function2<Customer, Database, Order> getOrderForCustomer =
-            (customer, database) -> database.findOrder(customer);
-
-    // Please do not change this function!
-    private static final Supplier<Database> getProductionDatabase =
-            Database::new;
-
-    // Please do not change this function!
-    private static final Function1<Order, Title> getOrderTitle =
-            order -> order.title;
-
-    // Please do not change this function!
-    private static final Function1<Title, Hash> getTitleHash =
-            value -> new Hash((long) value.title.length());
-
-    public static Function1<Customer, Hash> getCustomerToHash() {
-        throw new UnsupportedOperationException("Exercise 6 getCustomerToHash is missing!");
     }
 }

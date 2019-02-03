@@ -23,7 +23,7 @@ public class Exercise7Test {
 
         // when:
         final Function1<Customer, Hash> tested =
-                Exercise7.getCustomerToHash();
+                Exercise7.getCustomerOrderHash();
 
         // then:
         for (final Customer customer : customers) {
