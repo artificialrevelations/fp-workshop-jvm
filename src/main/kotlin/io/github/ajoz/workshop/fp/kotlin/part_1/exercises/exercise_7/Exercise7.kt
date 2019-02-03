@@ -1,4 +1,4 @@
-@file:Suppress("PackageName")
+@file:Suppress("PackageName", "unused")
 
 package io.github.ajoz.workshop.fp.kotlin.part_1.exercises.exercise_7
 
@@ -6,30 +6,56 @@ package io.github.ajoz.workshop.fp.kotlin.part_1.exercises.exercise_7
   -- Putting the knowledge to use --
 
   Functional programming is about building complexity from small parts. Let's
-  try to use the knowledge we gained so far to solve this simple example.
+  use the knowledge we gained so far to solve the task below.
 
-  Our apps domain is responsible for handling Customers and Orders. We
-  already have a function implemented for retrieving Orders for a given Customer
-  from a given Database. This function has a lot of domain logic and it is not
-  feasible to refactor it now. We will have to use it while preparing our logic.
+  You are working for a large company called EyeKeyA that is delivering ultra
+  high quality furniture to the customers all over the world. Just as all other
+  respected furniture companies, it has an IT department that is maintaining
+  and improving company's software.
 
-  One of the other teams we are working with prepared a code that expects a
-  function from a Customer to hash (Long), but they would like us to provide
-  the database for it.
+  You are on the team that maintains the Cutomers and Orders related modules.
+  It's a very tough time as several teams including yours are working on a new
+  exciting feature. You are tasked with creating a function that takes a customer
+  information as an argument and returns a hash of the order that customer made.
 
-  Our task is to write such function. We have all the necessary tools.
-
-  Please pick and use methods/functions from previous exercises to finish this
-  task.
+  The module you and your team are working on already has a lot of useful
+  functions:
+  - to get the Order for a particular Customer
+  - to get the Database from which Orders can be retrieved
+  - to get the Metadata of the Order
+  - to get the Hash from the given Metadata
  */
+
+object Exercise7 {
+    // Please do not change this function!
+    private val getOrderForCustomer: (Customer, Database) -> Order =
+            { customer, database ->
+                database.findOrder(customer)
+            }
+
+    // Please do not change this function!
+    private val getProductionDatabase = { Database() }
+
+    // Please do not change this function!
+    private val getOrderMetadata: (Order) -> Metadata = { it.metadata }
+
+    // Please do not change this function!
+    private val getTitleHash: (Metadata) -> Hash =
+            {
+                Hash(it.info.length.toLong())
+            }
+
+    fun getCustomerOrderHash(): (Customer) -> Hash =
+            TODO("Exercise 7 getCustomerOrderHash is missing!")
+}
 
 // other fields like: surname, address, etc.
 data class Customer(val name: String)
 
 // other fields like: amount, currency, tax, etc.
-data class Order(val title: Title, val date: Timestamp)
+data class Order(val metadata: Metadata, val date: Timestamp)
 
-data class Title(val title: String)
+data class Metadata(val info: String)
 
 data class Timestamp(val unixTimestamp: Long)
 
@@ -40,34 +66,8 @@ internal class Database {
     // given Customer
     fun findOrder(customer: Customer): Order {
         return Order(
-                Title(String.format("FP Workshop - %s", customer.name)),
+                Metadata(String.format("FP Workshop - %s", customer.name)),
                 Timestamp(42L)
         )
-    }
-}
-
-object Exercise6 {
-    // Please do not change this function!
-    private val getOrderForCustomer: (Customer, Database) -> Order =
-            { customer, database ->
-                database.findOrder(customer)
-            }
-
-    // Please do not change this function!
-    private val getProductionDatabase =
-            { Database() }
-
-    // Please do not change this function!
-    private val getOrderTitle: (Order) -> Title =
-            { it.title }
-
-    // Please do not change this function!
-    private val getTitleHash: (Title) -> Hash =
-            {
-                Hash(it.title.length.toLong())
-            }
-
-    fun customerToHash(): (Customer) -> Hash {
-        TODO("Exercise 6 customerToHash is missing!")
     }
 }
