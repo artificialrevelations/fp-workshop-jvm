@@ -56,6 +56,11 @@ captures/
 # Netbeans IDE
 /.nb-gradle/
 
+# Eclipse IDE
+.classpath
+.project
+.settings/
+
 # Keystore files
 *.jks
 
