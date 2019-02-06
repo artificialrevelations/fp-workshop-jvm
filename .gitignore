@@ -61,6 +61,9 @@ captures/
 .project
 .settings/
 
+# VSCode
+.vscode/
+
 # Keystore files
 *.jks
 
