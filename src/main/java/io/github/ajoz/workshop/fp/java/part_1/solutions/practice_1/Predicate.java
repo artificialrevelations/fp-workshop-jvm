@@ -6,22 +6,22 @@ import io.github.ajoz.workshop.fp.java.tools.Function1;
 public interface Predicate<A> {
     boolean test(final A value);
 
-    // Part 2:
+    // Part 1:
     default Predicate<A> and(final Predicate<A> other) {
         return value -> this.test(value) && other.test(value);
     }
 
-    // Part3:
+    // Part 2:
     default Predicate<A> or(final Predicate<A> other) {
         return value -> this.test(value) || other.test(value);
     }
 
-    // Part 4:
+    // Part 3:
     default Predicate<A> not() {
         return value -> !this.test(value);
     }
 
-    // Part 5:
+    // Part 4:
     default Predicate<A> xor(final Predicate<A> other) {
         // could be: return (this.or(other)).and((this.and(other).not()));
         // Less object creation the way below.
@@ -32,7 +32,7 @@ public interface Predicate<A> {
         };
     }
 
-    // Part 6:
+    // Part 5:
     default Function1<A, Boolean> asFunction1() {
         return this::test;
     }

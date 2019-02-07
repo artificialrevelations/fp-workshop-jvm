@@ -5,14 +5,17 @@ import io.github.ajoz.workshop.fp.java.tools.Function1;
 /*
   -- Practice: Other type of functions --
 
-  Part 1:
+  Java has access to both objects and primitive types. Unfortunately we cannot
+  declare a Function1<A, boolean>. Java does not allow primitives used with
+  generics if JEP218 comes to fruition we might get them.
 
-  Java has access to primitive types, if we would like to have a function that
-  returns a boolean then we need a special type for it as Function1<A, boolean>
-  is not possible with Java generics.
+  Until then we need a special type to declare such a function, Java 8 introduced
+  it under the name of a "Predicate". It is a generic type from a generic type
+  A to a boolean.
 
-  Type from A to boolean is called a Predicate, please look at the definition
-  below.
+  Each Predicate returns a boolean this means that comparing to other functions
+  we have a lot of different opportunities to "compose" them in some meaningful
+  way.
  */
 @SuppressWarnings("unused")
 @FunctionalInterface
@@ -20,7 +23,7 @@ public interface Predicate<A> {
     boolean test(final A value);
 
     /*
-      Part 2:
+      Part 1:
 
       Create a function `and` that composes two Predicates and returns another
       predicate. The resulting predicate should be based upon the return value
@@ -32,7 +35,7 @@ public interface Predicate<A> {
     }
 
     /*
-      Part 3:
+      Part 2:
 
       Create a function `or` that composes two Predicates and returns another
       predicate. The resulting predicate should be based upon the return value
@@ -43,7 +46,7 @@ public interface Predicate<A> {
     }
 
     /*
-      Part 4:
+      Part 3:
 
       Create a function `not` that returns a Predicate that is a negation.
      */
@@ -52,7 +55,7 @@ public interface Predicate<A> {
     }
 
     /*
-      Part 5:
+      Part 4:
 
       Create a function `xor` (exclusive or), try to implement it only with the
       use of `and`, `or`, `not`.
@@ -62,7 +65,7 @@ public interface Predicate<A> {
     }
 
     /*
-      Part 6:
+      Part 5:
 
       Create a function `asFunction1` that converts the Predicate into a Function1.
      */
