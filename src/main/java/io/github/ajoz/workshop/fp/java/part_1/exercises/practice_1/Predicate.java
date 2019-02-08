@@ -73,3 +73,54 @@ public interface Predicate<A> {
         throw new UnsupportedOperationException("Practice Predicate.asFunction1 is missing!");
     }
 }
+
+@SuppressWarnings({"Convert2MethodRef", "unused"})
+class UsingPredicates {
+    // Please read the predicates below and then follow with exercises:
+    private static final Predicate<String> isNull = str -> str == null;
+    private static final Predicate<String> isEmpty = str -> str.isEmpty();
+    private static final Predicate<String> isBlank = str -> str.trim().isEmpty();
+
+    /*
+      Part 6:
+
+      Please create a Predicate<String> called `isNullOrEmpty` that returns true
+      if the given String is null or is empty (has no characters). Please use
+      the existing predicates to solve this.
+
+      Hints:
+      - we can build predicates with and, or, xor
+     */
+    static final Predicate<String> isNullOrEmpty = str -> {
+        throw new UnsupportedOperationException("Practice isNullOrEmpty is missing!");
+    };
+
+    /*
+      Part 7:
+
+      Please create a Predicate<String> called `isNullOrBlank` that returns true
+      if the given String is null or is blank (has only whitespace characters).
+      Please use the existing predicates to solve this.
+
+      Hints:
+      - we can build predicates with and, or, xor
+     */
+    static final Predicate<String> isNullOrBlank = str -> {
+        throw new UnsupportedOperationException("Practice isNullOrBlank is missing!");
+    };
+
+    /*
+      Part 8:
+
+      Please create a Predicate<Integer> called `isInRange` that returns true if
+      the given Integer is between 0 and 6 or equal to 42. Please use the predicates
+      defined below to solve this.
+     */
+    private static final Predicate<Integer> isLargerThen0 = i -> i > 0;
+    private static final Predicate<Integer> isLowerThen6 = i -> i < 6;
+    private static final Predicate<Integer> isEqualTo42 = i -> i == 42;
+
+    static final Predicate<Integer> isInRange = i -> {
+        throw new UnsupportedOperationException("Practice isInRange is missing!");
+    };
+}

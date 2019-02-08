@@ -37,3 +37,24 @@ public interface Predicate<A> {
         return this::test;
     }
 }
+
+@SuppressWarnings({"Convert2MethodRef", "unused"})
+class UsingPredicates {
+    private static final Predicate<String> isNull = str -> str == null;
+    private static final Predicate<String> isEmpty = str -> str.isEmpty();
+    private static final Predicate<String> isBlank = str -> str.trim().isEmpty();
+
+    // Part 6:
+    static final Predicate<String> isNullOrEmpty = isNull.or(isEmpty);
+
+    // Part 7:
+    static final Predicate<String> isNullOrBlank = isNull.or(isBlank);
+
+    // Part 8:
+    private static final Predicate<Integer> isLargerThen0 = i -> i > 0;
+    private static final Predicate<Integer> isLowerThen6 = i -> i < 6;
+    private static final Predicate<Integer> isEqualTo42 = i -> i == 42;
+
+    static final Predicate<Integer> isInRange =
+            isLargerThen0.and(isLowerThen6).or(isEqualTo42);
+}

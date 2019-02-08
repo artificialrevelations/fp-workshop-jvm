@@ -11,7 +11,7 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(Enclosed.class)
 public class PredicateTest {
-    public static class Part2 {
+    public static class Part1 {
         @Test
         public void True_and_False_equals_False() {
             // given:
@@ -57,7 +57,7 @@ public class PredicateTest {
         }
     }
 
-    public static class Part3 {
+    public static class Part2 {
         @Test
         public void True_or_True_equals_True() {
             // given:
@@ -103,7 +103,7 @@ public class PredicateTest {
         }
     }
 
-    public static class Part4 {
+    public static class Part3 {
         @Test
         public void not_True_equals_False() {
             // given:
@@ -145,7 +145,7 @@ public class PredicateTest {
         }
     }
 
-    public static class Part5 {
+    public static class Part4 {
         @Test
         public void True_xor_True_equals_False() {
             // given:
@@ -191,7 +191,7 @@ public class PredicateTest {
         }
     }
 
-    public static class Part6 {
+    public static class Part5 {
         @Test
         public void should_return_the_same_result_as_a_function() {
             // given:
@@ -203,6 +203,94 @@ public class PredicateTest {
 
             // then:
             assertEquals(predicate.test(value), tested.apply(value));
+        }
+    }
+
+    public static class Part6 {
+        @Test
+        public void True_if_string_is_null() {
+            // given:
+            final String value = null;
+
+            // when:
+            final boolean actual = UsingPredicates.isNullOrEmpty.test(value);
+
+            // then:
+            assertTrue(actual);
+        }
+
+        @Test
+        public void False_if_string_is_not_empty() {
+            // given:
+            final String value = "JUG Lodz";
+
+            // when:
+            final boolean actual = UsingPredicates.isNullOrEmpty.test(value);
+
+            // then:
+            assertFalse(actual);
+        }
+
+        @Test
+        public void True_if_string_is_empty() {
+            // given:
+            final String value = "";
+
+            // when:
+            final boolean actual = UsingPredicates.isNullOrEmpty.test(value);
+
+            // then:
+            assertTrue(actual);
+        }
+    }
+
+    public static class Part7 {
+        @Test
+        public void True_if_string_is_null() {
+            // given:
+            final String value = null;
+
+            // when:
+            final boolean actual = UsingPredicates.isNullOrBlank.test(value);
+
+            // then:
+            assertTrue(actual);
+        }
+
+        @Test
+        public void False_if_string_is_not_empty() {
+            // given:
+            final String value = "JUG Lodz";
+
+            // when:
+            final boolean actual = UsingPredicates.isNullOrBlank.test(value);
+
+            // then:
+            assertFalse(actual);
+        }
+
+        @Test
+        public void True_if_string_is_empty() {
+            // given:
+            final String value = "";
+
+            // when:
+            final boolean actual = UsingPredicates.isNullOrBlank.test(value);
+
+            // then:
+            assertTrue(actual);
+        }
+
+        @Test
+        public void True_if_string_has_only_whitespaces() {
+            // given:
+            final String value = "      ";
+
+            // when:
+            final boolean actual = UsingPredicates.isNullOrBlank.test(value);
+
+            // then:
+            assertTrue(actual);
         }
     }
 }
