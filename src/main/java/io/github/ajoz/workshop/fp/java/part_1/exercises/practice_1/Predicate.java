@@ -112,7 +112,7 @@ class UsingPredicates {
     /*
       Part 8:
 
-      Please create a Predicate<Integer> called `isInRange` that returns true if
+      Please create a Predicate<Integer> called `isAllowed` that returns true if
       the given Integer is between 0 and 6 or equal to 42. Please use the predicates
       defined below to solve this.
      */
@@ -120,7 +120,7 @@ class UsingPredicates {
     private static final Predicate<Integer> isLowerThen6 = i -> i < 6;
     private static final Predicate<Integer> isEqualTo42 = i -> i == 42;
 
-    static final Predicate<Integer> isInRange = i -> {
-        throw new UnsupportedOperationException("Practice isInRange is missing!");
+    static final Predicate<Integer> isAllowed = i -> {
+        throw new UnsupportedOperationException("Practice isAllowed is missing!");
     };
 }

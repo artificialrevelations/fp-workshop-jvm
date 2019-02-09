@@ -55,6 +55,6 @@ class UsingPredicates {
     private static final Predicate<Integer> isLowerThen6 = i -> i < 6;
     private static final Predicate<Integer> isEqualTo42 = i -> i == 42;
 
-    static final Predicate<Integer> isInRange =
+    static final Predicate<Integer> isAllowed =
             isLargerThen0.and(isLowerThen6).or(isEqualTo42);
 }
