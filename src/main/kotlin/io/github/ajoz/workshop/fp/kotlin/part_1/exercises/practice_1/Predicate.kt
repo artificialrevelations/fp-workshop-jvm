@@ -48,3 +48,18 @@ fun <A> ((A) -> Boolean).not(): (A) -> Boolean =
  */
 infix fun <A> ((A) -> Boolean).xor(other: (A) -> Boolean): (A) -> Boolean =
         TODO("Practice Predicate.xor is missing!")
+
+
+/*
+  Part 5:
+
+  Please create a predicate called `isAllowed` that returns true if the given
+  Int is between 0 to 6 or is equal to 42. Please use predicates defined below
+  to solve this exercise.
+ */
+val isLargerThen0: (Int) -> Boolean = { it > 0 }
+val isLowerThen6: (Int) -> Boolean = { it < 6 }
+val isEqualTo42: (Int) -> Boolean = { it == 42 }
+
+val isAllowed: (Int) -> Boolean =
+        TODO("Practice isAllowed is missing!")

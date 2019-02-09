@@ -24,3 +24,11 @@ fun <A> ((A) -> Boolean).xor(other: (A) -> Boolean): (A) -> Boolean {
         (p || q) && !(p && q)
     }
 }
+
+// Part 5:
+val isLargerThen0: (Int) -> Boolean = { it > 0 }
+val isLowerThen6: (Int) -> Boolean = { it < 6 }
+val isEqualTo42: (Int) -> Boolean = { it == 42 }
+
+val isAllowed: (Int) -> Boolean =
+        (isLargerThen0 and isLowerThen6) or isEqualTo42
