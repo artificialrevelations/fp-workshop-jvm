@@ -31,7 +31,7 @@ public interface Predicate<A> {
      */
     @SuppressWarnings("unused")
     default Predicate<A> and(final Predicate<A> other) {
-        throw new UnsupportedOperationException("Practice Predicate.and is missing!");
+        throw new UnsupportedOperationException("Practice 1 Predicate.and is missing!");
     }
 
     /*
@@ -42,7 +42,7 @@ public interface Predicate<A> {
       of both predicates used.
      */
     default Predicate<A> or(final Predicate<A> other) {
-        throw new UnsupportedOperationException("Practice Predicate.or is missing!");
+        throw new UnsupportedOperationException("Practice 1 Predicate.or is missing!");
     }
 
     /*
@@ -51,7 +51,7 @@ public interface Predicate<A> {
       Create a function `not` that returns a Predicate that is a negation.
      */
     default Predicate<A> not() {
-        throw new UnsupportedOperationException("Practice Predicate.not is missing!");
+        throw new UnsupportedOperationException("Practice 1 Predicate.not is missing!");
     }
 
     /*
@@ -61,7 +61,7 @@ public interface Predicate<A> {
       use of `and`, `or`, `not`.
      */
     default Predicate<A> xor(final Predicate<A> other) {
-        throw new UnsupportedOperationException("Practice Predicate.xor is missing!");
+        throw new UnsupportedOperationException("Practice 1 Predicate.xor is missing!");
     }
 
     /*
@@ -70,7 +70,7 @@ public interface Predicate<A> {
       Create a function `asFunction1` that converts the Predicate into a Function1.
      */
     default Function1<A, Boolean> asFunction1() {
-        throw new UnsupportedOperationException("Practice Predicate.asFunction1 is missing!");
+        throw new UnsupportedOperationException("Practice 1 Predicate.asFunction1 is missing!");
     }
 }
 
@@ -92,7 +92,7 @@ class UsingPredicates {
       - we can build predicates with and, or, xor
      */
     static final Predicate<String> isNullOrEmpty = str -> {
-        throw new UnsupportedOperationException("Practice isNullOrEmpty is missing!");
+        throw new UnsupportedOperationException("Practice 1 isNullOrEmpty is missing!");
     };
 
     /*
@@ -106,7 +106,7 @@ class UsingPredicates {
       - we can build predicates with and, or, xor
      */
     static final Predicate<String> isNullOrBlank = str -> {
-        throw new UnsupportedOperationException("Practice isNullOrBlank is missing!");
+        throw new UnsupportedOperationException("Practice 1 isNullOrBlank is missing!");
     };
 
     /*
@@ -121,6 +121,6 @@ class UsingPredicates {
     private static final Predicate<Integer> isEqualTo42 = i -> i == 42;
 
     static final Predicate<Integer> isAllowed = i -> {
-        throw new UnsupportedOperationException("Practice isAllowed is missing!");
+        throw new UnsupportedOperationException("Practice 1 isAllowed is missing!");
     };
 }
