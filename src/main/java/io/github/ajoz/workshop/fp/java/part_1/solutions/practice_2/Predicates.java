@@ -6,7 +6,7 @@ import static io.github.ajoz.workshop.fp.java.part_1.solutions.practice_2.IntPre
 import static io.github.ajoz.workshop.fp.java.part_1.solutions.practice_2.IntPredicates.isLowerThen;
 import static io.github.ajoz.workshop.fp.java.part_1.solutions.practice_2.Predicates.isEqualTo;
 
-@SuppressWarnings({"Convert2MethodRef", "unused"})
+@SuppressWarnings({"Convert2MethodRef", "unused", "SameParameterValue"})
 class Predicates {
     // Part 1:
     static <A, B> Predicate<B> instanceOf(final Class<A> type) {
