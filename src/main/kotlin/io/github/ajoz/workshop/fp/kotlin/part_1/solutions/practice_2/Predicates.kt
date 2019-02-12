@@ -4,10 +4,14 @@ package io.github.ajoz.workshop.fp.kotlin.part_1.solutions.practice_2
 
 import io.github.ajoz.workshop.fp.kotlin.tools.and
 import io.github.ajoz.workshop.fp.kotlin.tools.or
+import kotlin.reflect.KClass
 
 // Part 1:
-fun <A : Any, B : Any> instanceOf(type: Class<out A>): (B) -> Boolean =
-        { b: B -> type.isAssignableFrom(b::class.java) }
+fun <A : Any, B : Any> instanceOf(type: KClass<A>): (B) -> Boolean =
+        { b: B -> type.isInstance(b) }
+
+// Part 1 bonus:
+inline fun <A, reified B> instanceOf(): (A) -> Boolean = { it is B }
 
 // Part 2:
 fun <A> alwaysTrue(): (A) -> Boolean = { true }

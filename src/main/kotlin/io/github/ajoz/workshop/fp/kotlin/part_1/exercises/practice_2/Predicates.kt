@@ -2,6 +2,8 @@
 
 package io.github.ajoz.workshop.fp.kotlin.part_1.exercises.practice_2
 
+import kotlin.reflect.KClass
+
 /*
   -- Fun with Predicates vol. 1 --
 
@@ -18,7 +20,7 @@ package io.github.ajoz.workshop.fp.kotlin.part_1.exercises.practice_2
   to check if the value is of the given type.
 
   Hints:
-  - Use class.isAssignableFrom method
+  - Use KClass.isInstance method
 
   Note:
   - the generic type A and B are both marked as derived from Any, because
@@ -26,8 +28,14 @@ package io.github.ajoz.workshop.fp.kotlin.part_1.exercises.practice_2
     Using normal generic that extends Any? would cause a compilation error
     when passing it to isAssignableFrom e.g. it::class.java
  */
-fun <A : Any, B : Any> instanceOf(type: Class<A>): (B) -> Boolean =
+fun <A, B: Any> instanceOf(type: KClass<B>): (A) -> Boolean =
         TODO("Practice 2 instanceOf is missing!")
+
+// BONUS: this could be implemented with reified generics
+
+inline fun <A, reified B> instanceOf(): (A) -> Boolean = {
+    TODO("Practice 2 reified instanceOf is missing!")
+}
 
 /*
   Part 2:

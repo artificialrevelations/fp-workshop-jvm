@@ -13,8 +13,7 @@ class PredicatesTest {
         @Test
         fun `is not an instance of`() {
             // given:
-            val tested: (String) -> Boolean =
-                    instanceOf(Int::class.java)
+            val tested: (String) -> Boolean = instanceOf(Int::class)
 
             // when:
             val actual = tested("JUG Lodz!")
@@ -26,8 +25,33 @@ class PredicatesTest {
         @Test
         fun `is an instance of`() {
             // given:
+            val tested: (Int) -> Boolean = instanceOf(Int::class)
+
+            // when:
+            val actual = tested(42)
+
+            // then:
+            assertTrue(actual)
+        }
+
+        @Test
+        fun `is not an instance of (reified)`() {
+            // given:
+            val tested: (String) -> Boolean =
+                    instanceOf<String, Int>()
+
+            // when:
+            val actual = tested("JUG Lodz!")
+
+            // then:
+            assertFalse(actual)
+        }
+
+        @Test
+        fun `is an instance of (reified)`() {
+            // given:
             val tested: (Int) -> Boolean =
-                    instanceOf(Int::class.java)
+                    instanceOf<Int, Int>()
 
             // when:
             val actual = tested(42)
