@@ -7,7 +7,7 @@ import io.github.ajoz.workshop.fp.kotlin.tools.or
 
 // Part 1:
 fun <A : Any, B : Any> instanceOf(type: Class<out A>): (B) -> Boolean =
-        { type.isAssignableFrom(it::class.java) }
+        { b: B -> type.isAssignableFrom(b::class.java) }
 
 // Part 2:
 fun <A> alwaysTrue(): (A) -> Boolean = { true }

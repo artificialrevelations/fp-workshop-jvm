@@ -19,6 +19,12 @@ package io.github.ajoz.workshop.fp.kotlin.part_1.exercises.practice_2
 
   Hints:
   - Use class.isAssignableFrom method
+
+  Note:
+  - the generic type A and B are both marked as derived from Any, because
+    by default Kotlin's generics have upper bound implicitly set to Any?
+    Using normal generic that extends Any? would cause a compilation error
+    when passing it to isAssignableFrom e.g. it::class.java
  */
 fun <A : Any, B : Any> instanceOf(type: Class<A>): (B) -> Boolean =
         TODO("Practice 2 instanceOf is missing!")
