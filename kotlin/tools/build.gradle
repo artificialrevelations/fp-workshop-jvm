@@ -1,9 +1,9 @@
 plugins {
-    id "org.jetbrains.tools.jvm"
+    id "org.jetbrains.kotlin.jvm"
 }
 
 dependencies {
-    implementation "org.jetbrains.tools:tools-stdlib"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
 
     testImplementation 'junit:junit:4.12'
 }
