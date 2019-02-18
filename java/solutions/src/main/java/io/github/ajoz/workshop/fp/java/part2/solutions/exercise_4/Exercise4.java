@@ -1,7 +1,7 @@
 package io.github.ajoz.workshop.fp.java.part2.solutions.exercise_4;
 
+import io.github.ajoz.workshop.fp.java.tools.Pair;
 import io.github.ajoz.workshop.fp.java.tools.collections.Lists;
-import kotlin.Pair;
 
 import java.util.Collections;
 import java.util.List;

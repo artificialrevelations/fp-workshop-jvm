@@ -1,7 +1,5 @@
 package io.github.ajoz.workshop.fp.java.tools;
 
-import kotlin.Pair;
-
 import static io.github.ajoz.workshop.fp.java.tools.Function1.memoize;
 
 @FunctionalInterface

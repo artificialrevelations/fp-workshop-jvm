@@ -1,6 +1,6 @@
 package io.github.ajoz.workshop.fp.java.part4.solutions.exercise_3;
 
-import kotlin.Pair;
+import io.github.ajoz.workshop.fp.java.tools.Pair;
 
 import java.util.concurrent.ConcurrentHashMap;
 
