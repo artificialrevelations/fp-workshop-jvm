@@ -1,0 +1,13 @@
+plugins {
+    id "org.jetbrains.tools.jvm"
+}
+
+dependencies {
+    implementation "org.jetbrains.tools:tools-stdlib"
+
+    testImplementation 'junit:junit:4.12'
+}
+
+repositories {
+    jcenter()
+}

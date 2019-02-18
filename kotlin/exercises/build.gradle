@@ -1,0 +1,15 @@
+plugins {
+    id "org.jetbrains.tools.jvm"
+}
+
+dependencies {
+    compile project(':tools')
+    implementation "org.jetbrains.tools:tools-stdlib"
+//    implementation "org.jetbrains.tools:tools-reflect"
+
+    testImplementation 'junit:junit:4.12'
+}
+
+repositories {
+    jcenter()
+}

@@ -1,2 +1,4 @@
-
+include 'exercises'
+include 'solutions'
+include 'tools'
 rootProject.name = 'fp-workshop-java'
