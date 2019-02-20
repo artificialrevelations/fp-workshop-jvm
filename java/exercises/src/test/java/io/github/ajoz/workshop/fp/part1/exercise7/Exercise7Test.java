@@ -14,7 +14,7 @@ public class Exercise7Test {
         // given:
         final List<Customer> customers =
                 Arrays.asList(
-                        new Customer("JUG Łódź!"),
+                        new Customer("JUG Lodz!"),
                         new Customer("http://www.juglodz.pl/"),
                         new Customer("https://www.facebook.com/groups/juglodz/"),
                         new Customer("https://groups.google.com/d/forum/lodz-jug"),

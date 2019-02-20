@@ -116,7 +116,7 @@ public class Exercise5 {
                     throw new UnsupportedOperationException("Exercise 5 fooPrefix is missing!");
                 };
 
-        System.out.println(fooPrefix.apply("rever with JUG Łódź!"));
+        System.out.println(fooPrefix.apply("rever with JUG Lodz!"));
         System.out.println(barSuffix.apply("Unfortunately no sponsors for an open "));
     }
 }
