@@ -1,0 +1,12 @@
+plugins {
+    id 'java-library'
+}
+
+dependencies {
+    compile project(':tools')
+    testImplementation 'junit:junit:4.12'
+}
+
+repositories {
+    jcenter()
+}
