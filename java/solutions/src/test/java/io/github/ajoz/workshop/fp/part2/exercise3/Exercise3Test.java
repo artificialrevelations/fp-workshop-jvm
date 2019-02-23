@@ -5,7 +5,9 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static io.github.ajoz.workshop.fp.part2.exercise3.Exercise3.*;
+import static io.github.ajoz.workshop.fp.part2.exercise3.Exercise3.foldLeft;
+import static io.github.ajoz.workshop.fp.part2.exercise3.Exercise3.foldRight;
+import static io.github.ajoz.workshop.fp.part2.exercise3.Exercise3.foldRight2;
 import static org.junit.Assert.assertEquals;
 
 public class Exercise3Test {

@@ -5,6 +5,7 @@ plugins {
 dependencies {
     compile project(':tools')
     testImplementation 'junit:junit:4.12'
+//    testImplementation 'com.github.foobaz42:teoria:master-SNAPSHOT'
 }
 
 repositories {

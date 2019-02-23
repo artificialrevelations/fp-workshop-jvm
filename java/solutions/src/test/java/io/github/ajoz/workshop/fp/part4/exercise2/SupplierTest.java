@@ -1,5 +1,6 @@
 package io.github.ajoz.workshop.fp.part4.exercise2;
 
+import io.github.ajoz.workshop.fp.tools.Supplier;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
