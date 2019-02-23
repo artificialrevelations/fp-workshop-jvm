@@ -3,13 +3,10 @@ plugins {
 }
 
 dependencies {
-    compile project(':tools')
+    implementation project(':tools')
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
     implementation "org.jetbrains.kotlin:kotlin-reflect"
 
     testImplementation 'junit:junit:4.12'
-}
-
-repositories {
-    jcenter()
+    testImplementation 'com.github.foobaz42:teoria:master-SNAPSHOT'
 }
