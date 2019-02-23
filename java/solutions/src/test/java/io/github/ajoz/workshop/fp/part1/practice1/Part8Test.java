@@ -1,8 +1,8 @@
 package io.github.ajoz.workshop.fp.part1.practice1;
 
-import io.github.ajoz.workshop.fp.tests.theory.Above;
-import io.github.ajoz.workshop.fp.tests.theory.Below;
-import io.github.ajoz.workshop.fp.tests.theory.Between;
+import io.teoria.junit.numbers.Above;
+import io.teoria.junit.numbers.Below;
+import io.teoria.junit.numbers.Between;
 import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;
 import org.junit.experimental.theories.suppliers.TestedOn;

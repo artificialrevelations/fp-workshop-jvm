@@ -1,8 +1,8 @@
 package io.github.ajoz.workshop.fp.part1.practice2;
 
-import io.github.ajoz.workshop.fp.tests.theory.Above;
-import io.github.ajoz.workshop.fp.tests.theory.Below;
 import io.github.ajoz.workshop.fp.tools.Predicate;
+import io.teoria.junit.numbers.Above;
+import io.teoria.junit.numbers.Below;
 import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
