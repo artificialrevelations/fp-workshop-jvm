@@ -3,15 +3,20 @@ plugins {
 }
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-    compile "org.jetbrains.kotlin:kotlin-reflect:1.3.11"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:1.3.11"
 
     testImplementation 'junit:junit:4.12'
 }
 
-repositories {
-    jcenter()
-    mavenCentral()
+allprojects {
+    repositories {
+        jcenter()
+        
+        maven {
+            url 'https://jitpack.io'
+        }
+    }
 }
 
 compileKotlin {
