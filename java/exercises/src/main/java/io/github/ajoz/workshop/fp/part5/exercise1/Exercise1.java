@@ -148,7 +148,6 @@ final class Trys {
  */
 @SuppressWarnings("unused")
 class Foo {
-    @Deprecated
     String getData() {
         return "unsafe (can blow up) Foo data!";
     }

@@ -49,6 +49,7 @@ class Exercise7 {
 
     /*
        Please solve this exercise using any of the tools we've built so far.
+       Can you reach the form that is simple and readable?
      */
     public static Function1<Customer, Hash> getCustomerOrderHash() {
         throw new UnsupportedOperationException("Exercise 7 getCustomerOrderHash is missing!");

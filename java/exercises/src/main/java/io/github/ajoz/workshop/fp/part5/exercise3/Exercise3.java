@@ -56,7 +56,6 @@ final class API {
       - Does this code look familiar to some other code we seen before?
       - Can we make it more linear?
      */
-    @Deprecated
     static Product getProduct(final Id id) throws ProductIsMissing {
         try {
             // first we try to get this from cache

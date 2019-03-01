@@ -9,7 +9,7 @@ import io.github.ajoz.workshop.fp.tools.Predicate;
   predicates, the only missing part is library of a general purpose predicates
   that can be used as building blocks.
  */
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "SameParameterValue"})
 class Predicates {
     /*
       Part 1:
@@ -91,7 +91,7 @@ class Predicates {
     }
 }
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "SameParameterValue"})
 class IntPredicates {
     /*
       Part 7:

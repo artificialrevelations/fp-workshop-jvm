@@ -2,11 +2,13 @@ package io.github.ajoz.workshop.fp.tools;
 
 import io.github.ajoz.workshop.fp.tools.control.Maybe;
 import io.github.ajoz.workshop.fp.tools.control.Try;
+import io.github.ajoz.workshop.fp.tools.iterators.ValueIterator;
 
+import java.util.Iterator;
 import java.util.concurrent.atomic.AtomicReference;
 
 @SuppressWarnings("unused")
-public interface Supplier<A> {
+public interface Supplier<A> extends Iterable<A> {
     default <B> Supplier<B> map(final Function1<A, B> function) {
         return () -> function.apply(get());
     }
@@ -16,6 +18,11 @@ public interface Supplier<A> {
     }
 
     A get();
+
+    @Override
+    default Iterator<A> iterator() {
+        return new ValueIterator<>(get());
+    }
 
     default A getOrElse(final A defaultValue) {
         try {
