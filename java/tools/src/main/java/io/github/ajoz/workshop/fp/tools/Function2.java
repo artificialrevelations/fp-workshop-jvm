@@ -57,6 +57,10 @@ public interface Function2<A, B, C> {
         return untuple(Function1.memoize(tupled()));
     }
 
+    static <A, B, C> Function1<A, Function1<B, C>> curry(final Function2<A, B, C> function2) {
+        return function2.curry();
+    }
+
     static <A, B, C> Function2<A, B, C> uncurry(final Function1<A, Function1<B, C>> function1) {
         return (A a, B b) -> function1.apply(a).apply(b);
     }
