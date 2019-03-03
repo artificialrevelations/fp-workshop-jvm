@@ -102,20 +102,21 @@ class ExercisesWithAList {
 
   You can use any of the general purpose predicates from the tools module that
   you need.
+
+  Hints:
+  - use Character.isUpperCase to check if the letter is a capital letter
+  - you can use predicates that are defined in tools module
  */
 @SuppressWarnings("unused")
 class Practice3 {
-    // Checks if the first letter of the given String is capital
     private static Predicate<String> hasFirstCapitalLetter = str -> {
         throw new UnsupportedOperationException("Practice 3 hasFirstCapitalLetter is missing!");
     };
 
-    // Checks if the last letter of the given String is capital
     private static Predicate<String> hasLastCapitalLetter = str -> {
         throw new UnsupportedOperationException("Practice 3 hasLastCapitalLetter is missing!");
     };
 
-    // Checks if the given String has length larger then
     private static Predicate<String> hasLengthLargerThen(final int length) {
         throw new UnsupportedOperationException("Practice 3 hasLengthLargerThen is missing!");
     }
@@ -128,7 +129,6 @@ class Practice3 {
         throw new UnsupportedOperationException("Practice 3 contains is missing!");
     }
 
-    // Implement this!!!
     static List<String> getStrings(final List<String> data) {
         throw new UnsupportedOperationException("Practice 3 getStrings is missing!");
     }
