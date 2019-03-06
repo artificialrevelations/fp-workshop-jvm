@@ -39,16 +39,34 @@ fun <A, B, C> ((A, B) -> C).curried() =
             }
         }
 
+fun <A, B, C> curry(f: ((A, B) -> C)) =
+        { a: A ->
+            { b: B ->
+                f(a, b)
+            }
+        }
+
+
 // applies the first argument and returns a one argument function
 infix fun <A, B, C> ((A, B) -> C).applyFirst(supplier: () -> A): (B) -> C =
         { b: B ->
             this(supplier(), b)
         }
 
+infix fun <A, B, C> ((A, B) -> C).applyFirst(value: A): (B) -> C =
+        { b: B ->
+            this(value, b)
+        }
+
 // applies the second argument and returns a one argument function
 infix fun <A, B, C> ((A, B) -> C).applySecond(supplier: () -> B): (A) -> C =
         { a: A ->
             this(a, supplier())
+        }
+
+infix fun <A, B, C> ((A, B) -> C).applySecond(value: B): (A) -> C =
+        { a: A ->
+            this(a, value)
         }
 
 // composes two functions
