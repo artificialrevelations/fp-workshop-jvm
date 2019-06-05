@@ -2,9 +2,9 @@
 
 package org.artrev.workshop.fp.part4.exercise6
 
-import io.github.ajoz.workshop.fp.part4.exercise6.Flows.cycle
-import io.github.ajoz.workshop.fp.part4.exercise6.Flows.generate
-import io.github.ajoz.workshop.fp.tools.control.Try
+import org.artrev.workshop.fp.part4.exercise6.Flows.cycle
+import org.artrev.workshop.fp.part4.exercise6.Flows.generate
+import org.artrev.workshop.fp.tools.control.Try
 import java.util.LinkedList
 
 import java.util.Arrays.asList

@@ -2,9 +2,9 @@
 
 package org.artrev.workshop.fp.part4.practice3
 
-import io.github.ajoz.workshop.fp.tools.flow.Flow
-import io.github.ajoz.workshop.fp.tools.flow.of
-import io.github.ajoz.workshop.fp.tools.flow.select
+import org.artrev.workshop.fp.tools.flow.Flow
+import org.artrev.workshop.fp.tools.flow.of
+import org.artrev.workshop.fp.tools.flow.select
 
 /*
   -- Looking at the flow of things --

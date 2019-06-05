@@ -2,7 +2,7 @@
 
 package org.artrev.workshop.fp.part1.exercise6
 
-import io.github.ajoz.workshop.fp.tools.andThen
+import org.artrev.workshop.fp.tools.andThen
 
 /*
   -- Other types of Functions --

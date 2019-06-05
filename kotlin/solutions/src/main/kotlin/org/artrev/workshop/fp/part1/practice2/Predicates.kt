@@ -2,8 +2,8 @@
 
 package org.artrev.workshop.fp.part1.practice2
 
-import io.github.ajoz.workshop.fp.tools.and
-import io.github.ajoz.workshop.fp.tools.or
+import org.artrev.workshop.fp.tools.and
+import org.artrev.workshop.fp.tools.or
 import kotlin.reflect.KClass
 
 // Part 1:

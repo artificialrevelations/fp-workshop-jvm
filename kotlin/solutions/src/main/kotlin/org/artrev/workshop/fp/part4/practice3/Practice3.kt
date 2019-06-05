@@ -1,7 +1,7 @@
-import io.github.ajoz.workshop.fp.tools.control.Try
-import io.github.ajoz.workshop.fp.tools.flow.Flow
-import io.github.ajoz.workshop.fp.tools.flow.of
-import io.github.ajoz.workshop.fp.tools.flow.select
+import org.artrev.workshop.fp.tools.control.Try
+import org.artrev.workshop.fp.tools.flow.Flow
+import org.artrev.workshop.fp.tools.flow.of
+import org.artrev.workshop.fp.tools.flow.select
 import java.util.HashSet
 import java.util.NoSuchElementException
 

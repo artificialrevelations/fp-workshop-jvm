@@ -2,12 +2,12 @@
 
 package org.artrev.workshop.fp.part1.practice3
 
-import io.github.ajoz.workshop.fp.part1.practice1.not
-import io.github.ajoz.workshop.fp.tools.and
-import io.github.ajoz.workshop.fp.tools.curry
-import io.github.ajoz.workshop.fp.tools.or
-import io.github.ajoz.workshop.fp.tools.predicates.isLargerThen
-import io.github.ajoz.workshop.fp.tools.predicates.isLowerThen
+import org.artrev.workshop.fp.part1.practice1.not
+import org.artrev.workshop.fp.tools.and
+import org.artrev.workshop.fp.tools.curry
+import org.artrev.workshop.fp.tools.or
+import org.artrev.workshop.fp.tools.predicates.isLargerThen
+import org.artrev.workshop.fp.tools.predicates.isLowerThen
 
 internal object Lists {
     // Part 1:

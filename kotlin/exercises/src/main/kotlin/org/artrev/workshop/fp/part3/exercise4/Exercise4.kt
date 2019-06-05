@@ -2,8 +2,8 @@
 
 package org.artrev.workshop.fp.part3.exercise4
 
-import io.github.ajoz.workshop.fp.part3.exercise4.SealedList.Cons
-import io.github.ajoz.workshop.fp.part3.exercise4.SealedList.Nil
+import org.artrev.workshop.fp.part3.exercise4.SealedList.Cons
+import org.artrev.workshop.fp.part3.exercise4.SealedList.Nil
 
 /*
   -- Recursive types --

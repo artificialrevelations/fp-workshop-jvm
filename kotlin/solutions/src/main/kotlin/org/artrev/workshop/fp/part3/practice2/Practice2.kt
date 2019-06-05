@@ -2,8 +2,8 @@
 
 package org.artrev.workshop.fp.part3.practice2
 
-import io.github.ajoz.workshop.fp.part3.practice2.BinaryTree.Branch
-import io.github.ajoz.workshop.fp.part3.practice2.BinaryTree.Leaf
+import org.artrev.workshop.fp.part3.practice2.BinaryTree.Branch
+import org.artrev.workshop.fp.part3.practice2.BinaryTree.Leaf
 
 internal sealed class BinaryTree<A> {
     class Leaf<A>(private val value: A) : BinaryTree<A>() {

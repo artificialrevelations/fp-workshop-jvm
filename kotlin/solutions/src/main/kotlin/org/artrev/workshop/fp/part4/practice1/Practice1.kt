@@ -2,8 +2,8 @@
 
 package org.artrev.workshop.fp.part4.practice1
 
-import io.github.ajoz.workshop.fp.tools.control.Maybe
-import io.github.ajoz.workshop.fp.tools.control.Try
+import org.artrev.workshop.fp.tools.control.Maybe
+import org.artrev.workshop.fp.tools.control.Try
 import java.util.concurrent.atomic.AtomicReference
 
 internal fun <A> (() -> A).tryGet(): Try<A> =

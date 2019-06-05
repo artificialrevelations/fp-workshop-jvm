@@ -2,7 +2,7 @@
 
 package org.artrev.workshop.fp.part3.exercise3
 
-import io.github.ajoz.workshop.fp.part3.exercise3.FoodOrderEventType.OrderCreated
+import org.artrev.workshop.fp.part3.exercise3.FoodOrderEventType.OrderCreated
 
 /*
   We can model this in two ways:

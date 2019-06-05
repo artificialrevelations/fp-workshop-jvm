@@ -1,7 +1,7 @@
 package org.artrev.workshop.fp.tools.control
 
-import io.github.ajoz.workshop.fp.tools.iterators.EmptyIterator
-import io.github.ajoz.workshop.fp.tools.iterators.ValueIterator
+import org.artrev.workshop.fp.tools.iterators.EmptyIterator
+import org.artrev.workshop.fp.tools.iterators.ValueIterator
 
 sealed class Try<A> : Iterable<A> {
     abstract val isSuccess: Boolean

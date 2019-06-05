@@ -1,8 +1,8 @@
 package org.artrev.workshop.fp.tools.control
 
-import io.github.ajoz.workshop.fp.tools.also
-import io.github.ajoz.workshop.fp.tools.iterators.EmptyIterator
-import io.github.ajoz.workshop.fp.tools.iterators.ValueIterator
+import org.artrev.workshop.fp.tools.also
+import org.artrev.workshop.fp.tools.iterators.EmptyIterator
+import org.artrev.workshop.fp.tools.iterators.ValueIterator
 
 sealed class Maybe<A> : Iterable<A> {
     abstract val isSome: Boolean

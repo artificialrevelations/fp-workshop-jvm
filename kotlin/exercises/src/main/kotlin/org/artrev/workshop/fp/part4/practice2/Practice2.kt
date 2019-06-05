@@ -2,8 +2,8 @@
 
 package org.artrev.workshop.fp.part4.practice2
 
-import io.github.ajoz.workshop.fp.tools.map
-import io.github.ajoz.workshop.fp.tools.memoized
+import org.artrev.workshop.fp.tools.map
+import org.artrev.workshop.fp.tools.memoized
 import java.io.File
 import java.io.IOException
 import java.net.URL

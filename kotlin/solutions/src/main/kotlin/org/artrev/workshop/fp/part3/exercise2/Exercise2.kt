@@ -2,7 +2,7 @@
 
 package org.artrev.workshop.fp.part3.exercise2
 
-import io.github.ajoz.workshop.fp.tools.also
+import org.artrev.workshop.fp.tools.also
 
 sealed class SealedBoolean {
     object True : SealedBoolean() {

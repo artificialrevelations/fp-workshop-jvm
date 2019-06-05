@@ -8,5 +8,5 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-reflect"
 
     testImplementation 'junit:junit:4.12'
-    testImplementation 'com.github.foobaz42:teoria:master-SNAPSHOT'
+    testImplementation 'com.github.artificialrevelations:teoria:master-SNAPSHOT'
 }

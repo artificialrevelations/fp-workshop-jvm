@@ -2,7 +2,7 @@
 
 package org.artrev.workshop.fp.part1.exercise5
 
-import io.github.ajoz.workshop.fp.part1.exercise3.andThen
+import org.artrev.workshop.fp.part1.exercise3.andThen
 
 // Part 1
 fun <A, B, C> ((A) -> (B) -> C).applyFirst(value: A): (B) -> C =

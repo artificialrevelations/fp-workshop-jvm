@@ -1,7 +1,7 @@
 package org.artrev.workshop.fp.part1.practice3
 
-import io.github.ajoz.workshop.fp.tools.predicates.alwaysFalse
-import io.github.ajoz.workshop.fp.tools.predicates.alwaysTrue
+import org.artrev.workshop.fp.tools.predicates.alwaysFalse
+import org.artrev.workshop.fp.tools.predicates.alwaysTrue
 import org.junit.Test
 import org.junit.experimental.runners.Enclosed
 import org.junit.runner.RunWith

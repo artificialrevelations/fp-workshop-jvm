@@ -2,8 +2,8 @@
 
 package org.artrev.workshop.fp.part3.exercise2
 
-import io.github.ajoz.workshop.fp.part3.exercise2.SealedBoolean.Companion.FALSE
-import io.github.ajoz.workshop.fp.part3.exercise2.SealedBoolean.Companion.TRUE
+import org.artrev.workshop.fp.part3.exercise2.SealedBoolean.Companion.FALSE
+import org.artrev.workshop.fp.part3.exercise2.SealedBoolean.Companion.TRUE
 import org.junit.Test
 import org.junit.experimental.runners.Enclosed
 import org.junit.runner.RunWith

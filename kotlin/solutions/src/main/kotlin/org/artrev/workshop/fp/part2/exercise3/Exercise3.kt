@@ -2,8 +2,8 @@
 
 package org.artrev.workshop.fp.part2.exercise3
 
-import io.github.ajoz.workshop.fp.tools.collections.reverse
-import io.github.ajoz.workshop.fp.tools.flipped
+import org.artrev.workshop.fp.tools.collections.reverse
+import org.artrev.workshop.fp.tools.flipped
 
 // Part 1:
 fun <A, B> foldLeft(list: List<A>,

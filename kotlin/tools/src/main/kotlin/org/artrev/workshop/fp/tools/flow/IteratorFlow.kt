@@ -1,6 +1,6 @@
 package org.artrev.workshop.fp.tools.flow
 
-import io.github.ajoz.workshop.fp.tools.control.Try
+import org.artrev.workshop.fp.tools.control.Try
 
 fun <A> Flow.Companion.of(iterator: Iterator<A>): Flow<A> {
     class IteratorFlow(val iter: Iterator<A>) : Flow<A> {

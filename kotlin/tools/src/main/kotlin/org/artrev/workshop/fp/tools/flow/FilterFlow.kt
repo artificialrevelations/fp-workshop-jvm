@@ -2,8 +2,8 @@
 
 package org.artrev.workshop.fp.tools.flow
 
-import io.github.ajoz.workshop.fp.tools.control.Try
-import io.github.ajoz.workshop.fp.tools.not
+import org.artrev.workshop.fp.tools.control.Try
+import org.artrev.workshop.fp.tools.not
 
 /**
  * Returns a [Flow] that only passes downstream elements that satisfy the given

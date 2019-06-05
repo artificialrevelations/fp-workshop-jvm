@@ -2,7 +2,7 @@
 
 package org.artrev.workshop.fp.part2.exercise4
 
-import io.github.ajoz.workshop.fp.tools.collections.*
+import org.artrev.workshop.fp.tools.collections.*
 import kotlin.Pair
 
 fun maximum(list: List<Int>): Int? {

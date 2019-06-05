@@ -2,7 +2,7 @@
 
 package org.artrev.workshop.fp.part3.exercise1
 
-import io.github.ajoz.workshop.fp.tools.also
+import org.artrev.workshop.fp.tools.also
 
 enum class EnumBoolean {
     TRUE {

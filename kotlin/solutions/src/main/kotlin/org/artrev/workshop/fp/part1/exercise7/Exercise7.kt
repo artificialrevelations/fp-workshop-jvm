@@ -2,8 +2,8 @@
 
 package org.artrev.workshop.fp.part1.exercise7
 
-import io.github.ajoz.workshop.fp.tools.andThen
-import io.github.ajoz.workshop.fp.tools.applySecond
+import org.artrev.workshop.fp.tools.andThen
+import org.artrev.workshop.fp.tools.applySecond
 
 object Exercise7 {
     private val getOrderForCustomer: (Customer, Database) -> Order =

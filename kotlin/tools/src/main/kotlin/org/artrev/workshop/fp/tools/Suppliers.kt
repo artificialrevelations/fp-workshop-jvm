@@ -1,7 +1,7 @@
 package org.artrev.workshop.fp.tools
 
-import io.github.ajoz.workshop.fp.tools.control.Maybe
-import io.github.ajoz.workshop.fp.tools.control.Try
+import org.artrev.workshop.fp.tools.control.Maybe
+import org.artrev.workshop.fp.tools.control.Try
 import java.util.concurrent.atomic.AtomicReference
 
 fun <A> (() -> A).memoized(): () -> A {

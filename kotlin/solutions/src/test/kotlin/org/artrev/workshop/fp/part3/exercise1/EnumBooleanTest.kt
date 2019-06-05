@@ -2,8 +2,8 @@
 
 package org.artrev.workshop.fp.part3.exercise1
 
-import io.github.ajoz.workshop.fp.part3.exercise1.EnumBoolean.FALSE
-import io.github.ajoz.workshop.fp.part3.exercise1.EnumBoolean.TRUE
+import org.artrev.workshop.fp.part3.exercise1.EnumBoolean.FALSE
+import org.artrev.workshop.fp.part3.exercise1.EnumBoolean.TRUE
 import org.junit.Test
 import org.junit.experimental.runners.Enclosed
 import org.junit.runner.RunWith

@@ -1,6 +1,6 @@
 package org.artrev.workshop.fp.tools.flow
 
-import io.github.ajoz.workshop.fp.tools.control.Try
+import org.artrev.workshop.fp.tools.control.Try
 import java.util.HashSet
 import java.util.NoSuchElementException
 
