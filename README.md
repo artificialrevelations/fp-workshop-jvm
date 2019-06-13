@@ -1,4 +1,5 @@
 # Beginner/Intermediate Functional Programming Workshop with examples in Java/Kotlin
+[![Gitter](https://badges.gitter.im/fp-workshop-jvm/community.svg)](https://gitter.im/fp-workshop-jvm/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 This repository contains materials (code examples, exercises and solutions, wiki with commentary and explanations) for the Functional Programming Workshop. The main idea behind the exercises is to teach how certain Functional Programming idioms can be implemented on the JVM (in Java/Kotlin), this means implementing things like functions, composition, control structures etc.
 
@@ -33,3 +34,7 @@ Each part of the workshop is planned to take around 3 hours, this means all 5 pa
 ## Workshop plan:
 
 For a detailed workshop plan and a description of all parts please check out the [wiki](https://github.com/ajoz/fp-workshop-jvm/wiki).
+
+## Community:
+* [Gitter - Community](https://gitter.im/fp-workshop-jvm/community?utm_source=share-link&utm_medium=link&utm_campaign=share-link) - for discussing the materials, things missing, things worth to be added etc
+* [Gitter - Exercises](https://gitter.im/fp-workshop-jvm/exercises?utm_source=share-link&utm_medium=link&utm_campaign=share-link) - if you need help with exercises and you do not want to peek into the solutions
