@@ -48,7 +48,7 @@ public class Exercise3Test {
 
             // then:
             assertEquals(new Integer(0), h.apply(0));
-            assertEquals(new Integer(1), h.apply(1));
+            assertEquals(new Integer(100), h.apply(100));
         }
     }
 

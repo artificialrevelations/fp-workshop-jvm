@@ -19,7 +19,7 @@ class Exercise3Test {
 
             // then:
             assertEquals(3, h(0))
-            assertEquals(4, h(0))
+            assertEquals(4, h(1))
         }
 
         @Test
